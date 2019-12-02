@@ -6,7 +6,7 @@
 /*   By: lboukrou <lboukrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 20:36:19 by lboukrou          #+#    #+#             */
-/*   Updated: 2019/11/30 18:50:01 by lboukrou         ###   ########.fr       */
+/*   Updated: 2019/12/02 20:31:51 by lboukrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,10 +23,22 @@ t_node  *create_node(int v)
     return (new_node);
 }
 
+t_node  *lemin_create_node(char *room, int v)
+{
+    t_node      *new_node;
+
+    if (!(new_node = (t_node *)ft_memalloc(sizeof(t_node))))
+        return NULL;
+    new_node->name_room = room;
+	new_node->vertex = v;
+    new_node->next = NULL;
+    return (new_node);
+}
+
 t_graph *create_graph(int vertices)
 {
-    t_graph     *graph;
-    int            i;
+    t_graph		*graph;
+    int			i;
 
     if (!(graph = (t_graph *)ft_memalloc(sizeof(t_graph))))
         return NULL;
@@ -53,6 +65,19 @@ void    add_edge(t_graph *graph, int src, int dest)
     new_node = create_node(src);
     new_node->next = graph->adj_list[dest];
     graph->adj_list[dest] = new_node;
+}
+
+void    lemin_add_edge(t_graph *graph, char *src_name, char *dest_name, int ind_src, int ind_dest)
+{
+    t_node  *new_node;
+
+    new_node = lemin_create_node(dest_name, ind_dest);
+    new_node->next = graph->adj_list[ind_src];
+    graph->adj_list[ind_src] = new_node;
+	
+    new_node = lemin_create_node(src_name, ind_src);
+    new_node->next = graph->adj_list[ind_dest];
+    graph->adj_list[ind_dest] = new_node;
 }
 
 void    print_graph(t_graph *graph)

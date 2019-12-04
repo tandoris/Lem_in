@@ -6,7 +6,7 @@
 /*   By: lboukrou <lboukrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/30 18:47:20 by lboukrou          #+#    #+#             */
-/*   Updated: 2019/12/02 20:35:21 by lboukrou         ###   ########.fr       */
+/*   Updated: 2019/12/04 20:50:12 by lboukrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int			is_number(char *str)
 }
 
 /*
-**	Cherche et renvoie le nombre de fourmis. ERROR si fourmis n'existent pas.
+**	Cherche et renvoie le nombre de fourmis. ERROR si fourmis n'existe pas.
 */
 
 unsigned int		get_num_ants(char *line)

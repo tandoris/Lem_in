@@ -6,7 +6,7 @@
 /*   By: lboukrou <lboukrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 20:11:32 by lboukrou          #+#    #+#             */
-/*   Updated: 2019/12/04 19:39:58 by lboukrou         ###   ########.fr       */
+/*   Updated: 2019/12/06 20:07:44 by lboukrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,6 @@
 typedef struct		s_node
 {
 	char			*name_room;		// nom de la salle
-	// int				vertex;			// index salle 
 	int				x;				// coord x
 	int				y;				// coord y
 	struct s_node	*next;			// next
@@ -43,9 +42,20 @@ typedef struct 		s_graph
 
 t_node				*create_room(char *name, int x, int y);
 void				add_tube(t_graph **graph, char *src, char *dest);
-t_graph 			*create_graph(int vertices);
+t_graph 			*create_empty_graph(int vertices);
 void				print_graph(t_graph *graph);
 void				add_end_list(t_node	*room, t_node *new_cnx);
-t_node	*duplicate_room(t_node *room_src);
+t_node				*duplicate_room(t_node *room_src);
 
+/*
+**	Parse functions
+*/
+
+unsigned int		get_num_ants(char *line);
+unsigned int		identify_start_or_end(char *buf);
+int					nb_elem_tab(char **tab);
+char				**identify_tube(char *line);
+char				**identify_room(char *line);
+unsigned int		identify_comment(char *line);
+void				fill_room(t_graph *graph, char **tab);
 #endif

@@ -6,7 +6,7 @@
 /*   By: lboukrou <lboukrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/03 18:01:59 by lboukrou          #+#    #+#             */
-/*   Updated: 2019/12/04 20:49:26 by lboukrou         ###   ########.fr       */
+/*   Updated: 2019/12/06 19:42:01 by lboukrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ t_node	*create_room(char *name, int x, int y)
 }
 
 /*
-**	Fonction pour ajouter un tube
+**	Fonction pour ajouter un tube entre 2 salles
 */
 
 void	add_tube(t_graph **graph, char *src, char *dest)
@@ -99,7 +99,7 @@ void	add_end_list(t_node	*room, t_node *new_cnx)
 **	Fonction pour creer un graphe vide
 */
 
-t_graph *create_graph(int vertices)
+t_graph *create_empty_graph(int vertices)
 {
     t_graph		*graph;
     int			i;

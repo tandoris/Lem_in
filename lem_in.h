@@ -6,7 +6,7 @@
 /*   By: lboukrou <lboukrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 20:11:32 by lboukrou          #+#    #+#             */
-/*   Updated: 2019/12/06 20:07:44 by lboukrou         ###   ########.fr       */
+/*   Updated: 2019/12/07 20:27:30 by lboukrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,20 @@
 #include "libft/libft.h"
 
 /*
+**	structure enum état de la salle. NORMAL = 0, START_ROOM = 1, END_ROOM = 2
+*/
+typedef enum		e_room_status
+{
+	NORMAL, START_ROOM, END_ROOM
+}					t_room_status;					
+
+/*
 **	Liste d'adjacence (structure liste chainee pour une salle)
 */
 
 typedef struct		s_node
 {
+	t_room_status	status;
 	char			*name_room;		// nom de la salle
 	int				x;				// coord x
 	int				y;				// coord y
@@ -52,10 +61,10 @@ t_node				*duplicate_room(t_node *room_src);
 */
 
 unsigned int		get_num_ants(char *line);
-unsigned int		identify_start_or_end(char *buf);
+t_room_status		identify_room_status(char *buf);
 int					nb_elem_tab(char **tab);
 char				**identify_tube(char *line);
 char				**identify_room(char *line);
 unsigned int		identify_comment(char *line);
-void				fill_room(t_graph *graph, char **tab);
+void				fill_room(t_graph *graph, char **tab, t_room_status status);
 #endif

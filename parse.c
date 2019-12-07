@@ -6,7 +6,7 @@
 /*   By: lboukrou <lboukrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/30 18:47:20 by lboukrou          #+#    #+#             */
-/*   Updated: 2019/12/06 20:05:03 by lboukrou         ###   ########.fr       */
+/*   Updated: 2019/12/07 20:48:43 by lboukrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,30 +53,19 @@ unsigned int		get_num_ants(char *line)
 	return (0);
 }
 
-unsigned int	identify_start_or_end(char *buf)
-{
-	if (!(ft_strcmp(buf, "##start")) || !(ft_strcmp(buf, "##end")))
-		return (1);
-	else
-		return (0);
-}
-
 /*
-int		check_line(char *line)
-{
-	if (ft_strlen(line) == 0)
-	{
-		free(line);
-		return (0);
-	}
-	if (!(identify_start_or_end))
-	{
-		free(line);
-		return (0);
-	}
-	return (1);
-}
+**	Retourne l'enum correspondant a une salle
 */
+
+t_room_status	identify_room_status(char *buf)
+{
+	if (!(ft_strcmp(buf, "##start")))
+		return (START_ROOM);
+	else if (!(ft_strcmp(buf, "##end")))
+		return (END_ROOM);
+	else
+		return (NORMAL);
+}
 
 int		nb_elem_tab(char **tab)
 {
@@ -141,12 +130,13 @@ unsigned int	identify_comment(char *line)
 **	Rajoute les infos d'une room dans un graphe
 */
 
-void		fill_room(t_graph *graph, char **tab)
+void		fill_room(t_graph *graph, char **tab, t_room_status status)
 {
 	int		i;
 
 	i = 0;
 	graph->adj_list[i] = create_room(*tab[0], ft_atoi(*tab[1]), ft_atoi(*tab[2]));
+	graph->adj_list[i]->status = status;
 }
 
 /*
@@ -167,12 +157,19 @@ t_graph		*get_infos(t_node *nodes)
 	while (ret == get_next_line(0, &line) > 0 && (identify_room(line) || identify_comment(line)))
 	{
 		if (tab = identify_room((line)))
-			fill_room(graph, tab);
+			fill_room(graph, tab, NORMAL);
 		else if (identify_comment(line))
 		{
-			if (identify_start_or_end)
+			if (identify_room_status)
 			{
-				// TODO Fonction fill_start_or_end (quelle structure faire ?)
+				if (get_next_line(0, &line) > 0 && identify_room(line))
+				{
+					get_next_line(0, &line);
+					tab = identify_room(line);	// TODO reduire, mettre dans if ? 			
+					fill_room(graph, tab, identify_room_status(line));
+				}
+				else
+					break ;
 			}
 		}
 		else
@@ -184,8 +181,8 @@ t_graph		*get_infos(t_node *nodes)
 			add_tube(&graph, *tab[0], *tab[1]);
 		else if (identify_comment(line))
 		{
-			if (identify_start_or_end)
-				// TODO pareil qu'en haut
+			if (identify_comment)
+				// TODO continuer
 		}
 		else
 			break ;

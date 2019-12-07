@@ -6,7 +6,7 @@
 /*   By: lboukrou <lboukrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/03 18:01:59 by lboukrou          #+#    #+#             */
-/*   Updated: 2019/12/06 19:42:01 by lboukrou         ###   ########.fr       */
+/*   Updated: 2019/12/07 18:40:22 by lboukrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,7 @@ t_node	*create_room(char *name, int x, int y)
 		return NULL;
 	if (!(new_node->name_room = (char *)ft_memalloc(sizeof(name))))
 		return NULL;
+	new_node->status = NORMAL;
 	new_node->name_room = name;
 	new_node->x = x;
 	new_node->y = y;

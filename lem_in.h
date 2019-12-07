@@ -6,7 +6,7 @@
 /*   By: lboukrou <lboukrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 20:11:32 by lboukrou          #+#    #+#             */
-/*   Updated: 2019/11/30 19:26:36 by lboukrou         ###   ########.fr       */
+/*   Updated: 2019/12/07 17:13:15 by clboutry         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,5 @@ typedef struct 		s_graph
 	int				nb_vertices;
 	struct s_node	**adj_list;
 }					t_graph;
-
 
 #endif

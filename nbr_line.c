@@ -6,12 +6,33 @@
 /*   By: clboutry <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/07 17:18:59 by clboutry          #+#    #+#             */
-/*   Updated: 2019/12/08 17:01:42 by clboutry         ###   ########.fr       */
+/*   Updated: 2019/12/09 17:40:40 by clboutry         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include <stdlib.h>
+
+int 	*sort_list(int	*path)
+{
+	int		cmpt;
+	int		bridge;
+
+	cmpt = 0;
+	bridge = 0;
+	while (path[cmpt] != '\0')
+	{
+		if (path[cmpt] > path[cmpt + 1] && path[cmpt + 1] != '\0')
+		{
+			bridge = path[cmpt + 1];
+			path[cmpt + 1] = path[cmpt];
+			path[cmpt] = bridge;
+			cmpt = -1;
+		}
+		cmpt++;
+	}
+	return (path);
+}
 
 int		nbr_line(int *paths, int ants, int nbr_path)
 {
@@ -53,18 +74,21 @@ int		nbr_line(int *paths, int ants, int nbr_path)
 int		main(void)
 {
     int		ants;
-	int		paths[6];
+	int		*paths;
 	int		minimum_line;
 	int		nbr_path;
 
 	nbr_path = 5;
-	paths[0] = 3;
-	paths[1] = 2;
-	paths[2] = 2;
-	paths[3] = 5;
-	paths[4] = 6;
+	if (!(paths = malloc((nbr_path + 1) * (sizeof(int))))) 
+		return (0);
+	paths[0] = 9333;
+	paths[1] = 4977;
+	paths[2] = 25;
+	paths[3] = 1513;
+	paths[4] = 4684;
 	paths[5] = '\0';
-	ants = 7;
+	ants = 250;
+	paths = sort_list(paths);
 	minimum_line = nbr_line(paths, ants, nbr_path);
 	printf("nbr de ligne minimum = %d\n", minimum_line);
 }

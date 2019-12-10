@@ -6,7 +6,7 @@
 /*   By: lboukrou <lboukrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 20:11:32 by lboukrou          #+#    #+#             */
-/*   Updated: 2019/12/07 20:27:30 by lboukrou         ###   ########.fr       */
+/*   Updated: 2019/12/10 19:59:02 by lboukrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ typedef struct		s_node
 typedef struct 		s_graph
 {
 	int				nb_vertices;	// nombre total de salles dans graphe
-	struct s_node	**adj_list;		// tableau de listes chaines
+	struct s_node	**adj_list;		// tableau de listes chaines 
 }					t_graph;
 
 
@@ -66,5 +66,8 @@ int					nb_elem_tab(char **tab);
 char				**identify_tube(char *line);
 char				**identify_room(char *line);
 unsigned int		identify_comment(char *line);
-void				fill_room(t_graph *graph, char **tab, t_room_status status);
+void				fill_room(t_node **first, char **tab, t_room_status status);
+void				put_rooms_in_graph(t_graph **graph, t_node **first);
+void				ft_error(void);
+void	ft_malloc_error(void);
 #endif

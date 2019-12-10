@@ -6,7 +6,7 @@
 /*   By: lboukrou <lboukrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/03 18:01:59 by lboukrou          #+#    #+#             */
-/*   Updated: 2019/12/07 18:40:22 by lboukrou         ###   ########.fr       */
+/*   Updated: 2019/12/10 20:17:22 by lboukrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,8 +45,14 @@ void	add_tube(t_graph **graph, char *src, char *dest)
 	int		j;
 	i = 0;
 	j = 0;
+	node_1 = NULL;
+	node_2 = NULL;
+	if (*graph)
+		printf("Courgette\n");
 	while ((*graph)->adj_list[i])
 	{
+		printf("Ma bite\n");		
+		printf("nom room%s\n", (*graph)->adj_list[i]->name_room);
 		if (!(ft_strcmp(src, (*graph)->adj_list[i]->name_room)))
 			node_1 = (*graph)->adj_list[i];
 		if (!(ft_strcmp(dest, (*graph)->adj_list[i]->name_room)))
@@ -59,6 +65,8 @@ void	add_tube(t_graph **graph, char *src, char *dest)
 		add_end_list(node_1, duplicate_room(node_2));
 		add_end_list(node_2, duplicate_room(node_1));
 	}
+	else
+		ft_error();
 }
 
 /*
@@ -105,10 +113,14 @@ t_graph *create_empty_graph(int vertices)
     t_graph		*graph;
     int			i;
 
-    if (!(graph = (t_graph *)ft_memalloc(sizeof(t_graph))))
-        return NULL;
+    if (!(graph = (t_graph *)ft_memalloc(sizeof(t_graph) )))
+       { printf("ma b\n");
+	   	ft_malloc_error();
+	   }
     if (!(graph->adj_list = ft_memalloc(vertices * sizeof(t_node *))))
-        return NULL;
+		{
+			printf("%d loulou\n", vertices);
+			ft_malloc_error();}
     graph->nb_vertices = vertices;
     i = 0;
     while (i < vertices)
@@ -141,23 +153,23 @@ void    print_graph(t_graph *graph)
     }
 }
 
-int		main()
-{
-	t_graph		*graph;
+// int		main()
+// {
+// 	t_graph		*graph;
 
-	graph = create_graph(5);
-	graph->adj_list[0] = create_room("start", 3, 4);
-	graph->adj_list[1] = create_room("two", 1, 2);
-	graph->adj_list[2] = create_room("three", 2, 2);
-	graph->adj_list[3] = create_room("four", 4, 2);
-	graph->adj_list[4] = create_room("end", 2, 1);
+// 	graph = create_empty_graph(5);
+// 	graph->adj_list[0] = create_room("start", 3, 4);
+// 	graph->adj_list[1] = create_room("two", 1, 2);
+// 	graph->adj_list[2] = create_room("three", 2, 2);
+// 	graph->adj_list[3] = create_room("four", 4, 2);
+// 	graph->adj_list[4] = create_room("end", 2, 1);
 	
-	add_tube(&graph, "start", "two");
-	add_tube(&graph, "start", "three");
-	add_tube(&graph, "start", "four");
-	add_tube(&graph, "three", "end");
-	add_tube(&graph, "four", "end");
+// 	add_tube(&graph, "start", "two");
+// 	add_tube(&graph, "start", "three");
+// 	add_tube(&graph, "start", "four");
+// 	add_tube(&graph, "three", "end");
+// 	add_tube(&graph, "four", "end");
 
-	print_graph(graph);
-	return (0);
-}
+// 	print_graph(graph);
+// 	return (0);
+// }

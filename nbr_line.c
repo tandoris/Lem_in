@@ -6,7 +6,7 @@
 /*   By: clboutry <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/07 17:18:59 by clboutry          #+#    #+#             */
-/*   Updated: 2019/12/09 17:40:40 by clboutry         ###   ########.fr       */
+/*   Updated: 2019/12/11 17:01:32 by clboutry         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,11 +34,10 @@ int 	*sort_list(int	*path)
 	return (path);
 }
 
-int		nbr_line(int *paths, int ants, int nbr_path)
+int		nbr_line(int *paths, int ants, int nbr_path, int *nbr_ants_path)
 {
 	int		cmpt;
 	int		total;
-	int		*nbr_ants_path;
 
 	if (!(nbr_ants_path = (malloc((nbr_path + 1) * (sizeof(int))))))
 		return (0);
@@ -77,18 +76,31 @@ int		main(void)
 	int		*paths;
 	int		minimum_line;
 	int		nbr_path;
+	int		*nbr_ants_path;
+	char	**path_name;
+	int		cmpt;
 
+	cmpt = 0;
 	nbr_path = 5;
 	if (!(paths = malloc((nbr_path + 1) * (sizeof(int))))) 
 		return (0);
-	paths[0] = 9333;
-	paths[1] = 4977;
+	if (!(path_name = malloc((nbr_path + 1) * (sizeof(char*)))))
+		return (0);
+	paths[0] = 9;
+	paths[1] = 86;
 	paths[2] = 25;
-	paths[3] = 1513;
-	paths[4] = 4684;
+	paths[3] = 15;
+	paths[4] = 6;
 	paths[5] = '\0';
-	ants = 250;
-	paths = sort_list(paths);
-	minimum_line = nbr_line(paths, ants, nbr_path);
+	ants = 54;
+	while (cmpt < nbr_path)
+	{
+		if (!(path_name[cmpt] = malloc((paths[cmpt]) * (sizeof(char)))))
+			return (0);
+		cmpt++;
+	}
+	sort_list(paths);
+	minimum_line = nbr_line(paths, ants, nbr_path, nbr_ants_path);
 	printf("nbr de ligne minimum = %d\n", minimum_line);
+	printf("chemin %d taille %d = %d fourmis\n", 4, paths[4], nbr_ants_path[4]);
 }

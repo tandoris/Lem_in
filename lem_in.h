@@ -6,7 +6,7 @@
 /*   By: lboukrou <lboukrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 20:11:32 by lboukrou          #+#    #+#             */
-/*   Updated: 2019/12/10 19:59:02 by lboukrou         ###   ########.fr       */
+/*   Updated: 2019/12/12 15:46:45 by lboukrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ t_node				*create_room(char *name, int x, int y);
 void				add_tube(t_graph **graph, char *src, char *dest);
 t_graph 			*create_empty_graph(int vertices);
 void				print_graph(t_graph *graph);
-void				add_end_list(t_node	*room, t_node *new_cnx);
+void				add_end_list(t_node	**room, t_node *new_cnx);
 t_node				*duplicate_room(t_node *room_src);
 
 /*

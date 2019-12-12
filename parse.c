@@ -6,7 +6,7 @@
 /*   By: lboukrou <lboukrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/30 18:47:20 by lboukrou          #+#    #+#             */
-/*   Updated: 2019/12/10 20:22:35 by lboukrou         ###   ########.fr       */
+/*   Updated: 2019/12/12 17:12:28 by lboukrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,7 @@ char	**identify_room(char *line)
 		tab = ft_strsplit(line, ' ');
 		if ((nb_elem_tab(tab)) == 3)
 			return (tab);
-		ft_memdel((void **)tab);		
+		ft_memdel((void **)tab);	
 	}
 	return NULL;
 }
@@ -163,6 +163,7 @@ int		get_list_length(t_node *list)
 		tmp = tmp->next;
 		i++;
 	}
+	i++;
 	return (i);
 }
 
@@ -170,9 +171,11 @@ void	fill_room(t_node **first, char **tab, t_room_status status)
 {
 	t_node		*new_node;
 
+
 	new_node = create_room(tab[0], ft_atoi(tab[1]), ft_atoi(tab[2]));
 	new_node->status = status;
-	add_end_list(*first, new_node);
+	add_end_list(first, new_node);
+	printf("name_room : %s \n", tab[0]);
 }
 
 void	put_rooms_in_graph(t_graph **graph, t_node **first)
@@ -183,7 +186,7 @@ void	put_rooms_in_graph(t_graph **graph, t_node **first)
 
 	i = 0;
 	len = get_list_length(*first); // TODO len = 0 SA MERE
-	printf("prout : %d\n", len);
+	// printf("prout : %d\n", len);
 	*graph = create_empty_graph(len);
 	while (i < len)
 	{
@@ -193,6 +196,24 @@ void	put_rooms_in_graph(t_graph **graph, t_node **first)
 		free(tmp);
 		i++;
 	} 
+}
+
+void	get_tubes(t_graph **graph, char *line)
+{
+	int		ret;
+	char	**tab_tube;
+
+	if ((tab_tube = identify_tube(line)))
+		add_tube(graph, tab_tube[0], tab_tube[1]); // fill tube
+	while ((ret = get_next_line(0, &line)) > 0 && (identify_tube(line) || identify_comment(line)))
+	{
+		if ((tab_tube = identify_tube(line)))
+			add_tube(graph, tab_tube[0], tab_tube[1]); // fill tube
+		else if (identify_comment(line))
+			;
+		else
+			break ;
+	}
 }
 
 /*
@@ -206,7 +227,7 @@ t_graph		*get_infos(void)
 	int			ret;
 	int			vertices;
 	char		**tab_room;
-	char		**tab_tube;
+	// char		**tab_tube;
 	t_node 		*tmp;
 	t_room_status status;
 
@@ -216,7 +237,7 @@ t_graph		*get_infos(void)
 	line = NULL;
 	status = NORMAL;
 	if (!get_num_ants(line))
-		return NULL;
+		ft_error();
 	while ((ret = get_next_line(0, &line)) > 0 && (identify_room(line) || identify_comment(line)))
 	{
 		if ((tab_room = identify_room((line))))
@@ -236,22 +257,16 @@ t_graph		*get_infos(void)
 		else
 			break ;
 	}
+	printf("len list : %d\n", get_list_length(tmp));
 	put_rooms_in_graph(&graph, &tmp);
-	while ((ret = get_next_line(0, &line)) > 0 && (identify_tube(line) || identify_comment(line)))
-	{
-		if ((tab_tube = identify_tube(line)))
-			add_tube(&graph, tab_tube[0], tab_tube[1]); // fill tube
-		else if (identify_comment(line))
-			;
-		else
-			break ;
-	}
+	get_tubes(&graph, line);
 	return (graph);
 }
 
 int		main(void)
 {
 	get_infos();
+	// print_graph(get_infos());
 	return (0);
 }
 

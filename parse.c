@@ -6,7 +6,7 @@
 /*   By: lboukrou <lboukrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/30 18:47:20 by lboukrou          #+#    #+#             */
-/*   Updated: 2019/12/12 17:12:28 by lboukrou         ###   ########.fr       */
+/*   Updated: 2019/12/12 17:41:23 by lboukrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,8 @@ unsigned int		get_num_ants(char *line)
 		if (is_number(line) == 1)
 		{
 			ants = ft_atoi(line);
-			return (ants);
+			if (ft_atoi(line) > 0)
+				return (ants);
 		}
 		else
 		{
@@ -158,12 +159,11 @@ int		get_list_length(t_node *list)
 
 	i = 0;
 	tmp = list;
-	while (tmp && tmp->next)
+	while (tmp)
 	{
 		tmp = tmp->next;
 		i++;
 	}
-	i++;
 	return (i);
 }
 
@@ -185,8 +185,9 @@ void	put_rooms_in_graph(t_graph **graph, t_node **first)
 	t_node	*tmp;
 
 	i = 0;
-	len = get_list_length(*first); // TODO len = 0 SA MERE
-	// printf("prout : %d\n", len);
+	len = get_list_length(*first);
+	if (!*first || len == 0)
+		ft_error();
 	*graph = create_empty_graph(len);
 	while (i < len)
 	{
@@ -216,28 +217,16 @@ void	get_tubes(t_graph **graph, char *line)
 	}
 }
 
-/*
-**	Lis la map sur l'entree standard (pas fini)
-*/
-
-t_graph		*get_infos(void)
+char	*get_rooms(t_graph **graph)
 {
-	t_graph		*graph;
-	char		*line;
-	int			ret;
-	int			vertices;
-	char		**tab_room;
-	// char		**tab_tube;
-	t_node 		*tmp;
-	t_room_status status;
-
+	char			*line;
+	int				ret;
+	char			**tab_room;
+	t_node			*tmp;
+	t_room_status	status;
+	
 	tmp = NULL;
-	vertices = 0;
-	graph = NULL;
-	line = NULL;
 	status = NORMAL;
-	if (!get_num_ants(line))
-		ft_error();
 	while ((ret = get_next_line(0, &line)) > 0 && (identify_room(line) || identify_comment(line)))
 	{
 		if ((tab_room = identify_room((line))))
@@ -257,8 +246,50 @@ t_graph		*get_infos(void)
 		else
 			break ;
 	}
-	printf("len list : %d\n", get_list_length(tmp));
-	put_rooms_in_graph(&graph, &tmp);
+	put_rooms_in_graph(graph, &tmp);
+	return (line);
+}
+/*
+**	Lis la map sur l'entree standard (pas fini)
+*/
+
+t_graph		*get_infos(void)
+{
+	t_graph		*graph;
+	char		*line;
+	// char		**tab_room;
+	// char		**tab_tube;
+	t_node 		*tmp;
+	// t_room_status status;
+
+	tmp = NULL;
+	graph = NULL;
+	line = NULL;
+	// status = NORMAL;
+	if (!get_num_ants(line))
+		ft_error();
+	line = get_rooms(&graph);
+	// while ((ret = get_next_line(0, &line)) > 0 && (identify_room(line) || identify_comment(line)))
+	// {
+	// 	if ((tab_room = identify_room((line))))
+	// 	{
+	// 		fill_room(&tmp, tab_room, NORMAL);
+	// 	}
+	// 	else if (identify_comment(line))
+	// 	{
+	// 		if ((status = identify_room_status(line)))
+	// 		{
+	// 			if (get_next_line(0, &line) > 0 && (tab_room = identify_room(line)) != NULL)
+	// 				fill_room(&tmp, tab_room, status); // fill room
+	// 			else
+	// 				break ;
+	// 		}
+	// 	}
+	// 	else
+	// 		break ;
+	// }
+	// printf("len list : %d\n", get_list_length(tmp));
+	// put_rooms_in_graph(&graph, &tmp);
 	get_tubes(&graph, line);
 	return (graph);
 }

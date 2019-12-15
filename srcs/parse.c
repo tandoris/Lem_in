@@ -6,7 +6,7 @@
 /*   By: lboukrou <lboukrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/30 18:47:20 by lboukrou          #+#    #+#             */
-/*   Updated: 2019/12/14 20:51:20 by lboukrou         ###   ########.fr       */
+/*   Updated: 2019/12/15 20:17:07 by lboukrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 **	Cherche et renvoie le nombre de fourmis. ERROR si fourmis n'existe pas.
 */
 
-size_t		get_num_ants(char *line)
+size_t		get_num_ants(char *line, t_map **display_map)
 {
 	size_t			ants;
 	int				ret;
@@ -27,7 +27,10 @@ size_t		get_num_ants(char *line)
 		{
 			ants = ft_atoilong(line);
 			if (ft_atoilong(line) > 0)
+			{	
+				add_end_map_list(display_map, line);
 				return (ants);
+			}
 		}
 		else
 			ft_error();
@@ -55,7 +58,7 @@ int		fill_room(t_node **first, char **tab, t_room_status status)
 		tmp = tmp->next;
 	}
 	add_end_list(first, new_node);
-	printf("name_room : %s\n", new_node->name_room);
+	// printf("name_room : %s and room status : %d\n", new_node->name_room, new_node->status);
 	return (1);
 }
 
@@ -76,8 +79,7 @@ void	put_rooms_in_graph(t_graph **graph, t_node **first)
 	start = 0;
 	len = get_list_length(*first);
 	if (!*first || len == 0)
-	{	printf("Bonjour put rooms\n");
-		ft_error();}
+		ft_error();
 	*graph = create_empty_graph(len);
 	while (i < len)
 	{
@@ -92,9 +94,8 @@ void	put_rooms_in_graph(t_graph **graph, t_node **first)
 		i++;
 	}
 	if (start != 1 || end != 1)
-		{
-			
-			printf("valu start : %d, val end : %d\n", start, end);
+		{	
+			// printf("value start : %d, val end : %d\n", start, end);
 			ft_error();
 		}
 }
@@ -103,31 +104,32 @@ void	put_rooms_in_graph(t_graph **graph, t_node **first)
 **	Lis les tubes et les stock dans graph
 */
 
-void	get_tubes(t_graph **graph, char *line)
+int		get_tubes(t_graph **graph, char *line, t_map **display_map)
 {
 	int		ret;
 	char	**tab_tube;
 
 	if ((tab_tube = identify_tube(line)) && add_tube(graph, tab_tube[0], tab_tube[1]))
-		;
+		add_end_map_list(display_map, line);
 	else
-		return ;
+		return (0);
 	while ((ret = get_next_line(0, &line)) > 0 && (identify_tube(line) || identify_comment(line)))
 	{
 		if (identify_comment(line))
-			;
+			add_end_map_list(display_map, line);
 		else if ((tab_tube = identify_tube(line)) && add_tube(graph, tab_tube[0], tab_tube[1]))
-			;
+			add_end_map_list(display_map, line);
 		else
-			break ;
+			return (0);
 	}
+	return (1);
 }
 
 /*
 **	Lis les salles et les stock dans la liste chainee tmp, puis dans graph
 */
 
-int		get_rooms(t_graph **graph, char **line)
+int		get_rooms(t_graph **graph, char **line, t_map **display_map)
 {
 	int				ret;
 	int				ret_fill_room;
@@ -141,13 +143,20 @@ int		get_rooms(t_graph **graph, char **line)
 	while (ret_fill_room && (ret = get_next_line(0, line)) > 0 && (identify_room(*line) || identify_comment(*line)))
 	{
 		if ((tab_room = identify_room(*line)))
-			ret_fill_room = fill_room(&tmp, tab_room, NORMAL);
+		{	
+			if ((ret_fill_room = fill_room(&tmp, tab_room, NORMAL)))
+				add_end_map_list(display_map, *line);
+		}
 		else if (identify_comment(*line))
 		{
+			add_end_map_list(display_map, *line);
 			if ((status = identify_room_status(*line)))
 			{
 				if (get_next_line(0, line) > 0 && (tab_room = identify_room(*line)) != NULL)
-					ret_fill_room = fill_room(&tmp, tab_room, status);
+				{	
+					if ((ret_fill_room = fill_room(&tmp, tab_room, status)))
+						add_end_map_list(display_map, *line);
+				}
 				else
 					break ;
 			}
@@ -156,7 +165,6 @@ int		get_rooms(t_graph **graph, char **line)
 			break ;
 	}
 	put_rooms_in_graph(graph, &tmp);
-	printf("valeur rest_fill_room : %d\n", ret_fill_room);
 	return (ret_fill_room);
 }
 
@@ -168,15 +176,18 @@ t_graph		*get_infos(void)
 {
 	t_graph		*graph;
 	t_node 		*tmp;
+	t_map		*display_map;
 	char		*line;
 
 	tmp = NULL;
 	graph = NULL;
 	line = NULL;
-	if (!get_num_ants(line))
+	display_map = NULL;
+	if (!get_num_ants(line, &display_map))
 		ft_error();
-	if (get_rooms(&graph, &line))
-		get_tubes(&graph, line);
+	if (get_rooms(&graph, &line, &display_map))
+		get_tubes(&graph, line, &display_map);
+	print_map(&display_map);
 	return (graph);
 }
 
@@ -184,7 +195,6 @@ int		main(void)
 {
 	get_infos();
 	printf("Algo begins\n");
-	// print_graph(get_infos());
 	return (0);
 }
 

@@ -6,7 +6,7 @@
 /*   By: lboukrou <lboukrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 20:11:32 by lboukrou          #+#    #+#             */
-/*   Updated: 2019/12/14 20:17:19 by lboukrou         ###   ########.fr       */
+/*   Updated: 2019/12/15 20:50:43 by lboukrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "libft/libft.h"
-
+#include "libft.h"
+//
 /*
 **	structure enum état de la salle. NORMAL = 0, START_ROOM = 1, END_ROOM = 2
 */
@@ -44,6 +44,13 @@ typedef struct 		s_graph
 	struct s_node	**adj_list;		// tableau de listes chaines 
 }					t_graph;
 
+typedef struct		s_map 
+{
+	char			*data;
+	struct s_map	*next;
+}					t_map;
+
+
 /*
 **	Utility functions
 */
@@ -69,10 +76,17 @@ void				add_end_list(t_node	**room, t_node *new_cnx);
 t_node				*duplicate_room(t_node *room_src);
 
 /*
+**	Utility display functions
+*/
+
+void				add_end_map_list(t_map **first, char *data);
+void				print_map(t_map **display_map);
+
+/*
 **	Parse functions
 */
 
-size_t				get_num_ants(char *line);
+size_t				get_num_ants(char *line, t_map **display_map);
 t_room_status		identify_room_status(char *buf);
 int					nb_elem_tab(char **tab);
 char				**identify_tube(char *line);
@@ -80,7 +94,7 @@ char				**identify_room(char *line);
 unsigned int		identify_comment(char *line);
 int					fill_room(t_node **first, char **tab, t_room_status status);
 void				put_rooms_in_graph(t_graph **graph, t_node **first);
-void				get_tubes(t_graph **graph, char *line);
-int					get_rooms(t_graph **graph, char **line);
+int					get_tubes(t_graph **graph, char *line, t_map **display_map);
+int					get_rooms(t_graph **graph, char **line, t_map **display_map);
 t_graph				*get_infos(void);
 #endif

@@ -6,7 +6,7 @@
 /*   By: lboukrou <lboukrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/14 18:11:05 by lboukrou          #+#    #+#             */
-/*   Updated: 2019/12/14 19:51:57 by lboukrou         ###   ########.fr       */
+/*   Updated: 2019/12/15 13:24:48 by lboukrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,10 +55,12 @@ int		is_number(char *str)
 	return (1);
 }
 
-int		nb_elem_tab(char **tab) // TODO proteger si tab n'existe pas ? 
+int		nb_elem_tab(char **tab)
 {
 	int		i;
 
+	if (!tab)
+		return (0);
 	i = 0;
 	while (tab[i])
 		i++;

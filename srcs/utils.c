@@ -6,7 +6,7 @@
 /*   By: lboukrou <lboukrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/14 18:11:05 by lboukrou          #+#    #+#             */
-/*   Updated: 2019/12/15 13:24:48 by lboukrou         ###   ########.fr       */
+/*   Updated: 2019/12/16 18:51:30 by lboukrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,6 @@ long long		ft_atoilong(const char *nptr)
 	return (retour * negatif);
 }
 
-// TODO : mettre is_number dans libft
 int		is_number(char *str)
 {
 	if (!str)

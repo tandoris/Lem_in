@@ -6,7 +6,7 @@
 /*   By: lboukrou <lboukrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/03 18:01:59 by lboukrou          #+#    #+#             */
-/*   Updated: 2019/12/15 19:29:52 by lboukrou         ###   ########.fr       */
+/*   Updated: 2019/12/16 18:18:40 by lboukrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,13 +55,29 @@ int		add_tube(t_graph **graph, char *src, char *dest)
 	}
 	if (node_1 && node_2)
 	{
-		// printf("rajoute un tube\n");
-		add_end_list(&node_1, duplicate_room(node_2));
-		add_end_list(&node_2, duplicate_room(node_1));
+		if (no_duplicate_tube(node_1, node_2))
+			add_end_list(&node_1, duplicate_room(node_2));
+		if (no_duplicate_tube(node_2, node_1))
+			add_end_list(&node_2, duplicate_room(node_1));
 		return (1);
 	}
 	else
 		return (0);
+}
+
+int		no_duplicate_tube(t_node *room, t_node *to_check)
+{
+	t_node	*tmp;
+
+
+	tmp = room;
+	while (tmp)
+	{
+		if (!(ft_strcmp(tmp->name_room, to_check->name_room)))
+			return (0);
+		tmp = tmp->next;
+	}
+	return (1);
 }
 
 /*

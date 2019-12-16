@@ -1,61 +1,59 @@
 # **************************************************************************** #
-#																			  #
-#														 :::	  ::::::::	#
-#	Makefile										   :+:	  :+:	:+:	#
-#													 +:+ +:+		 +:+	  #
-#	By: lboukrou <lboukrou@student.42.fr>		  +#+  +:+	   +#+		 #
-#												 +#+#+#+#+#+   +#+			#
-#	Created: 2019/12/15 20:23:36 by lboukrou		  #+#	#+#			  #
-#	Updated: 2019/12/15 20:45:23 by lboukrou		 ###   ########.fr		#
-#																			  #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: lboukrou <lboukrou@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2019/12/16 19:56:30 by lboukrou          #+#    #+#              #
+#    Updated: 2019/12/16 20:15:01 by lboukrou         ###   ########.fr        #
+#                                                                              #
 # **************************************************************************** #
 
-NAME		=	lem_in
-CC			=	gcc
-CFLAGS		=	-Werror -Wall -Wextra
+NAME		= lem_in
+################################################################################
+CC			= gcc
+CFLAGS		= -Wall -Wextra -Werror #-g3 -fsanitize=address
+INCS		= -Iincludes -I $(LIB_PATH)
+COLOR		= \033[31m
+FINCOLOR	= \033[0m
+################################################################################
+SRC_PATH	=	srcs
+INC_PATH	=	includes
+OBJ_PATH	=	obj
 LIB_PATH	=	libft
 LIB			=	$(LIB_PATH)/libft.a
-
-INC_DIR		=	includes
-INCS		=	-I $(INC_DIR) -I $(LIB_PATH)
+SRC_NAME	=   error.c \
+				graph_functions.c \
+				parse_utils.c \
+				parse.c \
+				display_utils.c \
+				utils.c
 INC_NAME	=	lem_in.h
-
-SRC_DIR		=	srcs
-SRC			=	error.c \
-					graph_functions.c \
-					parse_utils.c \
-					parse.c \
-					display_utils.c \
-					utils.c
-
-OBJ_DIR		=	obj
-
-SRCS		=	$(addprefix $(SRC_DIR)/, $(SRC))
-OBJS		=	$(addprefix $(OBJ_DIR)/, $(SRC:.c=.o))
+OBJ_NAME	=	$(SRC_NAME:.c=.o)
+################################################################################
+SRC	= $(addprefix $(SRC_PATH)/,$(SRC_NAME))
+OBJ	= $(addprefix $(OBJ_PATH)/,$(OBJ_NAME))
+INC	= $(addprefix $(INC_PATH)/,$(INC_NAME))
+################################################################################
 
 all: $(NAME)
 
-$(NAME): obj $(LIB) $(OBJS)
-	$(CC) $(CFLAGS) -o $@ $(OBJS) $(LIB)
-
-obj:
-	mkdir obj
-
 $(LIB):
 	make -C $(LIB_PATH)
-
-$(OBJ_DIR)/%.o: $(SRC_DIR)/%.c
-	$(CC) $(CFLAGS) $(INCS) -c -o $@ $<
-
+$(OBJ_PATH): 
+	mkdir $(OBJ_PATH) 
+$(OBJ_PATH)/%.o: $(SRC_PATH)/%.c $(INC)
+	$(CC) $(CFLAGS) $(INCS) -c $< -o $@ 
+$(NAME): $(OBJ_PATH) $(OBJ) $(LIB)
+	$(CC) -o $(NAME) $(OBJ) $(LIB)
 clean:
 	make -C $(LIB_PATH) clean
-	rm -f $(OBJS)
-	rm -rf $(OBJ_DIR)
-
-fclean: clean
+	rm -rf $(OBJ_PATH)
+fclean:
 	rm -f $(LIB)
-	rm -f $(NAME)
-
+	rm -rf $(OBJ_PATH)
+	rm -rf $(NAME)
 re: fclean all
-
-.PHONY: all clean fclean re
+.PHONY : all clean fclean re
+################################################################################

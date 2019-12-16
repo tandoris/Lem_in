@@ -6,7 +6,7 @@
 /*   By: lboukrou <lboukrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 20:11:32 by lboukrou          #+#    #+#             */
-/*   Updated: 2019/12/16 18:21:53 by lboukrou         ###   ########.fr       */
+/*   Updated: 2019/12/16 20:11:55 by lboukrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "libft.h"
-//
+
 /*
 **	structure enum état de la salle. NORMAL = 0, START_ROOM = 1, END_ROOM = 2
 */

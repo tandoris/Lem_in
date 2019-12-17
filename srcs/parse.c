@@ -6,7 +6,7 @@
 /*   By: lboukrou <lboukrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/30 18:47:20 by lboukrou          #+#    #+#             */
-/*   Updated: 2019/12/16 18:24:21 by lboukrou         ###   ########.fr       */
+/*   Updated: 2019/12/17 20:54:18 by lboukrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ void	put_rooms_in_graph(t_graph **graph, t_node **first)
 	if (!*first || len == 0)
 		ft_error();
 	*graph = create_empty_graph(len);
+	// printf("len : %d\n", len);
 	while (i < len)
 	{
 		if ((*first)->status == START_ROOM)
@@ -149,9 +150,11 @@ int		get_rooms(t_graph **graph, char **line, t_map **display_map)
 		}
 		else if (identify_comment(*line))
 		{
+			// printf("\nline : %s\n", *line);
 			add_end_map_list(display_map, *line);
 			if ((status = identify_room_status(*line)))
 			{
+				// printf("igdfnidfni\n");
 				if (get_next_line(0, line) > 0 && (tab_room = identify_room(*line)) != NULL)
 				{	
 					if ((ret_fill_room = fill_room(&tmp, tab_room, status)))
@@ -188,13 +191,17 @@ t_graph		*get_infos(void)
 	if (get_rooms(&graph, &line, &display_map))
 		get_tubes(&graph, line, &display_map);
 	print_map(&display_map);
+	free(line);
 	return (graph);
 }
 
 int		main(void)
 {
-	// get_infos();
-	print_graph(get_infos());
+	t_graph		*new_graph;
+
+	new_graph = get_infos();
+	print_graph(new_graph);
+	free_graph(&new_graph);
 	printf("Algo begins\n");
 	return (0);
 }

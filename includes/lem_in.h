@@ -6,7 +6,7 @@
 /*   By: lboukrou <lboukrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 20:11:32 by lboukrou          #+#    #+#             */
-/*   Updated: 2019/12/16 20:11:55 by lboukrou         ###   ########.fr       */
+/*   Updated: 2019/12/17 17:32:53 by lboukrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,4 +98,5 @@ int					get_tubes(t_graph **graph, char *line, t_map **display_map);
 int					get_rooms(t_graph **graph, char **line, t_map **display_map);
 t_graph				*get_infos(void);
 int					no_duplicate_tube(t_node *room, t_node *to_check);
+void				free_graph(t_graph **graph);
 #endif

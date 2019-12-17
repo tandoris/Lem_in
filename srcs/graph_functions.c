@@ -6,7 +6,7 @@
 /*   By: lboukrou <lboukrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/03 18:01:59 by lboukrou          #+#    #+#             */
-/*   Updated: 2019/12/16 18:18:40 by lboukrou         ###   ########.fr       */
+/*   Updated: 2019/12/17 20:53:06 by lboukrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,10 +22,10 @@ t_node	*create_room(char *name, int x, int y)
 
 	if (!(new_node = (t_node *)ft_memalloc(sizeof(t_node))))
 		return NULL;
-	if (!(new_node->name_room = (char *)ft_memalloc(sizeof(name))))
-		return NULL;
+	// if (!(new_node->name_room = (char *)ft_memalloc(sizeof(name))))
+	// 	return NULL;
 	new_node->status = NORMAL;
-	new_node->name_room = name;
+	new_node->name_room = ft_strdup(name);
 	new_node->x = x;
 	new_node->y = y;
 	new_node->next = NULL;
@@ -55,14 +55,16 @@ int		add_tube(t_graph **graph, char *src, char *dest)
 	}
 	if (node_1 && node_2)
 	{
-		if (no_duplicate_tube(node_1, node_2))
+		if (no_duplicate_tube(node_1, node_2) && no_duplicate_tube(node_2, node_1))
+		{
 			add_end_list(&node_1, duplicate_room(node_2));
-		if (no_duplicate_tube(node_2, node_1))
+			printf("Added copy of %s to %s\n", node_2->name_room, node_1->name_room);
 			add_end_list(&node_2, duplicate_room(node_1));
-		return (1);
+			printf("Added copy of %s to %s\n", node_1->name_room, node_2->name_room);
+			return (1);
+		}
 	}
-	else
-		return (0);
+	return (0);
 }
 
 int		no_duplicate_tube(t_node *room, t_node *to_check)
@@ -138,26 +140,36 @@ void    print_graph(t_graph *graph)
             tmp = tmp->next;
         }
         printf("\n");
+		// printf("printgraph\n");
     }
 }
 
-// int		main()
-// {
-// 	t_graph		*graph;
+void	free_graph(t_graph **graph)
+{
+	int		i;
+	t_node	*tmp;
+	t_node	*tmp_2;
 
-// 	graph = create_empty_graph(5);
-// 	graph->adj_list[0] = create_room("start", 3, 4);
-// 	graph->adj_list[1] = create_room("two", 1, 2);
-// 	graph->adj_list[2] = create_room("three", 2, 2);
-// 	graph->adj_list[3] = create_room("four", 4, 2);
-// 	graph->adj_list[4] = create_room("end", 2, 1);
-	
-// 	add_tube(&graph, "start", "two");
-// 	add_tube(&graph, "start", "three");
-// 	add_tube(&graph, "start", "four");
-// 	add_tube(&graph, "three", "end");
-// 	add_tube(&graph, "four", "end");
-
-// 	print_graph(graph);
-// 	return (0);
-// }
+	i = 0;
+	tmp = NULL;
+	if (!*graph || !graph)
+		return ;
+	while (i < (*graph)->nb_vertices)
+	{
+		
+		printf("i : %d\n",i);
+		tmp = (*graph)->adj_list[i];
+		while (tmp)
+		{
+			// printf("bonjour\n");
+			tmp_2 = tmp;
+			// printf("\n");
+			//printf("name : %s\n", tmp_2->name_room);
+			tmp = tmp->next;
+			ft_memdel((void**)&(tmp_2->name_room));
+			free(tmp_2);
+		}
+		i++;
+	}
+	free(*graph);
+}

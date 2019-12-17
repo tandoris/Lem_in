@@ -6,7 +6,7 @@
 /*   By: lboukrou <lboukrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/14 17:53:01 by lboukrou          #+#    #+#             */
-/*   Updated: 2019/12/16 18:51:23 by lboukrou         ###   ########.fr       */
+/*   Updated: 2019/12/17 20:11:55 by lboukrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,8 @@ char	**identify_room(char *line)
 		tab = ft_strsplit(line, ' ');
 		if (nb_elem_tab(tab) == 3 && tab[0][0] != 'L' && tab[0][0] != '#' && is_number(tab[1]) && is_number(tab[2])) 
 			return (tab);
-		ft_memdel((void **)tab);	
+		
+		ft_memdel((void **)tab);
 	}
 	return NULL;
 }
@@ -74,3 +75,8 @@ unsigned int	identify_comment(char *line)
 		return (1);
 	return (0);
 }
+
+// void	free_tab(char *tab)
+// {
+
+// }

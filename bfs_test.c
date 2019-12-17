@@ -6,7 +6,7 @@
 /*   By: clboutry <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/12 13:48:32 by clboutry          #+#    #+#             */
-/*   Updated: 2019/12/12 15:51:33 by clboutry         ###   ########.fr       */
+/*   Updated: 2019/12/16 12:16:35 by clboutry         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,13 @@ int			main(int ac, char **av)
 	int		cmpt;
 	int		cmpt2;
 	int		*path;
-	int		cmpt3;'
+	int		cmpt3;
 
 	cmpt3 = 0;
 	cmpt = -1;
-	if (!(names = malloc((ac) * (sizeof(char)))))
+	if (!(names = malloc((ac) * (sizeof(char*)))))
 		return (0);
-	names[ac] = '\0';
+	names[ac][0] = '\0';
 	if (!(path = malloc((ac) * (sizeof(int)))))
 		return (0);
 	while (++cmpt < ac)
@@ -38,15 +38,15 @@ int			main(int ac, char **av)
 	cmpt = 0;
 	cmpt2 = 0;
 	ants = 25;
-	while (av[cmpt][cmpt2])
+	while (av[cmpt + 1])
 	{
-		while (av[cmpt][cmpt2])
+		while (av[cmpt + 1][cmpt2])
 			cmpt2++;
 		if (!(names[cmpt] = malloc((cmpt2 + 1) * (sizeof(char)))))
 			return (0);
 		cmpt2 = -1;
-		while (av[cmpt][++cmpt2])
-			names[cmpt][cmpt2] = av[cmpt][cmpt2];
+		while (av[cmpt + 1][++cmpt2])
+			names[cmpt][cmpt2] = av[cmpt + 1][cmpt2];
 		names[cmpt][cmpt2] = '\0';
 		cmpt2 = 0;
 		cmpt++;
@@ -60,7 +60,7 @@ int			main(int ac, char **av)
 			if (cmpt == 0)
 			{
 				cmpt2 = path[cmpt + 1];
-				cmpt3 = path[cmpt + 1]
+				cmpt3 = path[cmpt + 1];
 				path[cmpt + 1] = path[cmpt];
 				path[cmpt] = num_ants;
 				num_ants  += 1;
@@ -78,7 +78,7 @@ int			main(int ac, char **av)
 		while (cmpt < ac - 1)
 		{
 			if (path[cmpt] != -1)
-				printf("L%d-%s " path[cmpt], names[cmpt]);
+				printf("L%d-%s ", path[cmpt], names[cmpt]);
 			cmpt++;
 		}
 		if (cmpt == ac - 1)

@@ -6,7 +6,7 @@
 /*   By: lboukrou <lboukrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/14 17:53:01 by lboukrou          #+#    #+#             */
-/*   Updated: 2019/12/17 20:11:55 by lboukrou         ###   ########.fr       */
+/*   Updated: 2019/12/18 15:47:38 by lboukrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,8 @@ char	**identify_room(char *line)
 
 unsigned int	identify_comment(char *line)
 {
-	if (ft_strchr(line, '#'))
+	// printf("comment # : %s : %ld\n", line, line - ft_strchr(line, '#'));
+	if ((line - ft_strchr(line, '#')) == 0)
 		return (1);
 	return (0);
 }

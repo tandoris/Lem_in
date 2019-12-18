@@ -6,7 +6,7 @@
 /*   By: lboukrou <lboukrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/30 18:47:20 by lboukrou          #+#    #+#             */
-/*   Updated: 2019/12/17 20:54:18 by lboukrou         ###   ########.fr       */
+/*   Updated: 2019/12/18 16:26:04 by lboukrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,17 +23,14 @@ size_t		get_num_ants(char *line, t_map **display_map)
 
 	if ((ret = get_next_line(0, &line)) > -1)
 	{
-		if (is_number(line) == 1)
+		if (is_number(line) == 1 && (ft_atoilong(line)) > 0)
 		{
 			ants = ft_atoilong(line);
-			if (ft_atoilong(line) > 0)
-			{	
-				add_end_map_list(display_map, line);
-				return (ants);
-			}
+			add_end_map_list(display_map, line);
+			free(line);
+			return (ants);
 		}
-		else
-			ft_error();
+		free(line);
 	}
 	ft_error();
 	return (0);

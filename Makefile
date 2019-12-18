@@ -6,7 +6,7 @@
 #    By: lboukrou <lboukrou@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/12/16 19:56:30 by lboukrou          #+#    #+#              #
-#    Updated: 2019/12/16 20:15:01 by lboukrou         ###   ########.fr        #
+#    Updated: 2019/12/18 16:34:37 by lboukrou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,8 @@ SRC_NAME	=   error.c \
 				parse_utils.c \
 				parse.c \
 				display_utils.c \
-				utils.c
+				utils.c \ 
+				free.c
 INC_NAME	=	lem_in.h
 OBJ_NAME	=	$(SRC_NAME:.c=.o)
 ################################################################################

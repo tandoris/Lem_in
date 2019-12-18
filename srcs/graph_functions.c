@@ -6,7 +6,7 @@
 /*   By: lboukrou <lboukrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/03 18:01:59 by lboukrou          #+#    #+#             */
-/*   Updated: 2019/12/17 20:53:06 by lboukrou         ###   ########.fr       */
+/*   Updated: 2019/12/18 16:33:22 by lboukrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -144,32 +144,3 @@ void    print_graph(t_graph *graph)
     }
 }
 
-void	free_graph(t_graph **graph)
-{
-	int		i;
-	t_node	*tmp;
-	t_node	*tmp_2;
-
-	i = 0;
-	tmp = NULL;
-	if (!*graph || !graph)
-		return ;
-	while (i < (*graph)->nb_vertices)
-	{
-		
-		printf("i : %d\n",i);
-		tmp = (*graph)->adj_list[i];
-		while (tmp)
-		{
-			// printf("bonjour\n");
-			tmp_2 = tmp;
-			// printf("\n");
-			//printf("name : %s\n", tmp_2->name_room);
-			tmp = tmp->next;
-			ft_memdel((void**)&(tmp_2->name_room));
-			free(tmp_2);
-		}
-		i++;
-	}
-	free(*graph);
-}

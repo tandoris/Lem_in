@@ -6,7 +6,7 @@
 /*   By: clboutry <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/07 17:18:59 by clboutry          #+#    #+#             */
-/*   Updated: 2019/12/12 15:19:52 by clboutry         ###   ########.fr       */
+/*   Updated: 2019/12/18 12:47:03 by clboutry         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,13 +86,13 @@ int		main(void)
 		return (0);
 	if (!(path_name = malloc((nbr_path + 1) * (sizeof(char*)))))
 		return (0);
-	paths[0] = 9;
-	paths[1] = 86;
-	paths[2] = 25;
-	paths[3] = 15;
-	paths[4] = 6;
+	paths[0] = 900;
+	paths[1] = 866;
+	paths[2] = 800;
+	paths[3] = 1598;
+	paths[4] = 650;
 	paths[5] = '\0';
-	ants = 54;
+	ants = 4000;
 	while (cmpt < nbr_path)
 	{
 		if (!(path_name[cmpt] = malloc((paths[cmpt]) * (sizeof(char)))))
@@ -102,5 +102,5 @@ int		main(void)
 	sort_list(paths);
 	minimum_line = nbr_line(paths, ants, nbr_path, nbr_ants_path);
 	printf("nbr de ligne minimum = %d\n", minimum_line);
-	printf("chemin %d taille %d = %d fourmis\n", 4, paths[4], nbr_ants_path[4]);
+	//printf("chemin %d taille %d = %d fourmis\n", 4, paths[4], nbr_ants_path[4]);
 }

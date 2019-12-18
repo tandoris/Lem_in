@@ -6,7 +6,7 @@
 /*   By: lboukrou <lboukrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/15 19:36:26 by lboukrou          #+#    #+#             */
-/*   Updated: 2019/12/15 20:50:18 by lboukrou         ###   ########.fr       */
+/*   Updated: 2019/12/18 21:04:48 by lboukrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,8 +43,8 @@ void	print_map(t_map **display_map)
 		ft_putendl((*display_map)->data);
 		tmp = *display_map;
 		*display_map = (*display_map)->next;
-		free(tmp->data);
-		// free(tmp);
+		// free(tmp->data);
 	}
+	// free(tmp);
 }
 

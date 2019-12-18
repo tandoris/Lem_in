@@ -6,7 +6,7 @@
 /*   By: lboukrou <lboukrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 20:11:32 by lboukrou          #+#    #+#             */
-/*   Updated: 2019/12/18 16:47:45 by lboukrou         ###   ########.fr       */
+/*   Updated: 2019/12/18 18:45:47 by lboukrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,5 +106,6 @@ int					no_duplicate_tube(t_node *room, t_node *to_check);
 void				free_node(t_node **node);
 void				free_node_list(t_node **node);
 void				free_graph(t_graph **graph);
+void				free_tab(char **tab);
 
 #endif

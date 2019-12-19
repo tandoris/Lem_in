@@ -6,7 +6,7 @@
 /*   By: lboukrou <lboukrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/15 19:36:26 by lboukrou          #+#    #+#             */
-/*   Updated: 2019/12/18 21:04:48 by lboukrou         ###   ########.fr       */
+/*   Updated: 2019/12/19 19:14:31 by lboukrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ void	add_end_map_list(t_map **first, char *data)
 {
 	t_map	*tmp;
 
-	tmp = *first;
 	if (*first == NULL)
 	{
 		if (!(*first = ft_memalloc(sizeof(t_map))))
@@ -25,6 +24,7 @@ void	add_end_map_list(t_map **first, char *data)
 		(*first)->next = NULL;
 		return ;
 	}
+	tmp = *first;
 	while (tmp && tmp->next)
 		tmp = tmp->next;
 	if (!(tmp->next = ft_memalloc(sizeof(t_map))))
@@ -38,13 +38,11 @@ void	print_map(t_map **display_map)
 {
 	t_map	*tmp;
 
-	while (*display_map)
+	tmp = *display_map;
+	while (tmp)
 	{
-		ft_putendl((*display_map)->data);
-		tmp = *display_map;
-		*display_map = (*display_map)->next;
-		// free(tmp->data);
+		ft_putendl(tmp->data);
+		tmp = tmp->next;
 	}
-	// free(tmp);
 }
 

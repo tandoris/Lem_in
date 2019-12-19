@@ -6,7 +6,7 @@
 /*   By: lboukrou <lboukrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/03 18:01:59 by lboukrou          #+#    #+#             */
-/*   Updated: 2019/12/18 19:17:55 by lboukrou         ###   ########.fr       */
+/*   Updated: 2019/12/19 17:40:39 by lboukrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,8 +40,8 @@ int		add_tube(t_graph **graph, char *src, char *dest)
 {
     t_node *node_1;
     t_node *node_2;
-
 	int		i;
+
 	i = 0;
 	node_1 = NULL;
 	node_2 = NULL;
@@ -58,8 +58,10 @@ int		add_tube(t_graph **graph, char *src, char *dest)
 		if (no_duplicate_tube(node_1, node_2) && no_duplicate_tube(node_2, node_1))
 		{
 			add_end_list(&node_1, duplicate_room(node_2));
+			// free_node(&node_2);
 			// printf("Added copy of %s to %s\n", node_2->name_room, node_1->name_room);
 			add_end_list(&node_2, duplicate_room(node_1));
+			// free_node(&node_1);
 			// printf("Added copy of %s to %s\n", node_1->name_room, node_2->name_room);
 			return (1);
 		}
@@ -108,7 +110,7 @@ t_graph *create_empty_graph(int vertices)
     if (!(graph = (t_graph *)ft_memalloc(sizeof(t_graph) )))
 	   	ft_malloc_error();
     if (!(graph->adj_list = ft_memalloc(vertices * sizeof(t_node *))))
-			ft_malloc_error();
+		ft_malloc_error();
     graph->nb_vertices = vertices;
     i = 0;
     while (i < vertices)

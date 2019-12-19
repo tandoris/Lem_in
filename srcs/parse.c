@@ -6,7 +6,7 @@
 /*   By: lboukrou <lboukrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/30 18:47:20 by lboukrou          #+#    #+#             */
-/*   Updated: 2019/12/18 21:16:48 by lboukrou         ###   ########.fr       */
+/*   Updated: 2019/12/19 19:39:25 by lboukrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,6 +82,7 @@ void	put_rooms_in_graph(t_graph **graph, t_node **first)
 	if (!*first || len == 0)
 		ft_error();
 	*graph = create_empty_graph(len);
+	// printf("len = %d\n", len);
 	while (i < len)
 	{
 		if (tmp->status == START_ROOM)
@@ -111,14 +112,20 @@ int		get_tubes(t_graph **graph, char *line, t_map **display_map)
 	int		ret;
 	char	**tab_tube;
 
+	// printf("get_tube debut\n");
+	// printf("loulou\n");
 	if ((tab_tube = identify_tube(line)) && add_tube(graph, tab_tube[0], tab_tube[1]))
 	{	
 		add_end_map_list(display_map, line);
+		free_tab(tab_tube);
 		free(line);
 	}
 	else
+	{	
+		free_tab(tab_tube); // added
 		return (0);
-	while ((ret = get_next_line(0, &line)) > 0 && (identify_tube(line) || identify_comment(line)))
+	}
+	while ((ret = get_next_line(0, &line)) > 0)// && (identify_tube(line) || identify_comment(line)))
 	{
 		if (identify_comment(line))
 		{
@@ -129,6 +136,7 @@ int		get_tubes(t_graph **graph, char *line, t_map **display_map)
 		{	
 			add_end_map_list(display_map, line);
 			free(line);
+			free_tab(tab_tube); // added
 		}
 		else
 		{
@@ -136,6 +144,7 @@ int		get_tubes(t_graph **graph, char *line, t_map **display_map)
 			return (0);
 		}
 	}
+	// printf("get_tube fin\n");
 	return (1);
 }
 
@@ -154,17 +163,21 @@ int		get_rooms(t_graph **graph, char **line, t_map **display_map)
 	tmp = NULL;
 	status = NORMAL;
 	ret_fill_room = 1;
-	while (ret_fill_room && (ret = get_next_line(0, line)) > 0 && (identify_room(*line) || identify_comment(*line)))
+	while (ret_fill_room && (ret = get_next_line(0, line)) > 0)// && (identify_room(*line) || identify_comment(*line)))
 	{
 		if ((tab_room = identify_room(*line)))
 		{	
 			if ((ret_fill_room = fill_room(&tmp, tab_room, NORMAL)))
+			{	
 				add_end_map_list(display_map, *line);
-			free(*line);
+				free(*line);
+			}
+			free_tab(tab_room);
 		}
 		else if (identify_comment(*line))
 		{
 			add_end_map_list(display_map, *line);
+			// free(*line);
 			if ((status = identify_room_status(*line)))
 			{
 				free(*line);
@@ -172,13 +185,16 @@ int		get_rooms(t_graph **graph, char **line, t_map **display_map)
 				{	
 					if ((ret_fill_room = fill_room(&tmp, tab_room, status)))
 						add_end_map_list(display_map, *line);
-					free(*line);			
+					free(*line);
+					free_tab(tab_room);
 				}
 				else
 				{
 					break ;
 				}
 			}
+			else
+				free(*line);
 		}
 		else
 		{
@@ -205,12 +221,13 @@ t_graph		*get_infos(void)
 	line = NULL;
 	display_map = NULL;
 	if (!get_num_ants(line, &display_map))
+	{	
 		ft_error();
+	}
 	if (get_rooms(&graph, &line, &display_map))
 		get_tubes(&graph, line, &display_map);
 	print_map(&display_map);
-	// free(line);
-	free(display_map);
+	free_t_map_list(&display_map);
 	return (graph);
 }
 

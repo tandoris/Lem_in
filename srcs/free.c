@@ -6,7 +6,7 @@
 /*   By: lboukrou <lboukrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 16:31:14 by lboukrou          #+#    #+#             */
-/*   Updated: 2019/12/18 21:00:25 by lboukrou         ###   ########.fr       */
+/*   Updated: 2019/12/19 19:37:54 by lboukrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@
 
 void	free_node(t_node **node)
 {
-	printf("name room : %s\n", (*node)->name_room);
+	// printf("name room : %s\n", (*node)->name_room);
 	ft_memdel((void**)&((*node)->name_room));
 	free(*node);
 }
@@ -58,7 +58,27 @@ void	free_graph(t_graph **graph)
 		free_node_list(&tmp);
 		i++;
 	}
+	free((*graph)->adj_list);
 	free(*graph);
+}
+
+void	free_t_map_node(t_map **display_map)
+{
+	// ft_memdel((void**)&(*display_map)->data);
+	free((*display_map)->data);
+	free(*display_map);
+}
+
+void	free_t_map_list(t_map **display_map)
+{
+	t_map	*tmp;
+
+	while  (*display_map)
+	{
+		tmp = *display_map;
+		*display_map = (*display_map)->next;
+		free_t_map_node(&tmp);
+	}
 }
 
 void	free_tab(char **tab)
@@ -66,9 +86,11 @@ void	free_tab(char **tab)
 	int		i;
 
 	i = 0;
+	if (!tab)
+		return ;
 	while (tab[i])
 	{
-		ft_memdel((void**)tab[i]);
+		ft_memdel((void **)&tab[i]);
 		i++;
 	}
 	free(tab);

@@ -6,7 +6,7 @@
 /*   By: lboukrou <lboukrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/14 17:53:01 by lboukrou          #+#    #+#             */
-/*   Updated: 2019/12/19 19:43:52 by lboukrou         ###   ########.fr       */
+/*   Updated: 2019/12/21 19:07:24 by lboukrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,12 +35,13 @@ char	**identify_tube(char *line)
 	char	**tab;
 
 	tab = NULL;
+	// printf("identify_tube : %s\n", line);
 	if (ft_strchr(line, '-'))
 	{
 		tab = ft_strsplit(line, '-');
 		if (nb_elem_tab(tab) == 2)
 			return (tab);
-		ft_memdel((void **)tab);
+		free_tab(tab);
 	}
 	return NULL;
 }
@@ -53,6 +54,7 @@ char	**identify_room(char *line)
 {
 	char	**tab;
 
+	// printf("identify_room : %s\n", line);
 	tab = NULL;
 	if (ft_strchr(line, ' '))
 	{

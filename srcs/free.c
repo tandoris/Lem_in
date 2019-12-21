@@ -6,7 +6,7 @@
 /*   By: lboukrou <lboukrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 16:31:14 by lboukrou          #+#    #+#             */
-/*   Updated: 2019/12/19 19:37:54 by lboukrou         ###   ########.fr       */
+/*   Updated: 2019/12/21 16:52:20 by lboukrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,6 @@ void	free_graph(t_graph **graph)
 
 void	free_t_map_node(t_map **display_map)
 {
-	// ft_memdel((void**)&(*display_map)->data);
 	free((*display_map)->data);
 	free(*display_map);
 }

@@ -6,14 +6,14 @@
 #    By: lboukrou <lboukrou@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/12/16 19:56:30 by lboukrou          #+#    #+#              #
-#    Updated: 2019/12/18 16:50:00 by lboukrou         ###   ########.fr        #
+#    Updated: 2019/12/21 19:05:49 by lboukrou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME		= lem_in
 ################################################################################
 CC			= gcc
-CFLAGS		= -Wall -Wextra -Werror #-g3 -fsanitize=address
+CFLAGS		= -Wall -Wextra -Werror #-fsanitize=address -fno-omit-frame-pointer -fno-optimize-sibling-calls -g #-g3 -fsanitize=address
 INCS		= -Iincludes -I $(LIB_PATH)
 COLOR		= \033[31m
 FINCOLOR	= \033[0m
@@ -48,7 +48,7 @@ $(OBJ_PATH):
 $(OBJ_PATH)/%.o: $(SRC_PATH)/%.c $(INC)
 	$(CC) $(CFLAGS) $(INCS) -c $< -o $@ 
 $(NAME): $(OBJ_PATH) $(OBJ) $(LIB)
-	$(CC) -o $(NAME) $(OBJ) $(LIB)
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJ) $(LIB)
 clean:
 	make -C $(LIB_PATH) clean
 	rm -rf $(OBJ_PATH)

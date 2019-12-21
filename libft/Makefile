@@ -1,6 +1,6 @@
 NAME = libft.a
 RM = rm -f
-CC = gcc
+CC = gcc #-fsanitize=address -fno-omit-frame-pointer -fno-optimize-sibling-calls -g 
 AR = ar rc
 RL = ranlib
 CFLG = -Wall -Werror -Wextra -c
@@ -69,7 +69,7 @@ OBJ = $(SRC:.c=.o)
 
 all: $(NAME)
 
-$(NAME): $(OBJ)
+$(NAME):
 	$(CC) $(CFLG) $(SRC)
 	$(AR) $(NAME) $(OBJ)
 	$(RL) $(NAME)

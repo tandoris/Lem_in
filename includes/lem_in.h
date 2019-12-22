@@ -6,7 +6,7 @@
 /*   By: lboukrou <lboukrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 20:11:32 by lboukrou          #+#    #+#             */
-/*   Updated: 2019/12/19 16:42:30 by lboukrou         ###   ########.fr       */
+/*   Updated: 2019/12/22 20:21:30 by lboukrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,8 +107,9 @@ void				free_node(t_node **node);
 void				free_node_list(t_node **node);
 void				free_graph(t_graph **graph);
 void				free_tab(char **tab);
-
 void				free_t_map_node(t_map **display_map);
 void				free_t_map_list(t_map **display_map);
+
+t_node				*find_existing_room(t_graph **graph, char *src);
 
 #endif

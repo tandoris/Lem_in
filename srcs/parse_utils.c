@@ -6,14 +6,14 @@
 /*   By: lboukrou <lboukrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/14 17:53:01 by lboukrou          #+#    #+#             */
-/*   Updated: 2019/12/21 19:07:24 by lboukrou         ###   ########.fr       */
+/*   Updated: 2019/12/22 17:40:11 by lboukrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
 /*
-**	Retourne l'enum correspondant a une salle
+**	Returns right enum while reading line
 */
 
 t_room_status	identify_room_status(char *buf)
@@ -27,15 +27,14 @@ t_room_status	identify_room_status(char *buf)
 }
 
 /*
-**	Identifier si line est un tube Si oui, retourne tableau malloque, si non NULL
+**	Read line, if tube identified, returns array, else NULL
 */
 
-char	**identify_tube(char *line)
+char			**identify_tube(char *line)
 {
 	char	**tab;
 
 	tab = NULL;
-	// printf("identify_tube : %s\n", line);
 	if (ft_strchr(line, '-'))
 	{
 		tab = ft_strsplit(line, '-');
@@ -43,36 +42,35 @@ char	**identify_tube(char *line)
 			return (tab);
 		free_tab(tab);
 	}
-	return NULL;
+	return (NULL);
 }
 
 /*
-**	Identifier si line est une room. Si oui, retourne tableau malloque, si non NULL
+**	Read line, if room detected, returns array, else NULL
 */
 
-char	**identify_room(char *line)
+char			**identify_room(char *line)
 {
 	char	**tab;
 
-	// printf("identify_room : %s\n", line);
 	tab = NULL;
 	if (ft_strchr(line, ' '))
 	{
 		tab = ft_strsplit(line, ' ');
-		if (nb_elem_tab(tab) == 3 && tab[0][0] != 'L' && tab[0][0] != '#' && is_number(tab[1]) && is_number(tab[2])) 
+		if (nb_elem_tab(tab) == 3 && tab[0][0] != 'L' && tab[0][0] != '#'
+			&& is_number(tab[1]) && is_number(tab[2]))
 			return (tab);
 		free_tab(tab);
 	}
-	return NULL;
+	return (NULL);
 }
 
 /*
-**	Identifier si line est un comment
+**	Read line, if comment detected, 1, else 0
 */
 
 unsigned int	identify_comment(char *line)
 {
-	// printf("comment # : %s : %ld\n", line, line - ft_strchr(line, '#'));
 	if ((line - ft_strchr(line, '#')) == 0)
 		return (1);
 	return (0);

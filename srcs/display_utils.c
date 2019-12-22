@@ -6,11 +6,15 @@
 /*   By: lboukrou <lboukrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/15 19:36:26 by lboukrou          #+#    #+#             */
-/*   Updated: 2019/12/19 19:14:31 by lboukrou         ###   ########.fr       */
+/*   Updated: 2019/12/22 17:02:28 by lboukrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
+
+/*
+**	Add a node at the end of display linked list
+*/
 
 void	add_end_map_list(t_map **first, char *data)
 {
@@ -34,6 +38,10 @@ void	add_end_map_list(t_map **first, char *data)
 	return ;
 }
 
+/*
+**	Print linked list containing map
+*/
+
 void	print_map(t_map **display_map)
 {
 	t_map	*tmp;
@@ -45,4 +53,3 @@ void	print_map(t_map **display_map)
 		tmp = tmp->next;
 	}
 }
-

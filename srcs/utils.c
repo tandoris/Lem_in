@@ -6,13 +6,13 @@
 /*   By: lboukrou <lboukrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/14 18:11:05 by lboukrou          #+#    #+#             */
-/*   Updated: 2019/12/16 18:51:30 by lboukrou         ###   ########.fr       */
+/*   Updated: 2019/12/22 17:46:19 by lboukrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-long long		ft_atoilong(const char *nptr)
+long long	ft_atoilong(const char *nptr)
 {
 	size_t		i;
 	long long	retour;
@@ -39,7 +39,7 @@ long long		ft_atoilong(const char *nptr)
 	return (retour * negatif);
 }
 
-int		is_number(char *str)
+int			is_number(char *str)
 {
 	if (!str)
 		return (0);
@@ -54,7 +54,7 @@ int		is_number(char *str)
 	return (1);
 }
 
-int		nb_elem_tab(char **tab)
+int			nb_elem_tab(char **tab)
 {
 	int		i;
 
@@ -66,7 +66,7 @@ int		nb_elem_tab(char **tab)
 	return (i);
 }
 
-int		get_list_length(t_node *list)
+int			get_list_length(t_node *list)
 {
 	int			i;
 	t_node		*tmp;
@@ -84,10 +84,10 @@ int		get_list_length(t_node *list)
 }
 
 /*
-**	Fonction pour ajouter une nouvelle connexion a la fin d'une room
+**	Adds new connexion at the end of a room
 */
 
-void	add_end_list(t_node	**room, t_node *new_cnx)
+void		add_end_list(t_node **room, t_node *new_cnx)
 {
 	t_node	*tmp;
 

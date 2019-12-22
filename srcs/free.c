@@ -6,7 +6,7 @@
 /*   By: lboukrou <lboukrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 16:31:14 by lboukrou          #+#    #+#             */
-/*   Updated: 2019/12/21 16:52:20 by lboukrou         ###   ########.fr       */
+/*   Updated: 2019/12/22 17:00:03 by lboukrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,6 @@
 
 void	free_node(t_node **node)
 {
-	// printf("name room : %s\n", (*node)->name_room);
 	ft_memdel((void**)&((*node)->name_room));
 	free(*node);
 }

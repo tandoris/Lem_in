@@ -1,33 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   lem_in.h                                           :+:      :+:    :+:   */
+/*   ft_strchr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lboukrou <lboukrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/11/28 20:11:32 by lboukrou          #+#    #+#             */
-/*   Updated: 2019/11/30 19:26:36 by lboukrou         ###   ########.fr       */
+/*   Created: 2017/12/11 23:01:11 by lboukrou          #+#    #+#             */
+/*   Updated: 2017/12/12 15:37:17 by lboukrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef LEM_IN_H
-# define LEM_IN_H
+#include "libft.h"
 
-#include <stdio.h>
-#include <stdlib.h>
-#include "libft/libft.h"
-
-typedef struct		s_node
+char	*ft_strchr(const char *s, int c)
 {
-    int				vertex;
-    struct s_node	*next;
-}					t_node;
+	char		*string;
+	int			i;
+	char		cc;
 
-typedef struct 		s_graph
-{
-	int				nb_vertices;
-	struct s_node	**adj_list;
-}					t_graph;
-
-
-#endif
+	string = (char*)s;
+	i = 0;
+	cc = c;
+	while (string[i] != '\0')
+	{
+		if (string[i] == cc)
+			return (string + i);
+		i++;
+	}
+	if (cc == '\0')
+		return (string + i);
+	return (NULL);
+}

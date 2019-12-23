@@ -6,7 +6,7 @@
 #    By: lboukrou <lboukrou@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/12/16 19:56:30 by lboukrou          #+#    #+#              #
-#    Updated: 2019/12/21 19:05:49 by lboukrou         ###   ########.fr        #
+#    Updated: 2019/12/23 21:46:05 by lboukrou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,7 +29,9 @@ SRC_NAME	=   error.c \
 				parse.c \
 				display_utils.c \
 				utils.c \
-				free.c
+				free.c \
+				parse_reading.c \
+				free_graph.c
 
 INC_NAME	=	lem_in.h
 OBJ_NAME	=	$(SRC_NAME:.c=.o)
@@ -53,6 +55,7 @@ clean:
 	make -C $(LIB_PATH) clean
 	rm -rf $(OBJ_PATH)
 fclean:
+	make -C $(LIB_PATH) fclean
 	rm -f $(LIB)
 	rm -rf $(OBJ_PATH)
 	rm -rf $(NAME)

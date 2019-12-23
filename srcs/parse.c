@@ -6,14 +6,14 @@
 /*   By: lboukrou <lboukrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/30 18:47:20 by lboukrou          #+#    #+#             */
-/*   Updated: 2019/12/22 20:47:49 by lboukrou         ###   ########.fr       */
+/*   Updated: 2019/12/23 19:28:59 by lboukrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
 /*
-**	Returns number of ants, error if it doesn't exiist
+**	Returns number of ants, error if it doesn't exist
 */
 
 size_t	get_num_ants(char *line, t_map **display_map)
@@ -73,15 +73,14 @@ void	put_rooms_in_graph(t_graph **graph, t_node **first)
 	int		start;
 	t_node	*tmp;
 
-	i = 0;
+	i = -1;
 	end = 0;
 	start = 0;
 	len = get_list_length(*first);
-	tmp = *first;
-	if (!*first || len == 0)
+	if (!(tmp = *first) || len == 0)
 		ft_error();
 	*graph = create_empty_graph(len);
-	while (i < len)
+	while (++i < len)
 	{
 		if (tmp->status == START_ROOM)
 			start += 1;
@@ -89,7 +88,6 @@ void	put_rooms_in_graph(t_graph **graph, t_node **first)
 			end += 1;
 		(*graph)->adj_list[i] = duplicate_room(tmp);
 		tmp = (tmp)->next;
-		i++;
 	}
 	free_node_list(first);
 	if (start != 1 || end != 1)
@@ -97,95 +95,10 @@ void	put_rooms_in_graph(t_graph **graph, t_node **first)
 }
 
 /*
-**	Reads tubes and put it in graph
-*/
-
-int		get_tubes(t_graph **graph, char *line, t_map **display_map)
-{
-	int		ret;
-	char	**tab_tube;
-
-	if ((tab_tube = identify_tube(line)) && add_tube(graph, tab_tube[0], tab_tube[1]))
-	{
-		add_end_map_list(display_map, line);
-		free_tab(tab_tube);
-		free(line);
-	}
-	else
-	{	
-		free_tab(tab_tube);
-		free(line);
-		return (0);
-	}
-	while ((ret = get_next_line(0, &line)) > 0)
-	{
-		if (identify_comment(line))
-		{
-			add_end_map_list(display_map, line);
-			free(line);
-		}
-		else if ((tab_tube = identify_tube(line)) && add_tube(graph, tab_tube[0], tab_tube[1]))
-		{
-			add_end_map_list(display_map, line);
-			free(line);
-			free_tab(tab_tube);
-		}
-		else
-		{
-			free(line);
-			free_tab(tab_tube);
-			return (0);
-		}
-	}
-	return (1);
-}
-
-/*
-**	Read rooms, put it in tmp linked list, then in graph
-*/
-
-int		get_rooms(t_graph **graph, char **line, t_map **display_map)
-{
-	int				ret;
-	int				ret_fill_room;
-	char			**tab_room;
-	t_node			*tmp;
-	t_room_status	status;
-
-	tmp = NULL;
-	status = NORMAL;
-	ret_fill_room = 1;
-	while (ret_fill_room && (ret = get_next_line(0, line)) > 0)
-	{
-		if ((tab_room = identify_room(*line)))
-		{
-			if ((ret_fill_room = fill_room(&tmp, tab_room, status)))
-				add_end_map_list(display_map, *line);
-			status = NORMAL;
-			free(*line);
-			free_tab(tab_room);
-		}
-		else if (identify_comment(*line))
-		{
-			add_end_map_list(display_map, *line);
-			if (identify_room_status(*line) != NORMAL)
-				status = identify_room_status(*line);
-			free(*line);
-		}
-		else
-			break ;
-	}
-	put_rooms_in_graph(graph, &tmp);
-	if (ret == 0)
-		return (0);
-	return (ret_fill_room);
-}
-
-/*
 **	Read map from stdin
 */
 
-t_graph		*get_infos(void)
+t_graph	*get_infos(void)
 {
 	t_graph		*graph;
 	t_node		*tmp;

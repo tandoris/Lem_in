@@ -6,7 +6,7 @@
 /*   By: lboukrou <lboukrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/03 18:01:59 by lboukrou          #+#    #+#             */
-/*   Updated: 2019/12/22 20:42:18 by lboukrou         ###   ########.fr       */
+/*   Updated: 2019/12/23 21:51:18 by lboukrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,16 +61,8 @@ int		add_tube(t_graph **graph, char *src, char *dest)
 	int			i;
 
 	i = 0;
-	node_1 = find_existing_room(graph, src);		//added for norme //TODO Faire plus de tests ? 
-	node_2 = find_existing_room(graph, dest);		// added for norme
-	// while ((*graph)->adj_list[i])
-	// {
-	// 	if (!(ft_strcmp(src, (*graph)->adj_list[i]->name_room)))
-	// 		node_1 = (*graph)->adj_list[i];
-	// 	if (!(ft_strcmp(dest, (*graph)->adj_list[i]->name_room)))
-	// 		node_2 = (*graph)->adj_list[i];
-	// 	i++;
-	// }
+	node_1 = find_existing_room(graph, src);
+	node_2 = find_existing_room(graph, dest);
 	if (node_1 && node_2)
 	{
 		if (no_duplicate_tube(node_1, node_2)
@@ -140,7 +132,7 @@ t_graph	*create_empty_graph(int vertices)
 }
 
 /*
-**	Prints a graph
+**	Prints a graph (to be deleted)
 */
 
 void	print_graph(t_graph *graph)

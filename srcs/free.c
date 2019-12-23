@@ -6,7 +6,7 @@
 /*   By: lboukrou <lboukrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 16:31:14 by lboukrou          #+#    #+#             */
-/*   Updated: 2019/12/22 17:00:03 by lboukrou         ###   ########.fr       */
+/*   Updated: 2019/12/23 19:32:04 by lboukrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,29 +38,6 @@ void	free_node_list(t_node **node)
 	}
 }
 
-/*
-**	Free a graph
-*/
-
-void	free_graph(t_graph **graph)
-{
-	int		i;
-	t_node	*tmp;
-
-	i = 0;
-	tmp = NULL;
-	if (!*graph || !graph)
-		return ;
-	while (i < (*graph)->nb_vertices)
-	{
-		tmp = (*graph)->adj_list[i];
-		free_node_list(&tmp);
-		i++;
-	}
-	free((*graph)->adj_list);
-	free(*graph);
-}
-
 void	free_t_map_node(t_map **display_map)
 {
 	free((*display_map)->data);
@@ -71,7 +48,7 @@ void	free_t_map_list(t_map **display_map)
 {
 	t_map	*tmp;
 
-	while  (*display_map)
+	while (*display_map)
 	{
 		tmp = *display_map;
 		*display_map = (*display_map)->next;

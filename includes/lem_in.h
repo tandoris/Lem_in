@@ -6,7 +6,7 @@
 /*   By: lboukrou <lboukrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 20:11:32 by lboukrou          #+#    #+#             */
-/*   Updated: 2019/12/22 20:21:30 by lboukrou         ###   ########.fr       */
+/*   Updated: 2019/12/23 21:51:08 by lboukrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,16 +32,16 @@ typedef enum		e_room_status
 typedef struct		s_node
 {
 	t_room_status	status;
-	char			*name_room;		// nom de la salle
-	int				x;				// coord x
-	int				y;				// coord y
-	struct s_node	*next;			// next
+	char			*name_room;
+	int				x;
+	int				y;
+	struct s_node	*next;
 }					t_node;
 
 typedef struct 		s_graph
 {
-	int				nb_vertices;	// nombre total de salles dans graphe
-	struct s_node	**adj_list;		// tableau de listes chaines 
+	int				nb_vertices;
+	struct s_node	**adj_list;
 }					t_graph;
 
 typedef struct		s_map 
@@ -71,7 +71,6 @@ long long			ft_atoilong(const char *nptr);
 t_node				*create_room(char *name, int x, int y);
 int					add_tube(t_graph **graph, char *src, char *dest);
 t_graph 			*create_empty_graph(int vertices);
-void				print_graph(t_graph *graph);
 void				add_end_list(t_node	**room, t_node *new_cnx);
 t_node				*duplicate_room(t_node *room_src);
 
@@ -98,6 +97,11 @@ int					get_tubes(t_graph **graph, char *line, t_map **display_map);
 int					get_rooms(t_graph **graph, char **line, t_map **display_map);
 t_graph				*get_infos(void);
 int					no_duplicate_tube(t_node *room, t_node *to_check);
+t_node				*find_existing_room(t_graph **graph, char *src);
+int					read_rooms(char **line, t_map **display_map, t_node **tmp,
+								t_room_status *status);
+int					read_tubes(t_graph **graph, char **line, t_map **display_map,
+								char **tab_tube);
 
 /*
 **	Free Functions
@@ -110,6 +114,11 @@ void				free_tab(char **tab);
 void				free_t_map_node(t_map **display_map);
 void				free_t_map_list(t_map **display_map);
 
-t_node				*find_existing_room(t_graph **graph, char *src);
+
+/*
+**	Functions to be deleted
+*/
+
+void				print_graph(t_graph *graph);
 
 #endif

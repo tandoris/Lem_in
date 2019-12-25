@@ -6,7 +6,7 @@
 /*   By: lboukrou <lboukrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 20:11:32 by lboukrou          #+#    #+#             */
-/*   Updated: 2019/12/25 17:26:00 by lboukrou         ###   ########.fr       */
+/*   Updated: 2019/12/25 19:48:06 by lboukrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,6 +112,13 @@ void				free_graph(t_graph **graph);
 void				free_tab(char **tab);
 void				free_t_map_node(t_map **display_map);
 void				free_t_map_list(t_map **display_map);
+
+/*
+**	Algo functions
+*/
+
+t_node				*search_by_status(t_graph *graph, t_room_status status);
+t_node				*search_by_name(t_graph *graph, char *name);
 
 /*
 **	Functions to be deleted

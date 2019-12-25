@@ -6,7 +6,7 @@
 /*   By: lboukrou <lboukrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/30 18:47:20 by lboukrou          #+#    #+#             */
-/*   Updated: 2019/12/23 19:28:59 by lboukrou         ###   ########.fr       */
+/*   Updated: 2019/12/25 20:03:20 by lboukrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -118,15 +118,4 @@ t_graph	*get_infos(void)
 	print_map(&display_map);
 	free_t_map_list(&display_map);
 	return (graph);
-}
-
-int		main(void)
-{
-	t_graph		*new_graph;
-
-	new_graph = get_infos();
-	print_graph(new_graph);
-	free_graph(&new_graph);
-	printf("Algo begins\n");
-	return (0);
 }

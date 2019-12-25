@@ -6,7 +6,7 @@
 /*   By: lboukrou <lboukrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/03 18:01:59 by lboukrou          #+#    #+#             */
-/*   Updated: 2019/12/23 21:51:18 by lboukrou         ###   ########.fr       */
+/*   Updated: 2019/12/25 17:18:18 by lboukrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,29 +106,6 @@ t_node	*duplicate_room(t_node *room_src)
 	if (room_src)
 		room_dest = create_room(room_src->name_room, room_src->x, room_src->y);
 	return (room_dest);
-}
-
-/*
-**	Creates an empty graph
-*/
-
-t_graph	*create_empty_graph(int vertices)
-{
-	t_graph		*graph;
-	int			i;
-
-	if (!(graph = (t_graph *)ft_memalloc(sizeof(t_graph))))
-		ft_malloc_error();
-	if (!(graph->adj_list = ft_memalloc((vertices + 1) * sizeof(t_node *))))
-		ft_malloc_error();
-	graph->nb_vertices = vertices;
-	i = 0;
-	while (i < vertices)
-	{
-		graph->adj_list[i] = NULL;
-		i++;
-	}
-	return (graph);
 }
 
 /*

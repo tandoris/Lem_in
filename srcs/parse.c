@@ -6,7 +6,7 @@
 /*   By: lboukrou <lboukrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/30 18:47:20 by lboukrou          #+#    #+#             */
-/*   Updated: 2019/12/25 20:03:20 by lboukrou         ###   ########.fr       */
+/*   Updated: 2019/12/26 22:14:27 by lboukrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,18 +104,18 @@ t_graph	*get_infos(void)
 	t_node		*tmp;
 	t_map		*display_map;
 	char		*line;
+	size_t		ants;
 
 	tmp = NULL;
 	graph = NULL;
 	line = NULL;
 	display_map = NULL;
-	if (!get_num_ants(line, &display_map))
-	{
+	if (!(ants = get_num_ants(line, &display_map)))
 		ft_error();
-	}
 	if (get_rooms(&graph, &line, &display_map))
 		get_tubes(&graph, line, &display_map);
 	print_map(&display_map);
 	free_t_map_list(&display_map);
+	graph->ants = ants;
 	return (graph);
 }

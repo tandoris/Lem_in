@@ -6,7 +6,7 @@
 #    By: lboukrou <lboukrou@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/12/16 19:56:30 by lboukrou          #+#    #+#              #
-#    Updated: 2019/12/25 19:49:27 by lboukrou         ###   ########.fr        #
+#    Updated: 2019/12/26 22:32:23 by lboukrou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -33,7 +33,9 @@ SRC_NAME	=   error.c \
 				parse_reading.c \
 				create_and_free_graph.c \
 				find_room.c \
-				main.c
+				main.c \
+				distance.c \
+				paths.c
 
 INC_NAME	=	lem_in.h
 OBJ_NAME	=	$(SRC_NAME:.c=.o)

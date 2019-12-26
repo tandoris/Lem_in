@@ -6,7 +6,7 @@
 /*   By: lboukrou <lboukrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 20:11:32 by lboukrou          #+#    #+#             */
-/*   Updated: 2019/12/25 19:48:06 by lboukrou         ###   ########.fr       */
+/*   Updated: 2019/12/26 22:32:10 by lboukrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,11 +35,13 @@ typedef struct		s_node
 	char			*name_room;
 	int				x;
 	int				y;
+	int				distance;
 	struct s_node	*next;
 }					t_node;
 
 typedef struct		s_graph
 {
+	size_t			ants;
 	int				nb_vertices;
 	struct s_node	**adj_list;
 }					t_graph;
@@ -117,8 +119,10 @@ void				free_t_map_list(t_map **display_map);
 **	Algo functions
 */
 
-t_node				*search_by_status(t_graph *graph, t_room_status status);
-t_node				*search_by_name(t_graph *graph, char *name);
+t_node				**search_by_status(t_graph *graph, t_room_status status);
+t_node				**search_by_name(t_graph *graph, char *name);
+void				calc_distance(t_graph *graph, t_node **room, int distance);
+size_t				count_paths(t_graph *graph);
 
 /*
 **	Functions to be deleted

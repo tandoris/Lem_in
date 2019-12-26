@@ -1,41 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   find_room.c                                        :+:      :+:    :+:   */
+/*   distance.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: lboukrou <lboukrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/12/25 19:29:15 by lboukrou          #+#    #+#             */
-/*   Updated: 2019/12/26 21:53:13 by lboukrou         ###   ########.fr       */
+/*   Created: 2019/12/26 21:28:46 by lboukrou          #+#    #+#             */
+/*   Updated: 2019/12/26 22:07:04 by lboukrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-t_node	**search_by_status(t_graph *graph, t_room_status status)
+void	calc_distance(t_graph *graph, t_node **room, int distance)
 {
-	int		i;
-
-	i = 0;
-	while (graph->adj_list[i])
+	t_node *tmp;
+	
+	if ((*room)->distance != -1 && (*room)->distance <= distance)
+		return ;
+	(*room)->distance = distance;
+	tmp = *room;
+	while(tmp)
 	{
-		if (graph->adj_list[i]->status == status)
-			return (&graph->adj_list[i]);
-		i++;
+		calc_distance(graph, search_by_name(graph, tmp->name_room), distance + 1);
+		tmp = tmp->next;
 	}
-	return (NULL);
-}
-
-t_node	**search_by_name(t_graph *graph, char *name)
-{
-	int		i;
-
-	i = 0;
-	while (graph->adj_list[i])
-	{
-		if (!ft_strcmp(graph->adj_list[i]->name_room, name))
-			return (&graph->adj_list[i]);
-		i++;
-	}
-	return (NULL);
 }

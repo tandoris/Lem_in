@@ -6,7 +6,7 @@
 /*   By: lboukrou <lboukrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/03 18:01:59 by lboukrou          #+#    #+#             */
-/*   Updated: 2019/12/26 21:49:35 by lboukrou         ###   ########.fr       */
+/*   Updated: 2019/12/27 21:07:46 by lboukrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,7 @@ t_node	*create_room(char *name, int x, int y)
 	new_node->x = x;
 	new_node->y = y;
 	new_node->distance = -1;
+	new_node->occupied = 0;
 	new_node->next = NULL;
 	return (new_node);
 }
@@ -125,6 +126,8 @@ void	print_graph(t_graph *graph)
 		return ;
 	for (i = 0; i < graph->nb_vertices; i++)
 	{
+		if (graph->adj_list[i]->occupied)
+			continue ;
 		tmp = graph->adj_list[i];
 		printf("\n Adjacency list of index %d and distance : %d\n ", i, tmp->distance);
 		while (tmp)
@@ -132,6 +135,7 @@ void	print_graph(t_graph *graph)
 			printf("%s -> ", tmp->name_room);
 			tmp = tmp->next;
 		}
+		printf("\n");
 		printf("\n");
 	}
 }

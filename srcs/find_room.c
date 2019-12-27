@@ -6,11 +6,15 @@
 /*   By: lboukrou <lboukrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/25 19:29:15 by lboukrou          #+#    #+#             */
-/*   Updated: 2019/12/26 21:53:13 by lboukrou         ###   ########.fr       */
+/*   Updated: 2019/12/27 18:19:50 by lboukrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
+
+/*
+**	Search and returnns a room by its status
+*/
 
 t_node	**search_by_status(t_graph *graph, t_room_status status)
 {
@@ -25,6 +29,10 @@ t_node	**search_by_status(t_graph *graph, t_room_status status)
 	}
 	return (NULL);
 }
+
+/*
+**	Search and returns a room by its name
+*/
 
 t_node	**search_by_name(t_graph *graph, char *name)
 {

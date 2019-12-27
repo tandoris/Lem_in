@@ -6,7 +6,7 @@
 /*   By: lboukrou <lboukrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 20:11:32 by lboukrou          #+#    #+#             */
-/*   Updated: 2019/12/26 22:32:10 by lboukrou         ###   ########.fr       */
+/*   Updated: 2019/12/27 21:14:42 by lboukrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ typedef struct		s_node
 	int				x;
 	int				y;
 	int				distance;
+	int				occupied;
 	struct s_node	*next;
 }					t_node;
 
@@ -121,8 +122,16 @@ void				free_t_map_list(t_map **display_map);
 
 t_node				**search_by_status(t_graph *graph, t_room_status status);
 t_node				**search_by_name(t_graph *graph, char *name);
-void				calc_distance(t_graph *graph, t_node **room, int distance);
-size_t				count_paths(t_graph *graph);
+void				calc_distance(t_graph **graph, t_node **room, int distance);
+size_t				count_max_paths(t_graph *graph);
+t_node				*get_shortest_path(t_graph **graph);
+t_node				*search_closest_room(t_graph *graph, t_node **room);
+t_node				*comp_distance(t_graph *graph, char *best, char *to_cmp);
+int					is_room_occupied(t_graph *graph, t_node *room);
+void				find_all_paths(t_graph **graph);
+void				reset_distance(t_graph **graph);
+void				opti_rooms(t_graph **graph);
+
 
 /*
 **	Functions to be deleted

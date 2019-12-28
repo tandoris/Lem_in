@@ -6,7 +6,7 @@
 /*   By: lboukrou <lboukrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/26 22:07:06 by lboukrou          #+#    #+#             */
-/*   Updated: 2019/12/27 21:22:00 by lboukrou         ###   ########.fr       */
+/*   Updated: 2019/12/28 14:59:50 by lboukrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,42 +117,43 @@ int				is_room_occupied(t_graph *graph, t_node *room)
 }
 
 /*
-**	//TODO mettre commentaire intelligent et precism allez hop
+**	//TODO mettre commentaire intelligent et precis allez hop
 */
 
-void			find_all_paths(t_graph **graph)
+t_paths			*find_all_paths(t_graph **graph)
 {
-	t_node		**paths;
+	t_paths		*p;
 	t_node		**end;
-	size_t		nb_paths;
 	size_t		i;
 	t_node		*pass;
 
+	if (!(p = (t_paths*)ft_memalloc(sizeof(t_paths))))
+		ft_malloc_error();
 	end = search_by_status(*graph, END_ROOM);
 	// printf("debut\n");
 	calc_distance(graph, end, 0);
-	if (!(nb_paths = count_max_paths(*graph)))
+	if (!(p->nb_paths = count_max_paths(*graph)))
 		ft_error();
-	if (!(paths = ft_memalloc(sizeof(t_node *) * (nb_paths + 1))))
+	if (!(p->paths = ft_memalloc(sizeof(t_node *) * (p->nb_paths + 1))))
 		ft_malloc_error();
 	i = 0;
-	while (i < nb_paths)
+	while (i < p->nb_paths)
 	{
-		if (!(paths[i] = get_shortest_path(graph)))
+		if (!(p->paths[i] = get_shortest_path(graph)))
 			break ;
 		reset_distance(graph);
 		calc_distance(graph, end, 0);
 		i++;
 	}
-	printf("nb max path : %zu\n", nb_paths);
+	printf("nb max path : %zu\n", p->nb_paths);
 	printf("nb path : %zu\n", i);
-	nb_paths = i;
-	if (nb_paths == 0)
+	p->nb_paths = i;
+	if (p->nb_paths == 0)
 		ft_error();
 	i = 0;
-	while (paths[i])
+	while (p->paths[i])
 	{
-		pass = paths[i];
+		pass = p->paths[i];
 		while (pass)
 		{
 			printf("name room : %s - ", pass->name_room);
@@ -161,4 +162,5 @@ void			find_all_paths(t_graph **graph)
 		printf("\n");
 		i++;
 	}
+	return (p);
 }

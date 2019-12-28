@@ -6,7 +6,7 @@
 /*   By: lboukrou <lboukrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 20:11:32 by lboukrou          #+#    #+#             */
-/*   Updated: 2019/12/27 21:14:42 by lboukrou         ###   ########.fr       */
+/*   Updated: 2019/12/28 21:49:27 by lboukrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,7 @@ typedef struct		s_node
 	int				y;
 	int				distance;
 	int				occupied;
+	size_t			visitors;
 	struct s_node	*next;
 }					t_node;
 
@@ -52,6 +53,13 @@ typedef struct		s_map
 	char			*data;
 	struct s_map	*next;
 }					t_map;
+
+typedef struct		s_paths
+{
+	t_node			**paths;
+	size_t			nb_paths;
+}					t_paths;
+
 
 /*
 **	Utility functions
@@ -128,15 +136,19 @@ t_node				*get_shortest_path(t_graph **graph);
 t_node				*search_closest_room(t_graph *graph, t_node **room);
 t_node				*comp_distance(t_graph *graph, char *best, char *to_cmp);
 int					is_room_occupied(t_graph *graph, t_node *room);
-void				find_all_paths(t_graph **graph);
+t_paths				*find_all_paths(t_graph **graph);
 void				reset_distance(t_graph **graph);
 void				opti_rooms(t_graph **graph);
-
+size_t				*spread_ants(t_paths *roads, size_t nb_ants);
+void				print_lem_in(t_paths *roads, size_t *flow, size_t nb_ants);
+void				print_one_trip(t_node **path, int nb_paths, int duration, int f, size_t flow);
+void				print_one_move(size_t ant_name, char *room);
 
 /*
 **	Functions to be deleted
 */
 
 void				print_graph(t_graph *graph);
+void				print_flow(t_paths *roads, size_t *flow);
 
 #endif

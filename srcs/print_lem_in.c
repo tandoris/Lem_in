@@ -6,7 +6,7 @@
 /*   By: lboukrou <lboukrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/28 18:18:00 by lboukrou          #+#    #+#             */
-/*   Updated: 2019/12/29 22:14:24 by lboukrou         ###   ########.fr       */
+/*   Updated: 2019/12/29 23:07:54 by lboukrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,16 +48,19 @@ static size_t	*flow_cpy(size_t *src)
 	return (dst);
 }
 
-static size_t	put_pioneers(t_paths *roads, size_t stationary)
+static size_t	put_pioneers(t_paths *roads, size_t *flow_max, size_t stationary)
 {
 	size_t	road_index;
 
+	(void)flow_max;
 	road_index = 0;
 	while (road_index < roads->nb_paths && stationary > 0)
 	{
 		roads->paths[road_index]->ant = stationary;
 		roads->paths[road_index]->prev_ant = 1;
 		stationary--;
+		if (roads->paths[road_index]->visitors == flow_max[road_index])
+			break ;
 		road_index++;
 	}
 	return (road_index);
@@ -77,19 +80,17 @@ void	print_lem_in(t_paths *roads, size_t *flow, size_t nb_ants)
 	arrived_ants = 0;
 	tour = 0;
 	roads->nb_paths = count_actual_paths(roads->nb_paths, flow);
-	stationary = nb_ants - put_pioneers(roads, nb_ants);
+	stationary = nb_ants - put_pioneers(roads, flow_max, nb_ants);
 	while (nb_ants > arrived_ants)
 	{
 		i = 0;
-		// printf("=");
 		while (i < roads->nb_paths && arrived_ants < nb_ants)
 		{
 			arrived_ants += print_one_trip(&roads->paths[i], tour, nb_ants, flow_max[i]);
-			flow[i]--;
+			flow[i] = flow_max[i] - roads->paths[i]->visitors;
 			i++;
 		}
-		// printf(".");
-		stationary -= put_pioneers(roads, stationary);
+		stationary -= put_pioneers(roads, flow_max, stationary);
 		printf("\n");
 		tour++;
 	}

@@ -6,7 +6,7 @@
 /*   By: lboukrou <lboukrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/26 22:07:06 by lboukrou          #+#    #+#             */
-/*   Updated: 2019/12/28 14:59:50 by lboukrou         ###   ########.fr       */
+/*   Updated: 2019/12/29 21:43:04 by lboukrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ t_node			*get_shortest_path(t_graph **graph)
 	// add_end_list(&path, duplicate_room(closest));
 	while ((closest)->status != END_ROOM)
 	{
-		printf("closest -> %s\n", closest->name_room);
+		// printf("closest -> %s\n", closest->name_room);
 		if (!(closest = search_closest_room(*graph, &closest)))
 			return (NULL);
 		add_end_list(&path, duplicate_room(closest));
@@ -73,7 +73,7 @@ t_node			*get_shortest_path(t_graph **graph)
 			(*tmp)->occupied = 1;
 		}
 	}
-	printf("\n");
+	// printf("\n");
 	return (path);
 }
 //TODO : supprimer les rooms qui ont moins de 2 connexions - peut-etre on verra
@@ -89,7 +89,7 @@ t_node			*search_closest_room(t_graph *graph, t_node **room)
 
 	tmp = *room;
 	closest = tmp;
-	printf("-->room : %s - ", tmp->name_room);
+	// printf("-->room : %s - ", tmp->name_room);
 	tmp = tmp->next;
 	while (tmp)
 	{
@@ -98,7 +98,7 @@ t_node			*search_closest_room(t_graph *graph, t_node **room)
 			closest = comp_distance(graph, closest->name_room, tmp->name_room);
 		tmp = tmp->next;
 	}
-	printf("\n");
+	// printf("\n");
 	if (!(ft_strcmp(closest->name_room, (*room)->name_room)))
 		return (NULL);
 	return (closest);
@@ -145,8 +145,8 @@ t_paths			*find_all_paths(t_graph **graph)
 		calc_distance(graph, end, 0);
 		i++;
 	}
-	printf("nb max path : %zu\n", p->nb_paths);
-	printf("nb path : %zu\n", i);
+	// printf("nb max path : %zu\n", p->nb_paths);
+	// printf("nb path : %zu\n", i);
 	p->nb_paths = i;
 	if (p->nb_paths == 0)
 		ft_error();
@@ -156,10 +156,10 @@ t_paths			*find_all_paths(t_graph **graph)
 		pass = p->paths[i];
 		while (pass)
 		{
-			printf("name room : %s - ", pass->name_room);
+			// printf("name room : %s - ", pass->name_room);
 			pass = pass->next;
 		}
-		printf("\n");
+		// printf("\n");
 		i++;
 	}
 	return (p);

@@ -6,7 +6,7 @@
 /*   By: lboukrou <lboukrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 20:11:32 by lboukrou          #+#    #+#             */
-/*   Updated: 2019/12/29 20:59:19 by lboukrou         ###   ########.fr       */
+/*   Updated: 2019/12/29 21:40:17 by lboukrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ typedef struct		s_node
 	int				occupied;
 	size_t			visitors;
 	size_t			ant;
-	size_t			old_ant;
+	size_t			prev_ant;
 	struct s_node	*next;
 }					t_node;
 
@@ -143,7 +143,7 @@ void				reset_distance(t_graph **graph);
 void				opti_rooms(t_graph **graph);
 size_t				*spread_ants(t_paths *roads, size_t nb_ants);
 void				print_lem_in(t_paths *roads, size_t *flow, size_t nb_ants);
-size_t				print_one_trip(t_node **path, int nb_paths, int duration, int f, size_t flow);
+size_t				print_one_trip(t_node **path, int duration, int nb_ants, size_t flow);
 size_t				print_one_move(size_t ant_name, char *room);
 
 /*

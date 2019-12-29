@@ -6,11 +6,11 @@
 #    By: lboukrou <lboukrou@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/12/16 19:56:30 by lboukrou          #+#    #+#              #
-#    Updated: 2019/12/29 18:55:23 by lboukrou         ###   ########.fr        #
+#    Updated: 2019/12/29 22:24:02 by lboukrou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME		= lem_in
+NAME		= lem-in
 ################################################################################
 CC			= gcc
 CFLAGS		= -Wall -Wextra -Werror -g3 #-fsanitize=address -fno-omit-frame-pointer -fno-optimize-sibling-calls -g #-g3 -fsanitize=address

@@ -6,7 +6,7 @@
 /*   By: lboukrou <lboukrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/28 18:18:00 by lboukrou          #+#    #+#             */
-/*   Updated: 2019/12/29 22:04:36 by lboukrou         ###   ########.fr       */
+/*   Updated: 2019/12/29 22:14:24 by lboukrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,7 +73,7 @@ void	print_lem_in(t_paths *roads, size_t *flow, size_t nb_ants)
 
 	i = 0;
 	flow_max = flow_cpy(flow);
-	// printf("------\n");
+	printf("\n");
 	arrived_ants = 0;
 	tour = 0;
 	roads->nb_paths = count_actual_paths(roads->nb_paths, flow);

@@ -6,7 +6,7 @@
 /*   By: lboukrou <lboukrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/03 18:01:59 by lboukrou          #+#    #+#             */
-/*   Updated: 2019/12/28 20:41:05 by lboukrou         ###   ########.fr       */
+/*   Updated: 2019/12/29 20:59:39 by lboukrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,8 @@ t_node	*create_room(char *name, int x, int y)
 	new_node->distance = -1;
 	new_node->occupied = 0;
 	new_node->visitors = 0;
+	new_node->ant = 0;
+	new_node->old_ant = 0;
 	new_node->next = NULL;
 	return (new_node);
 }

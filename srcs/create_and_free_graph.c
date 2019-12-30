@@ -6,7 +6,7 @@
 /*   By: lboukrou <lboukrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/23 19:31:00 by lboukrou          #+#    #+#             */
-/*   Updated: 2019/12/27 17:50:01 by lboukrou         ###   ########.fr       */
+/*   Updated: 2019/12/30 14:11:39 by lboukrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ t_graph	*create_empty_graph(int vertices)
 
 void	free_graph(t_graph **graph)
 {
-	int		i;
+	size_t	i;
 	t_node	*tmp;
 
 	i = 0;

@@ -6,7 +6,7 @@
 /*   By: lboukrou <lboukrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/26 21:28:46 by lboukrou          #+#    #+#             */
-/*   Updated: 2019/12/27 21:22:30 by lboukrou         ###   ########.fr       */
+/*   Updated: 2019/12/30 14:08:50 by lboukrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void		calc_distance(t_graph **graph, t_node **room, int distance)
 	while(tmp)
 	{
 		if (!(is_room_occupied(*graph, tmp)))
-			calc_distance(graph, search_by_name(*graph, tmp->name_room), distance + 1);
+			calc_distance(graph, search_by_index(*graph, tmp->room_index), distance + 1);
 		tmp = tmp->next;
 	}
 }
@@ -35,13 +35,13 @@ void		calc_distance(t_graph **graph, t_node **room, int distance)
 **	Compares the distance from End of 2 rooms, returns room with shortest distance
 */
 
-t_node		*comp_distance(t_graph *graph, char *best, char *to_cmp)
+t_node		*comp_distance(t_graph *graph, size_t best, size_t to_cmp)
 {
 	t_node		*best_room;
 	t_node		*to_cmp_room;
 
-	best_room = *search_by_name(graph, best);
-	to_cmp_room = *search_by_name(graph, to_cmp);
+	best_room = *search_by_index(graph, best);
+	to_cmp_room = *search_by_index(graph, to_cmp);
 	if (best_room->distance > to_cmp_room->distance)
 		return (to_cmp_room);
 	else

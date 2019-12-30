@@ -6,7 +6,7 @@
 /*   By: lboukrou <lboukrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/26 22:07:06 by lboukrou          #+#    #+#             */
-/*   Updated: 2019/12/29 21:43:04 by lboukrou         ###   ########.fr       */
+/*   Updated: 2019/12/30 14:13:23 by lboukrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ t_node			*get_shortest_path(t_graph **graph)
 		add_end_list(&path, duplicate_room(closest));
 		if (closest->status != END_ROOM)
 		{
-			tmp = search_by_name(*graph, closest->name_room);
+			tmp = search_by_index(*graph, closest->room_index);
 			(*tmp)->occupied = 1;
 		}
 	}
@@ -95,11 +95,11 @@ t_node			*search_closest_room(t_graph *graph, t_node **room)
 	{
 		// printf(" %s - ", tmp->name_room);
 		if (!(is_room_occupied(graph, tmp)))
-			closest = comp_distance(graph, closest->name_room, tmp->name_room);
+			closest = comp_distance(graph, closest->room_index, tmp->room_index);
 		tmp = tmp->next;
 	}
 	// printf("\n");
-	if (!(ft_strcmp(closest->name_room, (*room)->name_room)))
+	if (closest->room_index == (*room)->room_index)
 		return (NULL);
 	return (closest);
 }
@@ -112,7 +112,7 @@ int				is_room_occupied(t_graph *graph, t_node *room)
 {
 	t_node	*tmp;
 
-	tmp = *search_by_name(graph, room->name_room);
+	tmp = *search_by_index(graph, room->room_index);
 	return (tmp->occupied);
 }
 

@@ -6,7 +6,7 @@
 /*   By: lboukrou <lboukrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/28 18:18:00 by lboukrou          #+#    #+#             */
-/*   Updated: 2019/12/29 23:07:54 by lboukrou         ###   ########.fr       */
+/*   Updated: 2019/12/30 14:40:13 by lboukrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static size_t	put_pioneers(t_paths *roads, size_t *flow_max, size_t stationary)
 		roads->paths[road_index]->ant = stationary;
 		roads->paths[road_index]->prev_ant = 1;
 		stationary--;
-		if (roads->paths[road_index]->visitors == flow_max[road_index])
+		if (roads->paths[road_index]->visitors >= flow_max[road_index])
 			break ;
 		road_index++;
 	}

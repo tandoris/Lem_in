@@ -6,7 +6,7 @@
 /*   By: lboukrou <lboukrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/03 18:01:59 by lboukrou          #+#    #+#             */
-/*   Updated: 2019/12/29 22:13:33 by lboukrou         ###   ########.fr       */
+/*   Updated: 2019/12/30 14:11:16 by lboukrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 **	Function to create a new room
 */
 
-t_node	*create_room(char *name, int x, int y)
+t_node	*create_room(size_t room_index, char *name, int x, int y)
 {
 	t_node		*new_node;
 
@@ -26,6 +26,7 @@ t_node	*create_room(char *name, int x, int y)
 	new_node->name_room = ft_strdup(name);
 	new_node->x = x;
 	new_node->y = y;
+	new_node->room_index = room_index;
 	new_node->distance = -1;
 	new_node->occupied = 0;
 	new_node->visitors = 0;
@@ -110,7 +111,7 @@ t_node	*duplicate_room(t_node *room_src)
 	room_dest = NULL;
 	if (room_src)
 	{
-		room_dest = create_room(room_src->name_room, room_src->x, room_src->y);
+		room_dest = create_room(room_src->room_index, room_src->name_room, room_src->x, room_src->y);
 		room_dest->status = room_src->status;	
 		room_dest->distance = room_src->distance;			
 	}
@@ -123,17 +124,16 @@ t_node	*duplicate_room(t_node *room_src)
 
 void	print_graph(t_graph *graph)
 {
-	int			i;
 	t_node		*tmp;
 
 	if (!graph)
 		return ;
-	for (i = 0; i < graph->nb_vertices; i++)
+	for (size_t i = 0; i < graph->nb_vertices; i++)
 	{
 		if (graph->adj_list[i]->occupied)
 			continue ;
 		tmp = graph->adj_list[i];
-		printf("\n Adjacency list of index %d and distance : %d\n ", i, tmp->distance);
+		printf("\n Adjacency list of index %zu and distance : %d\n ", i, tmp->distance);
 		while (tmp)
 		{
 			printf("%s -> ", tmp->name_room);

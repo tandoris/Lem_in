@@ -6,7 +6,7 @@
 /*   By: lboukrou <lboukrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 20:11:32 by lboukrou          #+#    #+#             */
-/*   Updated: 2019/12/29 21:40:17 by lboukrou         ###   ########.fr       */
+/*   Updated: 2019/12/30 14:25:33 by lboukrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 # include <stdio.h>
 # include <stdlib.h>
 # include "libft.h"
+# include <limits.h>
+// # define INT_MAX 2147483647
 
 /*
 **	structure enum état de la salle. NORMAL = 0, START_ROOM = 1, END_ROOM = 2
@@ -33,6 +35,7 @@ typedef struct		s_node
 {
 	t_room_status	status;
 	char			*name_room;
+	size_t			room_index;
 	int				x;
 	int				y;
 	int				distance;
@@ -46,7 +49,8 @@ typedef struct		s_node
 typedef struct		s_graph
 {
 	size_t			ants;
-	int				nb_vertices;
+	char			**rooms;
+	size_t			nb_vertices;
 	struct s_node	**adj_list;
 }					t_graph;
 
@@ -79,7 +83,7 @@ long long			ft_atoilong(const char *nptr);
 **	Utility graph functions
 */
 
-t_node				*create_room(char *name, int x, int y);
+t_node				*create_room(size_t room_index, char *name, int x, int y);
 int					add_tube(t_graph **graph, char *src, char *dest);
 t_graph				*create_empty_graph(int vertices);
 void				add_end_list(t_node **room, t_node *new_cnx);
@@ -132,11 +136,12 @@ void				free_t_map_list(t_map **display_map);
 
 t_node				**search_by_status(t_graph *graph, t_room_status status);
 t_node				**search_by_name(t_graph *graph, char *name);
+t_node				**search_by_index(t_graph *graph, size_t index);
 void				calc_distance(t_graph **graph, t_node **room, int distance);
 size_t				count_max_paths(t_graph *graph);
 t_node				*get_shortest_path(t_graph **graph);
 t_node				*search_closest_room(t_graph *graph, t_node **room);
-t_node				*comp_distance(t_graph *graph, char *best, char *to_cmp);
+t_node				*comp_distance(t_graph *graph, size_t best, size_t to_cmp);
 int					is_room_occupied(t_graph *graph, t_node *room);
 t_paths				*find_all_paths(t_graph **graph);
 void				reset_distance(t_graph **graph);

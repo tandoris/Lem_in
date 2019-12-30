@@ -6,7 +6,7 @@
 /*   By: lboukrou <lboukrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/30 18:47:20 by lboukrou          #+#    #+#             */
-/*   Updated: 2019/12/26 22:14:27 by lboukrou         ###   ########.fr       */
+/*   Updated: 2019/12/30 14:24:23 by lboukrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,8 @@ size_t	get_num_ants(char *line, t_map **display_map)
 
 	if ((ret = get_next_line(0, &line)) > -1)
 	{
-		if (is_number(line) == 1 && (ft_atoilong(line)) > 0)
+		if (is_number(line) == 1 && (ft_atoilong(line)) > 0
+			&& (ft_atoilong(line)) < INT_MAX)
 		{
 			ants = ft_atoilong(line);
 			add_end_map_list(display_map, line);
@@ -42,15 +43,17 @@ size_t	get_num_ants(char *line, t_map **display_map)
 
 int		fill_room(t_node **first, char **tab, t_room_status status)
 {
-	t_node		*new_node;
-	t_node		*tmp;
+	t_node			*new_node;
+	t_node			*tmp;
+	static size_t	room_index = 0;
 
 	tmp = *first;
-	new_node = create_room(tab[0], ft_atoi(tab[1]), ft_atoi(tab[2]));
+	new_node = create_room(room_index, tab[0], ft_atoi(tab[1]), ft_atoi(tab[2]));
+	room_index++;
 	new_node->status = status;
 	while (tmp)
 	{
-		if (!(ft_strcmp(new_node->name_room, tmp->name_room)))
+		if (new_node->room_index == tmp->room_index)
 		{
 			free_node(&new_node);
 			return (0);
@@ -101,12 +104,10 @@ void	put_rooms_in_graph(t_graph **graph, t_node **first)
 t_graph	*get_infos(void)
 {
 	t_graph		*graph;
-	t_node		*tmp;
 	t_map		*display_map;
 	char		*line;
 	size_t		ants;
 
-	tmp = NULL;
 	graph = NULL;
 	line = NULL;
 	display_map = NULL;

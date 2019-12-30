@@ -6,7 +6,7 @@
 /*   By: lboukrou <lboukrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/26 22:07:06 by lboukrou          #+#    #+#             */
-/*   Updated: 2019/12/30 14:13:23 by lboukrou         ###   ########.fr       */
+/*   Updated: 2019/12/30 20:38:14 by lboukrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 **	Returns smallest nb
 */
 
-static size_t	who_is_smallest(size_t a, size_t b, size_t c)
+static int	who_is_smallest(int a, int b, int c)
 {
 	if (a < b)
 	{
@@ -33,7 +33,7 @@ static size_t	who_is_smallest(size_t a, size_t b, size_t c)
 **	Returns max numm of paths
 */
 
-size_t			count_max_paths(t_graph *graph)
+int				count_max_paths(t_graph *graph)
 {
 	size_t		ants;
 	t_node		*tmp;
@@ -124,7 +124,7 @@ t_paths			*find_all_paths(t_graph **graph)
 {
 	t_paths		*p;
 	t_node		**end;
-	size_t		i;
+	int			i;
 	t_node		*pass;
 
 	if (!(p = (t_paths*)ft_memalloc(sizeof(t_paths))))

@@ -6,13 +6,13 @@
 /*   By: lboukrou <lboukrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/28 18:18:00 by lboukrou          #+#    #+#             */
-/*   Updated: 2019/12/30 14:40:13 by lboukrou         ###   ########.fr       */
+/*   Updated: 2019/12/30 22:05:09 by lboukrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-static size_t	count_actual_paths(size_t nb_paths, size_t *flow)
+static size_t	count_actual_paths(size_t nb_paths, int *flow)
 {
 	size_t		i;
 	size_t	count;
@@ -28,9 +28,9 @@ static size_t	count_actual_paths(size_t nb_paths, size_t *flow)
 	return (count);
 }
 
-static size_t	*flow_cpy(size_t *src)
+static int	*flow_cpy(int *src)
 {
-	size_t	*dst;
+	int	*dst;
 	int		i;
 	int		j;
 
@@ -38,7 +38,7 @@ static size_t	*flow_cpy(size_t *src)
 	j = 0;
 	while (src[i])
 		i++;
-	if(!(dst = (size_t *)ft_memalloc(sizeof(size_t) * i)))
+	if(!(dst = (int *)ft_memalloc(sizeof(int) * i)))
 		ft_malloc_error();
 	while (j < i)
 	{
@@ -48,9 +48,9 @@ static size_t	*flow_cpy(size_t *src)
 	return (dst);
 }
 
-static size_t	put_pioneers(t_paths *roads, size_t *flow_max, size_t stationary)
+static int	put_pioneers(t_paths *roads, int *flow_max, int stationary)
 {
-	size_t	road_index;
+	int	road_index;
 
 	(void)flow_max;
 	road_index = 0;
@@ -66,13 +66,13 @@ static size_t	put_pioneers(t_paths *roads, size_t *flow_max, size_t stationary)
 	return (road_index);
 }
 
-void	print_lem_in(t_paths *roads, size_t *flow, size_t nb_ants)
+void	print_lem_in(t_paths *roads, int *flow, int nb_ants)
 {
-	size_t		i;
+	int			i;
 	int			tour;
-	size_t		*flow_max;
-	size_t		arrived_ants;
-	size_t		stationary;
+	int			*flow_max;
+	int			arrived_ants;
+	int			stationary;
 
 	i = 0;
 	flow_max = flow_cpy(flow);
@@ -96,19 +96,17 @@ void	print_lem_in(t_paths *roads, size_t *flow, size_t nb_ants)
 	}
 }
 
-size_t	print_one_trip(t_node **path, int duration, int nb_ants, size_t flow)
+int		print_one_trip(t_node **path, int duration, int nb_ants, int flow)
 {
 	t_node		*tmp;
 	int			i;
-	size_t		arrived_ants;
-	size_t		tmp_name;
+	int			arrived_ants;
 	int			len;
 
 	i = 0;
 	tmp = *path;
 	len = tmp->distance;
 	arrived_ants = 0;
-	tmp_name = 0;
 	i = 0;
 	while (tmp && i <= duration)
 	{
@@ -135,7 +133,7 @@ size_t	print_one_trip(t_node **path, int duration, int nb_ants, size_t flow)
 	return (arrived_ants);
 }
 
-size_t	print_one_move(size_t ant_name, char *room)
+int	print_one_move(size_t ant_name, char *room)
 {
 	printf("L%zu-%s ", ant_name + 1, room);
 	return (1);

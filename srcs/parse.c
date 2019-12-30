@@ -6,7 +6,7 @@
 /*   By: lboukrou <lboukrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/30 18:47:20 by lboukrou          #+#    #+#             */
-/*   Updated: 2019/12/30 14:24:23 by lboukrou         ###   ########.fr       */
+/*   Updated: 2019/12/31 00:15:11 by lboukrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 **	Returns number of ants, error if it doesn't exist
 */
 
-size_t	get_num_ants(char *line, t_map **display_map)
+int		get_num_ants(char *line, t_map **display_map)
 {
 	size_t			ants;
 	int				ret;
@@ -29,7 +29,7 @@ size_t	get_num_ants(char *line, t_map **display_map)
 			ants = ft_atoilong(line);
 			add_end_map_list(display_map, line);
 			free(line);
-			return (ants);
+			return ((int)ants);
 		}
 		free(line);
 	}

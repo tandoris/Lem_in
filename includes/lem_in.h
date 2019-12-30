@@ -6,7 +6,7 @@
 /*   By: lboukrou <lboukrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 20:11:32 by lboukrou          #+#    #+#             */
-/*   Updated: 2019/12/30 14:25:33 by lboukrou         ###   ########.fr       */
+/*   Updated: 2019/12/30 20:38:04 by lboukrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ typedef struct		s_node
 	int				y;
 	int				distance;
 	int				occupied;
-	size_t			visitors;
+	int				visitors;
 	size_t			ant;
 	size_t			prev_ant;
 	struct s_node	*next;
@@ -63,7 +63,7 @@ typedef struct		s_map
 typedef struct		s_paths
 {
 	t_node			**paths;
-	size_t			nb_paths;
+	int				nb_paths;
 }					t_paths;
 
 
@@ -100,7 +100,7 @@ void				print_map(t_map **display_map);
 **	Parse functions
 */
 
-size_t				get_num_ants(char *line, t_map **display_map);
+int					get_num_ants(char *line, t_map **display_map);
 t_room_status		identify_room_status(char *buf);
 int					nb_elem_tab(char **tab);
 char				**identify_tube(char *line);
@@ -138,24 +138,24 @@ t_node				**search_by_status(t_graph *graph, t_room_status status);
 t_node				**search_by_name(t_graph *graph, char *name);
 t_node				**search_by_index(t_graph *graph, size_t index);
 void				calc_distance(t_graph **graph, t_node **room, int distance);
-size_t				count_max_paths(t_graph *graph);
+int					count_max_paths(t_graph *graph);
 t_node				*get_shortest_path(t_graph **graph);
 t_node				*search_closest_room(t_graph *graph, t_node **room);
-t_node				*comp_distance(t_graph *graph, size_t best, size_t to_cmp);
+t_node				*comp_distance(t_graph *graph, int best, int to_cmp);
 int					is_room_occupied(t_graph *graph, t_node *room);
 t_paths				*find_all_paths(t_graph **graph);
 void				reset_distance(t_graph **graph);
 void				opti_rooms(t_graph **graph);
-size_t				*spread_ants(t_paths *roads, size_t nb_ants);
-void				print_lem_in(t_paths *roads, size_t *flow, size_t nb_ants);
-size_t				print_one_trip(t_node **path, int duration, int nb_ants, size_t flow);
-size_t				print_one_move(size_t ant_name, char *room);
+int					*spread_ants(t_paths **roads, int nb_ants);
+void				print_lem_in(t_paths *roads, int *flow, int nb_ants);
+int					print_one_trip(t_node **path, int duration, int nb_ants, int flow);
+int					print_one_move(size_t ant_name, char *room);
 
 /*
 **	Functions to be deleted
 */
 
 void				print_graph(t_graph *graph);
-void				print_flow(t_paths *roads, size_t *flow);
+void				print_flow(t_paths *roads, int *flow);
 
 #endif

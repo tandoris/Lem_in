@@ -6,7 +6,7 @@
 /*   By: lboukrou <lboukrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/25 19:48:58 by lboukrou          #+#    #+#             */
-/*   Updated: 2019/12/31 00:15:26 by lboukrou         ###   ########.fr       */
+/*   Updated: 2019/12/31 20:08:51 by lboukrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,24 @@ int		main(void)
 	t_graph		*new_graph;
 	t_paths		*paths;
 	int			*flow;
+	t_map		*display_map;
 
-	new_graph = get_infos();
+	display_map = NULL;
+	new_graph = get_infos(&display_map);
 	// printf("Algo begins\n");
 	// print_graph(new_graph);
 	// opti_rooms(&new_graph);
 	// printf("OPTI begins\n");
-	paths = find_all_paths(&new_graph);
+	if (!(paths = find_all_paths(&new_graph)))
+		ft_free_and_exit(&new_graph, &display_map);
 	flow = spread_ants(&paths, new_graph->ants);
 	// print_flow(paths, flow);
+	print_map(&display_map);
+	free_t_map_list(&display_map);
 	print_lem_in(paths, flow, new_graph->ants);
 	// print_graph(new_graph);
 	free_graph(&new_graph);
+	free_paths(&paths); //ca change rien, revoir fonction free ? 
+	free(flow);
 	return (0);
 }

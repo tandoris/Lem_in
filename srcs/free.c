@@ -6,7 +6,7 @@
 /*   By: lboukrou <lboukrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 16:31:14 by lboukrou          #+#    #+#             */
-/*   Updated: 2019/12/23 19:32:04 by lboukrou         ###   ########.fr       */
+/*   Updated: 2019/12/31 20:17:00 by lboukrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,4 +69,26 @@ void	free_tab(char **tab)
 		i++;
 	}
 	free(tab);
+}
+
+void	free_paths(t_paths **paths_to_free)
+{
+	int		i;
+	t_node	*tmp;
+
+	i = 0;
+	tmp = NULL;
+	if (!(*paths_to_free) || !paths_to_free)
+		return ;
+	if ((*paths_to_free)->paths)
+	{
+		while ((*paths_to_free)->paths[i])
+		{
+			tmp = (*paths_to_free)->paths[i];
+			free_node_list(&tmp);
+			i++;
+		}
+		free((*paths_to_free)->paths);
+	}
+	free(*paths_to_free);
 }

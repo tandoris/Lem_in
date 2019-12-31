@@ -6,7 +6,7 @@
 /*   By: lboukrou <lboukrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/28 18:18:00 by lboukrou          #+#    #+#             */
-/*   Updated: 2019/12/31 20:22:48 by lboukrou         ###   ########.fr       */
+/*   Updated: 2019/12/31 21:26:42 by lboukrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,6 +81,7 @@ void	print_lem_in(t_paths *roads, int *flow, int nb_ants)
 	tour = 0;
 	roads->nb_paths = count_actual_paths(roads->nb_paths, flow);
 	stationary = nb_ants - put_pioneers(roads, flow_max, nb_ants);
+
 	while (nb_ants > arrived_ants)
 	{
 		i = 0;

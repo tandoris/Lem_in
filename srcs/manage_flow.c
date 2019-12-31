@@ -6,7 +6,7 @@
 /*   By: lboukrou <lboukrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/28 15:00:10 by lboukrou          #+#    #+#             */
-/*   Updated: 2019/12/31 17:55:04 by lboukrou         ###   ########.fr       */
+/*   Updated: 2019/12/31 21:30:25 by lboukrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ int			*spread_ants(t_paths **roads, int nb_ants)
 	int			i;
 	int			rest;
 	int			tmp = 0;
+
 	if (!(flow = (int*)ft_memalloc(sizeof(int) * ((*roads)->nb_paths + 1))))
 		ft_malloc_error();
 	rest = equally_spread_ants(roads, nb_ants, &flow);
@@ -51,6 +52,7 @@ int			*spread_ants(t_paths **roads, int nb_ants)
 	}
 	i = 0;
 	tmp = (rest < 0) ? -1 : 1;
+		printf("coucou %d\n", (*roads)->nb_paths);
 	while (rest)
 	{
 		if (!(tmp == -1 && flow[i] <= 0))

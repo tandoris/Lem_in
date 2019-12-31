@@ -6,7 +6,7 @@
 /*   By: lboukrou <lboukrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/26 22:07:06 by lboukrou          #+#    #+#             */
-/*   Updated: 2019/12/31 20:12:52 by lboukrou         ###   ########.fr       */
+/*   Updated: 2019/12/31 20:40:12 by lboukrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -134,7 +134,6 @@ t_paths			*find_all_paths(t_graph **graph)
 	calc_distance(graph, end, 0);
 	if (!(p->nb_paths = count_max_paths(*graph)))
 	{
-		printf("loulou\n");
 		free_paths(&p);
 		return (NULL);
 	}

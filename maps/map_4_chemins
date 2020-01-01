@@ -3,13 +3,16 @@
 s 0 0
 0 7 5
 1 2 3
+##commande invalide
 2 2 2
 3 3 3
 4 4 4
 5 5 5
+###commentaire tricky
 6 6 6
 7 7 7
 8 8 8
+#commentaire normal
 9 9 9
 ##end
 e 1 1

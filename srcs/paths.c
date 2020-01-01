@@ -6,7 +6,7 @@
 /*   By: lboukrou <lboukrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/26 22:07:06 by lboukrou          #+#    #+#             */
-/*   Updated: 2019/12/30 20:38:14 by lboukrou         ###   ########.fr       */
+/*   Updated: 2019/12/31 20:12:52 by lboukrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -125,7 +125,7 @@ t_paths			*find_all_paths(t_graph **graph)
 	t_paths		*p;
 	t_node		**end;
 	int			i;
-	t_node		*pass;
+	// t_node		*pass;
 
 	if (!(p = (t_paths*)ft_memalloc(sizeof(t_paths))))
 		ft_malloc_error();
@@ -133,7 +133,11 @@ t_paths			*find_all_paths(t_graph **graph)
 	// printf("debut\n");
 	calc_distance(graph, end, 0);
 	if (!(p->nb_paths = count_max_paths(*graph)))
-		ft_error();
+	{
+		printf("loulou\n");
+		free_paths(&p);
+		return (NULL);
+	}
 	if (!(p->paths = ft_memalloc(sizeof(t_node *) * (p->nb_paths + 1))))
 		ft_malloc_error();
 	i = 0;
@@ -149,18 +153,22 @@ t_paths			*find_all_paths(t_graph **graph)
 	// printf("nb path : %zu\n", i);
 	p->nb_paths = i;
 	if (p->nb_paths == 0)
-		ft_error();
-	i = 0;
-	while (p->paths[i])
 	{
-		pass = p->paths[i];
-		while (pass)
-		{
-			// printf("name room : %s - ", pass->name_room);
-			pass = pass->next;
-		}
-		// printf("\n");
-		i++;
+		free_paths(&p);
+		return (NULL);
+		
 	}
+	// i = 0;
+	// while (p->paths[i])
+	// {
+	// 	pass = p->paths[i];
+	// 	while (pass)
+	// 	{
+	// 		// printf("name room : %s - ", pass->name_room);
+	// 		pass = pass->next;
+	// 	}
+	// 	// printf("\n");
+	// 	i++;
+	// }
 	return (p);
 }

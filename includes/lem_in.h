@@ -6,7 +6,7 @@
 /*   By: lboukrou <lboukrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 20:11:32 by lboukrou          #+#    #+#             */
-/*   Updated: 2019/12/30 20:38:04 by lboukrou         ###   ########.fr       */
+/*   Updated: 2019/12/31 20:05:20 by lboukrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,6 @@ int					is_number(char *str);
 int					nb_elem_tab(char **tab);
 int					get_list_length(t_node *list);
 void				add_end_list(t_node	**room, t_node *new_cnx);
-void				ft_error(void);
-void				ft_malloc_error(void);
 long long			ft_atoilong(const char *nptr);
 
 /*
@@ -97,6 +95,14 @@ void				add_end_map_list(t_map **first, char *data);
 void				print_map(t_map **display_map);
 
 /*
+**	Utility error functions
+*/
+
+void				ft_error(void);
+void				ft_malloc_error(void);
+void				ft_free_and_exit(t_graph **graph, t_map **display_map);
+
+/*
 **	Parse functions
 */
 
@@ -107,11 +113,11 @@ char				**identify_tube(char *line);
 char				**identify_room(char *line);
 unsigned int		identify_comment(char *line);
 int					fill_room(t_node **first, char **tab, t_room_status status);
-void				put_rooms_in_graph(t_graph **graph, t_node **first);
+int					put_rooms_in_graph(t_graph **graph, t_node **first);
 int					get_tubes(t_graph **graph, char *line, t_map **display_map);
 int					get_rooms(t_graph **graph, char **line,
 								t_map **display_map);
-t_graph				*get_infos(void);
+t_graph				*get_infos(t_map **display_map);
 int					no_duplicate_tube(t_node *room, t_node *to_check);
 t_node				*find_existing_room(t_graph **graph, char *src);
 int					read_rooms(char **line, t_map **display_map, t_node **tmp,
@@ -129,6 +135,7 @@ void				free_graph(t_graph **graph);
 void				free_tab(char **tab);
 void				free_t_map_node(t_map **display_map);
 void				free_t_map_list(t_map **display_map);
+void				free_paths(t_paths **paths_to_free);
 
 /*
 **	Algo functions

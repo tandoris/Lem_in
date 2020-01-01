@@ -6,7 +6,7 @@
 /*   By: lboukrou <lboukrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/28 18:18:00 by lboukrou          #+#    #+#             */
-/*   Updated: 2019/12/30 22:05:09 by lboukrou         ###   ########.fr       */
+/*   Updated: 2019/12/31 20:22:48 by lboukrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static size_t	count_actual_paths(size_t nb_paths, int *flow)
 
 static int	*flow_cpy(int *src)
 {
-	int	*dst;
+	int		*dst;
 	int		i;
 	int		j;
 
@@ -96,6 +96,7 @@ void	print_lem_in(t_paths *roads, int *flow, int nb_ants)
 		printf("\n");
 		tour++;
 	}
+	free(flow_max); // faire fonction free int * ?
 }
 
 int		print_one_trip(t_node **path, int duration, int nb_ants, int flow)

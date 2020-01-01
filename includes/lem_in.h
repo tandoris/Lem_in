@@ -6,7 +6,7 @@
 /*   By: lboukrou <lboukrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 20:11:32 by lboukrou          #+#    #+#             */
-/*   Updated: 2019/12/31 20:05:20 by lboukrou         ###   ########.fr       */
+/*   Updated: 2020/01/01 22:32:11 by lboukrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,7 +142,7 @@ void				free_paths(t_paths **paths_to_free);
 */
 
 t_node				**search_by_status(t_graph *graph, t_room_status status);
-t_node				**search_by_name(t_graph *graph, char *name);
+// t_node				**search_by_name(t_graph *graph, char *name);
 t_node				**search_by_index(t_graph *graph, size_t index);
 void				calc_distance(t_graph **graph, t_node **room, int distance);
 int					count_max_paths(t_graph *graph);

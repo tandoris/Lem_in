@@ -6,7 +6,7 @@
 /*   By: lboukrou <lboukrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/15 19:36:26 by lboukrou          #+#    #+#             */
-/*   Updated: 2019/12/22 17:02:28 by lboukrou         ###   ########.fr       */
+/*   Updated: 2020/01/01 20:57:00 by lboukrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,8 @@ void	add_end_map_list(t_map **first, char *data)
 	{
 		if (!(*first = ft_memalloc(sizeof(t_map))))
 			ft_malloc_error();
-		(*first)->data = ft_strdup(data);
+		if (!((*first)->data = ft_strdup(data)))
+			ft_malloc_error();
 		(*first)->next = NULL;
 		return ;
 	}
@@ -33,7 +34,8 @@ void	add_end_map_list(t_map **first, char *data)
 		tmp = tmp->next;
 	if (!(tmp->next = ft_memalloc(sizeof(t_map))))
 		ft_malloc_error();
-	tmp->next->data = ft_strdup(data);
+	if (!(tmp->next->data = ft_strdup(data)))
+		ft_malloc_error();
 	tmp->next->next = NULL;
 	return ;
 }

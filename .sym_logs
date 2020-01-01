@@ -1,0 +1,30 @@
+_ft_malloc_error:
+0000000100001331	e8 3a 32 00 00 	callq	_ft_memalloc
+0000000100001344	e8 47 ff ff ff 	callq	_ft_malloc_error
+000000010000136e	e8 1d ff ff ff 	callq	_ft_malloc_error
+00000001000017f8	e8 93 fa ff ff 	callq	_ft_malloc_error
+0000000100001888	e8 03 fa ff ff 	callq	_ft_malloc_error
+0000000100001d15	e8 56 28 00 00 	callq	_ft_memalloc
+0000000100001d2b	e8 60 f5 ff ff 	callq	_ft_malloc_error
+0000000100001d4d	e8 3e f5 ff ff 	callq	_ft_malloc_error
+0000000100001dba	e8 b1 27 00 00 	callq	_ft_memalloc
+0000000100001dd1	e8 ba f4 ff ff 	callq	_ft_malloc_error
+0000000100001df4	e8 97 f4 ff ff 	callq	_ft_malloc_error
+00000001000028f5	e8 76 1c 00 00 	callq	_ft_memalloc
+0000000100002908	e8 83 e9 ff ff 	callq	_ft_malloc_error
+000000010000291d	e8 4e 1c 00 00 	callq	_ft_memalloc
+0000000100002934	e8 57 e9 ff ff 	callq	_ft_malloc_error
+0000000100003096	e8 d5 14 00 00 	callq	_ft_memalloc
+00000001000030a9	e8 e2 e1 ff ff 	callq	_ft_malloc_error
+0000000100003118	e8 53 14 00 00 	callq	_ft_memalloc
+000000010000312e	e8 5d e1 ff ff 	callq	_ft_malloc_error
+000000010000338a	e8 e1 11 00 00 	callq	_ft_memalloc
+000000010000339d	e8 ee de ff ff 	callq	_ft_malloc_error
+0000000100003816	e8 55 0d 00 00 	callq	_ft_memalloc
+0000000100003829	e8 62 da ff ff 	callq	_ft_malloc_error
+0000000100003ea0	e8 ff 0f 00 00 	callq	0x100004ea4 ## symbol stub for: _malloc
+_ft_memalloc:
+000000010000459b	e8 04 09 00 00 	callq	0x100004ea4 ## symbol stub for: _malloc
+0000000100004634	e8 6b 08 00 00 	callq	0x100004ea4 ## symbol stub for: _malloc
+000000010000470d	e8 92 07 00 00 	callq	0x100004ea4 ## symbol stub for: _malloc
+000000010000492e	e8 71 05 00 00 	callq	0x100004ea4 ## symbol stub for: _malloc

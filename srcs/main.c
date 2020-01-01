@@ -6,7 +6,7 @@
 /*   By: lboukrou <lboukrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/25 19:48:58 by lboukrou          #+#    #+#             */
-/*   Updated: 2020/01/01 15:13:58 by clboutry         ###   ########.fr       */
+/*   Updated: 2020/01/01 23:15:09 by lboukrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,19 +37,21 @@ int		main(void)
 	i = 0;
 	if (paths->paths[0]->status == END_ROOM)
 	{
-		printf("\n");
+		ft_putchar('\n');
+		// printf("\n");
 		while (i < new_graph->ants)
 		{
 			print_one_move(i, paths->paths[0]->name_room);
 			i++;
 		}
-		printf("\n");
+		ft_putchar('\n');
+		// printf("\n");
 	}
 	else
 		print_lem_in(paths, flow, new_graph->ants);
 	// print_graph(new_graph);
 	free_graph(&new_graph);
-	free_paths(&paths); //ca change rien, revoir fonction free ?
+	free_paths(&paths);
 	free(flow);
 	return (0);
 }

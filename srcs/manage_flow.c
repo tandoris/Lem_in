@@ -12,10 +12,10 @@
 
 #include "lem_in.h"
 
-static int	equally_spread_ants(t_paths **roads, int nb_ants, int **flow)
+static int	equally_spread_ants(t_paths **roads, int nb_ants, long int **flow)
 {
 	int 		i;
-	int			result;
+	long int	result;
 	int			rest;
 	i = 0;
 	result = nb_ants;
@@ -25,7 +25,7 @@ static int	equally_spread_ants(t_paths **roads, int nb_ants, int **flow)
 		i++;
 	}
 	rest = result % (*roads)->nb_paths;
-	result /= (*roads)->nb_paths;
+	result /= (long int)(*roads)->nb_paths;
 	i = 0;
 	while (i < (*roads)->nb_paths)
 	{
@@ -35,14 +35,14 @@ static int	equally_spread_ants(t_paths **roads, int nb_ants, int **flow)
 	return (rest);
 }
 
-int			*spread_ants(t_paths **roads, int nb_ants)
+long int			*spread_ants(t_paths **roads, int nb_ants)
 {
-	int			*flow;
+	long int	*flow;
 	int			i;
 	int			rest;
 	int			tmp = 0;
 
-	if (!(flow = (int*)ft_memalloc(sizeof(int) * ((*roads)->nb_paths + 1))))
+	if (!(flow = (long int*)ft_memalloc(sizeof(long int) * ((*roads)->nb_paths + 1))))
 		ft_malloc_error();
 	rest = equally_spread_ants(roads, nb_ants, &flow);
 	while (flow[(*roads)->nb_paths - 1] <= 0)
@@ -52,7 +52,6 @@ int			*spread_ants(t_paths **roads, int nb_ants)
 	}
 	i = 0;
 	tmp = (rest < 0) ? -1 : 1;
-		printf("coucou %d\n", (*roads)->nb_paths);
 	while (rest)
 	{
 		if (!(tmp == -1 && flow[i] <= 0))
@@ -67,14 +66,14 @@ int			*spread_ants(t_paths **roads, int nb_ants)
 	return (flow);
 }
 
-void	print_flow(t_paths *roads, int *flow)
+void	print_flow(t_paths *roads, long int *flow)
 {
 	int		i;
 	t_node	*tmp;
 	i = 0;
 	while (i < roads->nb_paths)
 	{
-		printf("nb fourmis %d pour path n`%d -> ", flow[i], i);
+		printf("nb fourmis %ld pour path n`%d -> ", flow[i], i);
 		tmp = roads->paths[i];
 		while (tmp)
 		{

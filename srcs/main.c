@@ -16,7 +16,7 @@ int		main(void)
 {
 	t_graph		*new_graph;
 	t_paths		*paths;
-	int			*flow;
+	long int	*flow;
 	t_map		*display_map;
 	size_t		i;
 
@@ -26,12 +26,9 @@ int		main(void)
 	// print_graph(new_graph);
 	// opti_rooms(&new_graph);
 	// printf("OPTI begins\n");
-	printf("lloo\n");
 	if (!(paths = find_all_paths(&new_graph)))
 		ft_free_and_exit(&new_graph, &display_map);
-			printf("au revoir\n");
 	flow = spread_ants(&paths, new_graph->ants);
-	printf("chatte\n");
 	// print_flow(paths, flow);
 
 	print_map(&display_map);

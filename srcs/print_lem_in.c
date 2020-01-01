@@ -12,7 +12,7 @@
 
 #include "lem_in.h"
 
-static size_t	count_actual_paths(size_t nb_paths, int *flow)
+static size_t	count_actual_paths(size_t nb_paths, long int *flow)
 {
 	size_t		i;
 	size_t	count;
@@ -28,9 +28,9 @@ static size_t	count_actual_paths(size_t nb_paths, int *flow)
 	return (count);
 }
 
-static int	*flow_cpy(int *src)
+static long int	*flow_cpy(long int *src)
 {
-	int		*dst;
+	long int		*dst;
 	int		i;
 	int		j;
 
@@ -38,7 +38,7 @@ static int	*flow_cpy(int *src)
 	j = 0;
 	while (src[i])
 		i++;
-	if(!(dst = (int *)ft_memalloc(sizeof(int) * i)))
+	if(!(dst = (long int *)ft_memalloc(sizeof(long int) * i)))
 		ft_malloc_error();
 	while (j < i)
 	{
@@ -48,11 +48,10 @@ static int	*flow_cpy(int *src)
 	return (dst);
 }
 
-static int	put_pioneers(t_paths *roads, int *flow_max, int stationary)
+static int	put_pioneers(t_paths *roads, long int *flow_max, int stationary)
 {
 	int	road_index;
 
-	(void)flow_max;
 	road_index = 0;
 	while (road_index < roads->nb_paths && stationary > 0)
 	{
@@ -66,11 +65,11 @@ static int	put_pioneers(t_paths *roads, int *flow_max, int stationary)
 	return (road_index);
 }
 
-void	print_lem_in(t_paths *roads, int *flow, int nb_ants)
+void	print_lem_in(t_paths *roads, long int *flow, int nb_ants)
 {
 	int			i;
 	int			tour;
-	int			*flow_max;
+	long int	*flow_max;
 	int			arrived_ants;
 	int			stationary;
 
@@ -98,7 +97,7 @@ void	print_lem_in(t_paths *roads, int *flow, int nb_ants)
 	free(flow_max); // faire fonction free int * ?
 }
 
-int		print_one_trip(t_node **path, int duration, int nb_ants, int flow)
+int		print_one_trip(t_node **path, int duration, int nb_ants, long int flow)
 {
 	t_node		*tmp;
 	int			i;
@@ -112,7 +111,7 @@ int		print_one_trip(t_node **path, int duration, int nb_ants, int flow)
 	i = 0;
 	while (tmp && i <= duration)
 	{
-		if (tmp->visitors < flow)// || tmp->status == END_ROOM)
+		if (tmp->visitors < flow)
 		{
 			if (tmp->status == END_ROOM)
 				arrived_ants++;

@@ -153,9 +153,9 @@ int					is_room_occupied(t_graph *graph, t_node *room);
 t_paths				*find_all_paths(t_graph **graph);
 void				reset_distance(t_graph **graph);
 void				opti_rooms(t_graph **graph);
-int					*spread_ants(t_paths **roads, int nb_ants);
-void				print_lem_in(t_paths *roads, int *flow, int nb_ants);
-int					print_one_trip(t_node **path, int duration, int nb_ants, int flow);
+long int			*spread_ants(t_paths **roads, int nb_ants);
+void				print_lem_in(t_paths *roads, long int *flow, int nb_ants);
+int					print_one_trip(t_node **path, int duration, int nb_ants, long int flow);
 int					print_one_move(size_t ant_name, char *room);
 
 /*
@@ -163,6 +163,6 @@ int					print_one_move(size_t ant_name, char *room);
 */
 
 void				print_graph(t_graph *graph);
-void				print_flow(t_paths *roads, int *flow);
+void				print_flow(t_paths *roads, long int *flow);
 
 #endif

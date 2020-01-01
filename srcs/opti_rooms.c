@@ -6,7 +6,7 @@
 /*   By: lboukrou <lboukrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/27 20:23:42 by lboukrou          #+#    #+#             */
-/*   Updated: 2019/12/30 14:05:37 by lboukrou         ###   ########.fr       */
+/*   Updated: 2020/01/01 15:15:09 by clboutry         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,8 +18,8 @@
 
 static int	how_many_free_rooms(t_graph *graph, t_node *room)
 {
-	int			i;
-	t_node		*tmp;
+	int	i;
+	t_node	*tmp;
 
 	if (!room)
 		return (0);
@@ -35,15 +35,15 @@ static int	how_many_free_rooms(t_graph *graph, t_node *room)
 }
 
 /*
-**	Set rooms having 2 or less free connexions to occupied 
-**	(rooms that won't be used in algo)   
+**	Set rooms having 2 or less free connexions to occupied
+**	(rooms that won't be used in algo)
 */
 
-void	opti_rooms(t_graph **graph)
+void		opti_rooms(t_graph **graph)
 {
-	int			i;
-	int			len;
-	int			mark;
+	int	i;
+	int	len;
+	int	mark;
 
 	mark = 1;
 	while (mark)

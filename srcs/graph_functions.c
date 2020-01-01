@@ -6,7 +6,7 @@
 /*   By: lboukrou <lboukrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/03 18:01:59 by lboukrou          #+#    #+#             */
-/*   Updated: 2019/12/31 21:35:26 by lboukrou         ###   ########.fr       */
+/*   Updated: 2020/01/01 15:12:09 by clboutry         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,8 +112,8 @@ t_node	*duplicate_room(t_node *room_src)
 	if (room_src)
 	{
 		room_dest = create_room(room_src->room_index, room_src->name_room, room_src->x, room_src->y);
-		room_dest->status = room_src->status;	
-		room_dest->distance = room_src->distance;			
+		room_dest->status = room_src->status;
+		room_dest->distance = room_src->distance;
 	}
 	return (room_dest);
 }

@@ -6,7 +6,7 @@
 /*   By: lboukrou <lboukrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/26 22:07:06 by lboukrou          #+#    #+#             */
-/*   Updated: 2019/12/31 20:40:12 by lboukrou         ###   ########.fr       */
+/*   Updated: 2020/01/01 15:17:16 by clboutry         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ t_node			*get_shortest_path(t_graph **graph)
 //TODO : supprimer les rooms qui ont moins de 2 connexions - peut-etre on verra
 
 /*
-**	Returns adjencency room that is closest to end, if it's unoccupied 
+**	Returns adjencency room that is closest to end, if it's unoccupied
 */
 
 t_node			*search_closest_room(t_graph *graph, t_node **room)
@@ -155,7 +155,6 @@ t_paths			*find_all_paths(t_graph **graph)
 	{
 		free_paths(&p);
 		return (NULL);
-		
 	}
 	// i = 0;
 	// while (p->paths[i])

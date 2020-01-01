@@ -6,7 +6,7 @@
 /*   By: lboukrou <lboukrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/14 17:53:40 by lboukrou          #+#    #+#             */
-/*   Updated: 2019/12/31 21:23:28 by lboukrou         ###   ########.fr       */
+/*   Updated: 2020/01/01 15:08:25 by clboutry         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ void	ft_malloc_error(void)
 
 void	ft_free_and_exit(t_graph **graph, t_map **display_map)
 {
-	printf("bonjour\n");	
+	printf("bonjour\n");
 	if (graph || *graph)
 		free_graph(graph);
 	if (display_map || *display_map)

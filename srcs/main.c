@@ -6,7 +6,7 @@
 /*   By: lboukrou <lboukrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/25 19:48:58 by lboukrou          #+#    #+#             */
-/*   Updated: 2019/12/31 21:27:47 by lboukrou         ###   ########.fr       */
+/*   Updated: 2020/01/01 15:13:58 by clboutry         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ int		main(void)
 		print_lem_in(paths, flow, new_graph->ants);
 	// print_graph(new_graph);
 	free_graph(&new_graph);
-	free_paths(&paths); //ca change rien, revoir fonction free ? 
+	free_paths(&paths); //ca change rien, revoir fonction free ?
 	free(flow);
 	return (0);
 }

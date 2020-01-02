@@ -6,7 +6,7 @@
 /*   By: lboukrou <lboukrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/26 22:07:06 by lboukrou          #+#    #+#             */
-/*   Updated: 2020/01/02 20:31:37 by clboutry         ###   ########.fr       */
+/*   Updated: 2020/01/02 20:37:27 by lboukrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 **	Returns smallest nb
 */
 
-static int	who_is_smallest(int a, int b, int c)
+static int		who_is_smallest(int a, int b, int c)
 {
 	if (a < b)
 	{
@@ -111,7 +111,7 @@ int				is_room_occupied(t_graph *graph, t_node *room)
 }
 
 /*
-**	//TODO traduire : return une structure contenant tous les paths possibles du plus court au plus long
+**	Returns a structure with all possible paths from shortest to longest
 */
 
 t_paths			*last_verif(t_paths *p)

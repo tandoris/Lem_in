@@ -6,7 +6,7 @@
 /*   By: lboukrou <lboukrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 20:11:32 by lboukrou          #+#    #+#             */
-/*   Updated: 2020/01/01 22:32:11 by lboukrou         ###   ########.fr       */
+/*   Updated: 2020/01/02 21:01:40 by lboukrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 /*
 **	structure enum état de la salle. NORMAL = 0, START_ROOM = 1, END_ROOM = 2
 */
+
 typedef enum		e_room_status
 {
 	NORMAL, START_ROOM, END_ROOM
@@ -66,7 +67,6 @@ typedef struct		s_paths
 	int				nb_paths;
 }					t_paths;
 
-
 /*
 **	Utility functions
 */
@@ -76,6 +76,7 @@ int					nb_elem_tab(char **tab);
 int					get_list_length(t_node *list);
 void				add_end_list(t_node	**room, t_node *new_cnx);
 long long			ft_atoilong(const char *nptr);
+void				print_buffer(char *str, size_t len);
 
 /*
 **	Utility graph functions
@@ -142,7 +143,6 @@ void				free_paths(t_paths **paths_to_free);
 */
 
 t_node				**search_by_status(t_graph *graph, t_room_status status);
-// t_node				**search_by_name(t_graph *graph, char *name);
 t_node				**search_by_index(t_graph *graph, size_t index);
 void				calc_distance(t_graph **graph, t_node **room, int distance);
 int					count_max_paths(t_graph *graph);
@@ -155,7 +155,8 @@ void				reset_distance(t_graph **graph);
 void				opti_rooms(t_graph **graph);
 long int			*spread_ants(t_paths **roads, int nb_ants);
 void				print_lem_in(t_paths *roads, long int *flow, int nb_ants);
-int					print_one_trip(t_node **path, int duration, int nb_ants, long int flow);
+int					print_one_trip(t_node **path, int duration, int nb_ants,
+									long int flow);
 int					print_one_move(size_t ant_name, char *room);
 
 /*
@@ -164,8 +165,5 @@ int					print_one_move(size_t ant_name, char *room);
 
 void				print_graph(t_graph *graph);
 void				print_flow(t_paths *roads, long int *flow);
-
-void				print_buffer(char *str, size_t len);
-
 
 #endif

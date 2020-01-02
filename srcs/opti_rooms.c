@@ -6,19 +6,20 @@
 /*   By: lboukrou <lboukrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/27 20:23:42 by lboukrou          #+#    #+#             */
-/*   Updated: 2020/01/01 15:15:09 by clboutry         ###   ########.fr       */
+/*   Updated: 2020/01/02 20:35:38 by lboukrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
 /*
-**	Returns int i that counts number of rooms occupied in a room and its connexions
+**	Returns int i that counts number of rooms
+**	occupied in a room and its connexions
 */
 
 static int	how_many_free_rooms(t_graph *graph, t_node *room)
 {
-	int	i;
+	int		i;
 	t_node	*tmp;
 
 	if (!room)
@@ -53,7 +54,8 @@ void		opti_rooms(t_graph **graph)
 		while ((*graph)->adj_list[i])
 		{
 			len = how_many_free_rooms(*graph, (*graph)->adj_list[i]);
-			if (len <= 2 && !(*graph)->adj_list[i]->status && !(*graph)->adj_list[i]->occupied)
+			if (len <= 2 && !(*graph)->adj_list[i]->status
+							&& !(*graph)->adj_list[i]->occupied)
 			{
 				(*graph)->adj_list[i]->occupied = 1;
 				mark = 1;

@@ -6,13 +6,13 @@
 /*   By: lboukrou <lboukrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/28 18:18:00 by lboukrou          #+#    #+#             */
-/*   Updated: 2020/01/02 17:26:38 by lboukrou         ###   ########.fr       */
+/*   Updated: 2020/01/02 20:39:09 by lboukrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-void	print_buffer(char *str, size_t len)
+void			print_buffer(char *str, size_t len)
 {
 	static char buf[BUFFER_SIZE];
 	static int	index = 0;
@@ -76,7 +76,7 @@ static long int	*flow_cpy(long int *src)
 	return (dst);
 }
 
-static int	put_pioneers(t_paths *roads, long int *flow_max, int stationary)
+static int		put_pioneers(t_paths *roads, long int *flow_max, int stationary)
 {
 	int	road_index;
 
@@ -94,7 +94,7 @@ static int	put_pioneers(t_paths *roads, long int *flow_max, int stationary)
 	return (road_index);
 }
 
-void	print_lem_in(t_paths *roads, long int *flow, int nb_ants)
+void			print_lem_in(t_paths *roads, long int *flow, int nb_ants)
 {
 	int			i;
 	int			tour;
@@ -123,7 +123,7 @@ void	print_lem_in(t_paths *roads, long int *flow, int nb_ants)
 	free(flow_max);
 }
 
-void	make_next_move(t_node **path)
+void			make_next_move(t_node **path)
 {
 	t_node		*tmp;
 
@@ -139,7 +139,8 @@ void	make_next_move(t_node **path)
 	}
 }
 
-int		print_one_trip(t_node **path, int duration, int nb_ants, long int flow)
+int				print_one_trip(t_node **path, int duration, int nb_ants,
+								long int flow)
 {
 	t_node		*tmp;
 	int			i;
@@ -167,7 +168,7 @@ int		print_one_trip(t_node **path, int duration, int nb_ants, long int flow)
 	return (arrived_ants);
 }
 
-int		print_one_move(size_t ant_name, char *room)
+int				print_one_move(size_t ant_name, char *room)
 {
 	char *nbr;
 

@@ -6,7 +6,7 @@
 /*   By: lboukrou <lboukrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/28 20:11:32 by lboukrou          #+#    #+#             */
-/*   Updated: 2020/01/02 21:01:40 by lboukrou         ###   ########.fr       */
+/*   Updated: 2020/01/02 22:41:17 by lboukrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -152,18 +152,10 @@ t_node				*comp_distance(t_graph *graph, int best, int to_cmp);
 int					is_room_occupied(t_graph *graph, t_node *room);
 t_paths				*find_all_paths(t_graph **graph);
 void				reset_distance(t_graph **graph);
-void				opti_rooms(t_graph **graph);
 long int			*spread_ants(t_paths **roads, int nb_ants);
 void				print_lem_in(t_paths *roads, long int *flow, int nb_ants);
 int					print_one_trip(t_node **path, int duration, int nb_ants,
 									long int flow);
 int					print_one_move(size_t ant_name, char *room);
-
-/*
-**	Functions to be deleted
-*/
-
-void				print_graph(t_graph *graph);
-void				print_flow(t_paths *roads, long int *flow);
 
 #endif

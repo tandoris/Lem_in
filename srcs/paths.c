@@ -6,7 +6,7 @@
 /*   By: lboukrou <lboukrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/26 22:07:06 by lboukrou          #+#    #+#             */
-/*   Updated: 2020/01/01 22:56:07 by lboukrou         ###   ########.fr       */
+/*   Updated: 2020/01/02 20:31:37 by clboutry         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -89,7 +89,8 @@ t_node			*search_closest_room(t_graph *graph, t_node **room)
 	while (tmp)
 	{
 		if (!(is_room_occupied(graph, tmp)))
-			closest = comp_distance(graph, closest->room_index, tmp->room_index);
+			closest = comp_distance(graph, closest->room_index,
+						tmp->room_index);
 		tmp = tmp->next;
 	}
 	if (closest->room_index == (*room)->room_index)
@@ -113,6 +114,16 @@ int				is_room_occupied(t_graph *graph, t_node *room)
 **	//TODO traduire : return une structure contenant tous les paths possibles du plus court au plus long
 */
 
+t_paths			*last_verif(t_paths *p)
+{
+	if (p->nb_paths == 0)
+	{
+		free_paths(&p);
+		return (NULL);
+	}
+	return (p);
+}
+
 t_paths			*find_all_paths(t_graph **graph)
 {
 	t_paths		*p;
@@ -130,20 +141,14 @@ t_paths			*find_all_paths(t_graph **graph)
 	}
 	if (!(p->paths = ft_memalloc(sizeof(t_node *) * (p->nb_paths + 1))))
 		ft_malloc_error();
-	i = 0;
-	while (i < p->nb_paths)
+	i = -1;
+	while (++i < p->nb_paths)
 	{
 		if (!(p->paths[i] = get_shortest_path(graph)))
 			break ;
 		reset_distance(graph);
 		calc_distance(graph, end, 0);
-		i++;
 	}
 	p->nb_paths = i;
-	if (p->nb_paths == 0)
-	{
-		free_paths(&p);
-		return (NULL);
-	}
-	return (p);
+	return (last_verif(p));
 }

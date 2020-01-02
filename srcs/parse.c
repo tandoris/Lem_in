@@ -6,7 +6,7 @@
 /*   By: lboukrou <lboukrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/30 18:47:20 by lboukrou          #+#    #+#             */
-/*   Updated: 2020/01/02 16:01:55 by lboukrou         ###   ########.fr       */
+/*   Updated: 2020/01/02 17:25:44 by lboukrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,9 +94,7 @@ int		put_rooms_in_graph(t_graph **graph, t_node **first)
 		tmp = (tmp)->next;
 	}
 	free_node_list(first);
-	if (start != 1 || end != 1)
-		return (0);
-	return (1);
+	return (start != 1 || end != 1) ? 0 : 1;
 }
 
 /*

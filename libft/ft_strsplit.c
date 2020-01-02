@@ -12,6 +12,23 @@
 
 #include "libft.h"
 
+static char	**ft_free_all(char ***tab)
+{
+	int		i;
+
+	i = 0;
+	if (!*tab)
+		return (NULL);
+	while ((*tab)[i])
+	{
+		free((*tab)[i]);
+		i++;
+	}
+	free(*tab);
+	return (NULL);
+
+}
+
 char	**ft_strsplit(char const *s, char c)
 {
 	char	**tab;
@@ -26,7 +43,7 @@ char	**ft_strsplit(char const *s, char c)
 	while (++i < ft_strlen(s))
 		words = (s[i] != c && (!i || s[i - 1] == c)) ? words + 1 : words;
 	if ((tab = malloc(sizeof(char*) * (words + 1))) == NULL)
-		return (NULL);
+		return (ft_free_all(&tab));
 	i = -1;
 	words = -1;
 	while (s[++i])
@@ -35,6 +52,8 @@ char	**ft_strsplit(char const *s, char c)
 			y = i;
 		if (s[i] != c && (s[i + 1] == c || !s[i + 1]))
 			tab[++words] = ft_strsub(s, y, i - y + 1);
+		if (!tab[words])
+			return (ft_free_all(&tab));
 	}
 	tab[words + 1] = NULL;
 	return (tab);

@@ -51,7 +51,8 @@ void	print_map(t_map **display_map)
 	tmp = *display_map;
 	while (tmp)
 	{
-		ft_putendl(tmp->data);
+		print_buffer(tmp->data, ft_strlen(tmp->data));
+		print_buffer("\n", 1);
 		tmp = tmp->next;
 	}
 }

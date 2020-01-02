@@ -13,7 +13,7 @@
 NAME		= lem-in
 ################################################################################
 CC			= gcc
-CFLAGS		= -Wall -Wextra -Werror -g3 #-fsanitize=address -fno-omit-frame-pointer -fno-optimize-sibling-calls -g #-g3 -fsanitize=address
+CFLAGS		= -Wall -Wextra -Werror #-g3 #-fsanitize=address -fno-omit-frame-pointer -fno-optimize-sibling-calls -g #-g3 -fsanitize=address
 INCS		= -Iincludes -I $(LIB_PATH)
 COLOR		= \033[31m
 FINCOLOR	= \033[0m

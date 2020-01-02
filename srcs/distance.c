@@ -6,7 +6,7 @@
 /*   By: lboukrou <lboukrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/26 21:28:46 by lboukrou          #+#    #+#             */
-/*   Updated: 2020/01/01 15:07:10 by clboutry         ###   ########.fr       */
+/*   Updated: 2020/01/02 14:53:19 by lboukrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,8 @@ void		calc_distance(t_graph **graph, t_node **room, int distance)
 }
 
 /*
-**	Compares the distance from End of 2 rooms, returns room with shortest distance
+**	Compares the distance from End of 2 rooms
+**	Returns room with shortest distance
 */
 
 t_node		*comp_distance(t_graph *graph, int best, int to_cmp)

@@ -6,7 +6,7 @@
 /*   By: lboukrou <lboukrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 16:31:14 by lboukrou          #+#    #+#             */
-/*   Updated: 2019/12/31 20:17:00 by lboukrou         ###   ########.fr       */
+/*   Updated: 2020/01/02 14:57:07 by lboukrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,11 +38,19 @@ void	free_node_list(t_node **node)
 	}
 }
 
+/*
+**	Free display_map node
+*/
+
 void	free_t_map_node(t_map **display_map)
 {
 	free((*display_map)->data);
 	free(*display_map);
 }
+
+/*
+**	Free display_map list
+*/
 
 void	free_t_map_list(t_map **display_map)
 {
@@ -70,6 +78,10 @@ void	free_tab(char **tab)
 	}
 	free(tab);
 }
+
+/*
+**	//TODO deplacer 
+*/
 
 void	free_paths(t_paths **paths_to_free)
 {

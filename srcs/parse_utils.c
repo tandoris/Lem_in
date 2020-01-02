@@ -6,7 +6,7 @@
 /*   By: lboukrou <lboukrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/14 17:53:01 by lboukrou          #+#    #+#             */
-/*   Updated: 2020/01/01 22:49:22 by lboukrou         ###   ########.fr       */
+/*   Updated: 2020/01/02 15:58:53 by lboukrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ char			**identify_tube(char *line)
 	if (ft_strchr(line, '-'))
 	{
 		if (!(tab = ft_strsplit(line, '-')))
-			ft_malloc_error();					// protection malloc
+			ft_malloc_error();
 		if (nb_elem_tab(tab) == 2)
 			return (tab);
 		free_tab(tab);
@@ -58,7 +58,7 @@ char			**identify_room(char *line)
 	if (ft_strchr(line, ' '))
 	{
 		if (!(tab = ft_strsplit(line, ' ')))
-			ft_malloc_error();					// protection malloc
+			ft_malloc_error();
 		if (nb_elem_tab(tab) == 3 && tab[0][0] != 'L' && tab[0][0] != '#'
 			&& is_number(tab[1]) && is_number(tab[2]))
 			return (tab);

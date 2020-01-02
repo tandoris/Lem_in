@@ -13,14 +13,13 @@ s 0 0
 7 7 7
 8 8 8
 #commentaire normal
-##commande invalide
 9 9 9
 ##end
 e 1 1
+##invalid command
 s-7
 s-0
 s-3
-##invalid command
 s-2
 7-8
 0-1

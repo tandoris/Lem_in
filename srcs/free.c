@@ -6,7 +6,7 @@
 /*   By: lboukrou <lboukrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/18 16:31:14 by lboukrou          #+#    #+#             */
-/*   Updated: 2020/01/02 14:57:07 by lboukrou         ###   ########.fr       */
+/*   Updated: 2020/01/02 15:54:42 by lboukrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ void	free_tab(char **tab)
 }
 
 /*
-**	//TODO deplacer 
+**	//TODO norme deplacer ailleurs
 */
 
 void	free_paths(t_paths **paths_to_free)

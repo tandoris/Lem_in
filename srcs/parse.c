@@ -6,7 +6,7 @@
 /*   By: lboukrou <lboukrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/30 18:47:20 by lboukrou          #+#    #+#             */
-/*   Updated: 2020/01/01 22:51:43 by lboukrou         ###   ########.fr       */
+/*   Updated: 2020/01/02 16:01:55 by lboukrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,8 @@ int		fill_room(t_node **first, char **tab, t_room_status status)
 	static size_t	room_index = 0;
 
 	tmp = *first;
-	new_node = create_room(room_index, tab[0], ft_atoi(tab[1]), ft_atoi(tab[2]));
+	new_node = create_room(room_index, tab[0], ft_atoi(tab[1]),
+							ft_atoi(tab[2]));
 	room_index++;
 	new_node->status = status;
 	while (tmp)
@@ -105,19 +106,15 @@ int		put_rooms_in_graph(t_graph **graph, t_node **first)
 t_graph	*get_infos(t_map **display_map)
 {
 	t_graph		*graph;
-	// t_map		*display_map;
 	char		*line;
 	size_t		ants;
 
 	graph = NULL;
 	line = NULL;
-	// display_map = NULL;
 	if (!(ants = get_num_ants(line, display_map)))
 		ft_free_and_exit(NULL, display_map);
 	if (get_rooms(&graph, &line, display_map))
 		get_tubes(&graph, line, display_map);
-	// print_map(&display_map);
-	// free_t_map_list(&display_map);
 	graph->ants = ants;
 	return (graph);
 }

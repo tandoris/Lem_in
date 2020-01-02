@@ -92,7 +92,7 @@ int		get_rooms(t_graph **graph, char **line, t_map **display_map)
 	}
 	if (!(put_rooms_in_graph(graph, &tmp)))
 	{
-		if (ret > 0)
+		if (ret > 0 && ret_fill_room)
 			free(*line);
 		ft_free_and_exit(graph, display_map);
 	}

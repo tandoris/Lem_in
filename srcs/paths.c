@@ -114,9 +114,9 @@ int				is_room_occupied(t_graph *graph, t_node *room)
 **	Returns a structure with all possible paths from shortest to longest
 */
 
-t_paths			*last_verif(t_paths *p)
+static t_paths	*last_verif(t_paths *p)
 {
-	if (p->nb_paths == 0)
+	if (p->nb_paths <= 0)
 	{
 		free_paths(&p);
 		return (NULL);

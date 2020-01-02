@@ -85,16 +85,13 @@ t_node			*search_closest_room(t_graph *graph, t_node **room)
 
 	tmp = *room;
 	closest = tmp;
-	// printf("-->room : %s - ", tmp->name_room);
 	tmp = tmp->next;
 	while (tmp)
 	{
-		// printf(" %s - ", tmp->name_room);
 		if (!(is_room_occupied(graph, tmp)))
 			closest = comp_distance(graph, closest->room_index, tmp->room_index);
 		tmp = tmp->next;
 	}
-	// printf("\n");
 	if (closest->room_index == (*room)->room_index)
 		return (NULL);
 	return (closest);
@@ -113,7 +110,7 @@ int				is_room_occupied(t_graph *graph, t_node *room)
 }
 
 /*
-**	//TODO mettre commentaire intelligent et precis allez hop
+**	//TODO traduire : return une structure contenant tous les paths possibles du plus court au plus long
 */
 
 t_paths			*find_all_paths(t_graph **graph)
@@ -121,7 +118,6 @@ t_paths			*find_all_paths(t_graph **graph)
 	t_paths		*p;
 	t_node		**end;
 	int			i;
-	// t_node		*pass;
 
 	if (!(p = (t_paths*)ft_memalloc(sizeof(t_paths))))
 		ft_malloc_error();

@@ -80,6 +80,7 @@ void	print_lem_in(t_paths *roads, long int *flow, int nb_ants)
 	arrived_ants = 0;
 	tour = 0;
 	roads->nb_paths = count_actual_paths(roads->nb_paths, flow);
+	// printf("nb_paths : %d\n", roads->nb_paths);
 	stationary = nb_ants - put_pioneers(roads, flow_max, nb_ants);
 
 	while (nb_ants > arrived_ants)
@@ -89,6 +90,7 @@ void	print_lem_in(t_paths *roads, long int *flow, int nb_ants)
 		{
 			arrived_ants += print_one_trip(&roads->paths[i], tour, nb_ants, flow_max[i]);
 			flow[i] = flow_max[i] - roads->paths[i]->visitors;
+			// printf("Arrived Ants : %d ", arrived_ants);
 			i++;
 		}
 		stationary -= put_pioneers(roads, flow_max, stationary);
@@ -118,6 +120,8 @@ int		print_one_trip(t_node **path, int duration, int nb_ants, long int flow)
 			if (tmp->status == END_ROOM)
 				arrived_ants++;
 			print_one_move(nb_ants - tmp->ant, tmp->name_room);
+			// if (nb_ants - tmp->ant + 1 == 2)
+				// printf(" %zu ", nb_ants - tmp->prev_ant + 1);
 			tmp->visitors++;
 		}
 		tmp = tmp->next;

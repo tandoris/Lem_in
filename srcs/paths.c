@@ -6,7 +6,7 @@
 /*   By: lboukrou <lboukrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/26 22:07:06 by lboukrou          #+#    #+#             */
-/*   Updated: 2019/12/31 20:12:52 by lboukrou         ###   ########.fr       */
+/*   Updated: 2020/01/01 22:56:07 by lboukrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,7 @@ t_node			*get_shortest_path(t_graph **graph)
 //TODO : supprimer les rooms qui ont moins de 2 connexions - peut-etre on verra
 
 /*
-**	Returns adjencency room that is closest to end, if it's unoccupied 
+**	Returns adjencency room that is closest to end, if it's unoccupied
 */
 
 t_node			*search_closest_room(t_graph *graph, t_node **room)
@@ -130,11 +130,9 @@ t_paths			*find_all_paths(t_graph **graph)
 	if (!(p = (t_paths*)ft_memalloc(sizeof(t_paths))))
 		ft_malloc_error();
 	end = search_by_status(*graph, END_ROOM);
-	// printf("debut\n");
 	calc_distance(graph, end, 0);
 	if (!(p->nb_paths = count_max_paths(*graph)))
 	{
-		printf("loulou\n");
 		free_paths(&p);
 		return (NULL);
 	}
@@ -149,26 +147,11 @@ t_paths			*find_all_paths(t_graph **graph)
 		calc_distance(graph, end, 0);
 		i++;
 	}
-	// printf("nb max path : %zu\n", p->nb_paths);
-	// printf("nb path : %zu\n", i);
 	p->nb_paths = i;
 	if (p->nb_paths == 0)
 	{
 		free_paths(&p);
 		return (NULL);
-		
 	}
-	// i = 0;
-	// while (p->paths[i])
-	// {
-	// 	pass = p->paths[i];
-	// 	while (pass)
-	// 	{
-	// 		// printf("name room : %s - ", pass->name_room);
-	// 		pass = pass->next;
-	// 	}
-	// 	// printf("\n");
-	// 	i++;
-	// }
 	return (p);
 }

@@ -6,7 +6,7 @@
 /*   By: lboukrou <lboukrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/23 19:22:28 by lboukrou          #+#    #+#             */
-/*   Updated: 2019/12/31 20:05:33 by lboukrou         ###   ########.fr       */
+/*   Updated: 2020/01/01 22:24:05 by lboukrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,10 @@ int		get_rooms(t_graph **graph, char **line, t_map **display_map)
 		}
 	}
 	if (!(put_rooms_in_graph(graph, &tmp)))
+	{
+		// free(*line);
 		ft_free_and_exit(graph, display_map);
+	}
 	return (ret == 0 ? 0 : ret_fill_room);
 }
 
@@ -113,7 +116,7 @@ int		read_rooms(char **line, t_map **display_map, t_node **tmp,
 	{
 		if (identify_room_status(*line) != NORMAL)
 			*status = identify_room_status(*line);
-		if (*status != NORMAL || (*line - ft_strstr(*line, "##") || (*line)[2] == '#'))
+		if (identify_room_status(*line) || (*line - ft_strstr(*line, "##") || (*line)[2] == '#'))
 			add_end_map_list(display_map, *line);
 		free(*line);
 	}

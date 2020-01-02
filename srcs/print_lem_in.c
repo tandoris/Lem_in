@@ -6,13 +6,13 @@
 /*   By: lboukrou <lboukrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/28 18:18:00 by lboukrou          #+#    #+#             */
-/*   Updated: 2019/12/31 20:22:48 by lboukrou         ###   ########.fr       */
+/*   Updated: 2020/01/01 23:17:20 by lboukrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "lem_in.h"
 
-static size_t	count_actual_paths(size_t nb_paths, int *flow)
+static size_t	count_actual_paths(size_t nb_paths, long int *flow)
 {
 	size_t		i;
 	size_t	count;
@@ -28,17 +28,17 @@ static size_t	count_actual_paths(size_t nb_paths, int *flow)
 	return (count);
 }
 
-static int	*flow_cpy(int *src)
+static long int	*flow_cpy(long int *src)
 {
-	int		*dst;
-	int		i;
-	int		j;
+	long int		*dst;
+	int				i;
+	int				j;
 
 	i = 0;
 	j = 0;
 	while (src[i])
 		i++;
-	if(!(dst = (int *)ft_memalloc(sizeof(int) * i)))
+	if(!(dst = (long int *)ft_memalloc(sizeof(long int) * i)))
 		ft_malloc_error();
 	while (j < i)
 	{
@@ -48,11 +48,10 @@ static int	*flow_cpy(int *src)
 	return (dst);
 }
 
-static int	put_pioneers(t_paths *roads, int *flow_max, int stationary)
+static int	put_pioneers(t_paths *roads, long int *flow_max, int stationary)
 {
 	int	road_index;
 
-	(void)flow_max;
 	road_index = 0;
 	while (road_index < roads->nb_paths && stationary > 0)
 	{
@@ -66,22 +65,24 @@ static int	put_pioneers(t_paths *roads, int *flow_max, int stationary)
 	return (road_index);
 }
 
-void	print_lem_in(t_paths *roads, int *flow, int nb_ants)
+void	print_lem_in(t_paths *roads, long int *flow, int nb_ants)
 {
 	int			i;
 	int			tour;
-	int			*flow_max;
+	long int	*flow_max;
 	int			arrived_ants;
 	int			stationary;
 
 	i = 0;
 	flow_max = flow_cpy(flow);
-	printf("\n");
+	ft_putchar('\n');		
+	// printf("\n");
 	arrived_ants = 0;
 	tour = 0;
 	roads->nb_paths = count_actual_paths(roads->nb_paths, flow);
 	// printf("nb_paths : %d\n", roads->nb_paths);
 	stationary = nb_ants - put_pioneers(roads, flow_max, nb_ants);
+
 	while (nb_ants > arrived_ants)
 	{
 		i = 0;
@@ -93,13 +94,14 @@ void	print_lem_in(t_paths *roads, int *flow, int nb_ants)
 			i++;
 		}
 		stationary -= put_pioneers(roads, flow_max, stationary);
-		printf("\n");
+		ft_putchar('\n');		
+		// printf("\n");
 		tour++;
 	}
 	free(flow_max); // faire fonction free int * ?
 }
 
-int		print_one_trip(t_node **path, int duration, int nb_ants, int flow)
+int		print_one_trip(t_node **path, int duration, int nb_ants, long int flow)
 {
 	t_node		*tmp;
 	int			i;
@@ -113,8 +115,7 @@ int		print_one_trip(t_node **path, int duration, int nb_ants, int flow)
 	i = 0;
 	while (tmp && i <= duration)
 	{
-		// printf("vis : %d - i : %d", tmp->visitors, i);
-		if (tmp->visitors < flow)// || tmp->status == END_ROOM)
+		if (tmp->visitors < flow)
 		{
 			if (tmp->status == END_ROOM)
 				arrived_ants++;
@@ -141,6 +142,11 @@ int		print_one_trip(t_node **path, int duration, int nb_ants, int flow)
 
 int	print_one_move(size_t ant_name, char *room)
 {
-	printf("L%zu-%s ", ant_name + 1, room);
+	ft_putchar('L');
+	ft_putnbr((int)ant_name + 1);
+	ft_putchar('-');
+	ft_putstr(room);
+	ft_putchar(' ');
+//	printf("L%zu-%s ", ant_name + 1, room);
 	return (1);
 }

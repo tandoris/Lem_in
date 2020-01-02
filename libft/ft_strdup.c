@@ -6,7 +6,7 @@
 /*   By: lboukrou <lboukrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/27 01:32:13 by lboukrou          #+#    #+#             */
-/*   Updated: 2017/12/10 16:37:12 by lboukrou         ###   ########.fr       */
+/*   Updated: 2020/01/01 20:22:57 by lboukrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ char	*ft_strdup(const char *s)
 	char	*dest;
 	int		i;
 
-	dest = (char *)malloc(sizeof(*s) * (ft_strlen(s) + 1));
+	if (!(dest = (char *)malloc(sizeof(*s) * (ft_strlen(s) + 1))))
+		return (NULL);
 	if (dest == NULL)
 		return (NULL);
 	i = 0;

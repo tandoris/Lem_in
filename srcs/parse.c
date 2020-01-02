@@ -6,7 +6,7 @@
 /*   By: lboukrou <lboukrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/30 18:47:20 by lboukrou          #+#    #+#             */
-/*   Updated: 2019/12/31 20:04:18 by lboukrou         ###   ########.fr       */
+/*   Updated: 2020/01/01 22:51:43 by lboukrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ int		get_num_ants(char *line, t_map **display_map)
 	if ((ret = get_next_line(0, &line)) > -1)
 	{
 		if (is_number(line) == 1 && (ft_atoilong(line)) > 0
-			&& (ft_atoilong(line)) < INT_MAX)
+			&& (ft_atoilong(line)) <= INT_MAX)
 		{
 			ants = ft_atoilong(line);
 			add_end_map_list(display_map, line);
@@ -53,8 +53,7 @@ int		fill_room(t_node **first, char **tab, t_room_status status)
 	new_node->status = status;
 	while (tmp)
 	{
-		// if (new_node->room_index == tmp->room_index)
-		if (!(ft_strcmp(new_node->name_room, tmp->name_room))) //TODO voir comment gerer ca
+		if (!(ft_strcmp(new_node->name_room, tmp->name_room)))
 		{
 			free_node(&new_node);
 			return (0);

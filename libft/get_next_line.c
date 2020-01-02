@@ -54,7 +54,7 @@ int				get_next_line(const int fd, char **line)
 		ret = ft_strlen(str) > 0 ? 1 : ret;
 		if (!(tmp = ft_strsub(str, ft_size(str, '\n') + 1,
 				ft_strlen(str) - ft_size(str, '\n'))))
-					return (-1);
+			return (-1);
 		free(str);
 		str = tmp;
 	}

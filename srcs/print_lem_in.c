@@ -16,7 +16,7 @@ void	print_buffer(char *str, size_t len)
 {
 	static char buf[BUFFER_SIZE];
 	static int	index = 0;
-	size_t	i;
+	size_t		i;
 
 	if (!str)
 	{
@@ -42,7 +42,7 @@ void	print_buffer(char *str, size_t len)
 
 static size_t	count_actual_paths(size_t nb_paths, long int *flow)
 {
-	size_t		i;
+	size_t	i;
 	size_t	count;
 
 	i = 0;
@@ -66,7 +66,7 @@ static long int	*flow_cpy(long int *src)
 	j = 0;
 	while (src[i])
 		i++;
-	if(!(dst = (long int *)ft_memalloc(sizeof(long int) * i)))
+	if (!(dst = (long int *)ft_memalloc(sizeof(long int) * i)))
 		ft_malloc_error();
 	while (j < i)
 	{
@@ -90,6 +90,7 @@ static int	put_pioneers(t_paths *roads, long int *flow_max, int stationary)
 			break ;
 		road_index++;
 	}
+	print_buffer("\n", 1);
 	return (road_index);
 }
 
@@ -103,25 +104,39 @@ void	print_lem_in(t_paths *roads, long int *flow, int nb_ants)
 
 	i = 0;
 	flow_max = flow_cpy(flow);
-	print_buffer("\n", 1);		
 	arrived_ants = 0;
 	tour = 0;
 	roads->nb_paths = count_actual_paths(roads->nb_paths, flow);
 	stationary = nb_ants - put_pioneers(roads, flow_max, nb_ants);
 	while (nb_ants > arrived_ants)
 	{
-		i = 0;
-		while (i < roads->nb_paths && arrived_ants < nb_ants)
+		i = -1;
+		while (++i < roads->nb_paths && arrived_ants < nb_ants)
 		{
-			arrived_ants += print_one_trip(&roads->paths[i], tour, nb_ants, flow_max[i]);
+			arrived_ants += print_one_trip(&roads->paths[i], tour,
+												nb_ants, flow_max[i]);
 			flow[i] = flow_max[i] - roads->paths[i]->visitors;
-			i++;
 		}
 		stationary -= put_pioneers(roads, flow_max, stationary);
-		print_buffer("\n", 1);
 		tour++;
 	}
 	free(flow_max);
+}
+
+void	make_next_move(t_node **path)
+{
+	t_node		*tmp;
+
+	tmp = *path;
+	while (tmp)
+	{
+		if (tmp->next)
+		{
+			tmp->next->prev_ant = tmp->ant;
+		}
+		tmp->ant = tmp->prev_ant;
+		tmp = tmp->next;
+	}
 }
 
 int		print_one_trip(t_node **path, int duration, int nb_ants, long int flow)
@@ -148,21 +163,11 @@ int		print_one_trip(t_node **path, int duration, int nb_ants, long int flow)
 		tmp = tmp->next;
 		i++;
 	}
-	tmp = *path;
-	while (tmp)
-	{
-		if (tmp->next)
-		{
-			tmp->next->prev_ant = tmp->ant;
-		}
-		tmp->ant = tmp->prev_ant;
-		tmp = tmp->next;
-	}
+	make_next_move(path);
 	return (arrived_ants);
 }
 
-
-int	print_one_move(size_t ant_name, char *room)
+int		print_one_move(size_t ant_name, char *room)
 {
 	char *nbr;
 

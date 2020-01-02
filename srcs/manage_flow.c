@@ -14,10 +14,14 @@
 
 static int	equally_spread_ants(t_paths **roads, int nb_ants, long int **flow)
 {
-	int 		i;
+	int			i;
 	long int	result;
 	int			rest;
+
 	i = 0;
+	if (!(*flow = (long int*)ft_memalloc(sizeof(long int)
+		* ((*roads)->nb_paths + 1))))
+		ft_malloc_error();
 	result = nb_ants;
 	while (i < (*roads)->nb_paths)
 	{
@@ -35,15 +39,14 @@ static int	equally_spread_ants(t_paths **roads, int nb_ants, long int **flow)
 	return (rest);
 }
 
-long int			*spread_ants(t_paths **roads, int nb_ants)
+long int	*spread_ants(t_paths **roads, int nb_ants)
 {
 	long int	*flow;
 	int			i;
 	int			rest;
-	int			tmp = 0;
+	int			tmp;
 
-	if (!(flow = (long int*)ft_memalloc(sizeof(long int) * ((*roads)->nb_paths + 1))))
-		ft_malloc_error();
+	flow = NULL;
 	rest = equally_spread_ants(roads, nb_ants, &flow);
 	while (flow[(*roads)->nb_paths - 1] <= 0)
 	{
@@ -56,20 +59,20 @@ long int			*spread_ants(t_paths **roads, int nb_ants)
 	{
 		if (!(tmp == -1 && flow[i] <= 0))
 		{
-			flow[i] += tmp; 
+			flow[i] += tmp;
 			rest -= tmp;
 		}
 		i++;
-		if (i == (*roads)->nb_paths)
-			i = 0;
+		i = (i == (*roads)->nb_paths) ? 0 : i;
 	}
 	return (flow);
 }
 
-void	print_flow(t_paths *roads, long int *flow)
+void		print_flow(t_paths *roads, long int *flow)
 {
 	int		i;
 	t_node	*tmp;
+
 	i = 0;
 	while (i < roads->nb_paths)
 	{

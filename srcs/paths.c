@@ -60,10 +60,8 @@ t_node			*get_shortest_path(t_graph **graph)
 
 	path = NULL;
 	closest = *search_by_status(*graph, START_ROOM);
-	// add_end_list(&path, duplicate_room(closest));
 	while ((closest)->status != END_ROOM)
 	{
-		// printf("closest -> %s\n", closest->name_room);
 		if (!(closest = search_closest_room(*graph, &closest)))
 			return (NULL);
 		add_end_list(&path, duplicate_room(closest));
@@ -73,10 +71,8 @@ t_node			*get_shortest_path(t_graph **graph)
 			(*tmp)->occupied = 1;
 		}
 	}
-	// printf("\n");
 	return (path);
 }
-//TODO : supprimer les rooms qui ont moins de 2 connexions - peut-etre on verra
 
 /*
 **	Returns adjencency room that is closest to end, if it's unoccupied

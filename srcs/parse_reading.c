@@ -48,10 +48,7 @@ int		read_tubes(t_graph **graph, char **line, t_map **display_map,
 	if (identify_comment(*line) && !(identify_room_status(*line)))
 	{
 		if ((*line - ft_strstr(*line, "##") || (*line)[2] == '#'))
-		{
-			printf("Je suis la\n");
 			add_end_map_list(display_map, *line);
-		}
 		free(*line);
 	}
 	else if ((tab_tube = identify_tube(*line))
@@ -94,7 +91,11 @@ int		get_rooms(t_graph **graph, char **line, t_map **display_map)
 		}
 	}
 	if (!(put_rooms_in_graph(graph, &tmp)))
+	{
+		if (ret > 0)
+			free(*line);
 		ft_free_and_exit(graph, display_map);
+	}
 	return (ret == 0 ? 0 : ret_fill_room);
 }
 

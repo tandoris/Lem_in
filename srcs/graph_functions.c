@@ -124,24 +124,27 @@ t_node	*duplicate_room(t_node *room_src)
 **	Prints a graph (to be deleted)
 */
 
-void	print_graph(t_graph *graph)
-{
-	t_node		*tmp;
-
-	if (!graph)
-		return ;
-	for (size_t i = 0; i < graph->nb_vertices; i++)
-	{
-		if (graph->adj_list[i]->occupied)
-			continue ;
-		tmp = graph->adj_list[i];
-		printf("\n Adjacency list of index %zu and distance : %d\n ", i, tmp->distance);
-		while (tmp)
-		{
-			printf("%s -> ", tmp->name_room);
-			tmp = tmp->next;
-		}
-		printf("\n");
-		printf("\n");
-	}
-}
+/*
+** void	print_graph(t_graph *graph)
+** {
+** 	t_node		*tmp;
+**
+** 	if (!graph)
+** 		return ;
+** 	for (size_t i = 0; i < graph->nb_vertices; i++)
+** 	{
+** 		if (graph->adj_list[i]->occupied)
+** 			continue ;
+** 		tmp = graph->adj_list[i];
+** 		printf("\n Adjacency list of index %zu and distance : %d\n ",
+**				i, tmp->distance);
+** 		while (tmp)
+** 		{
+** 			printf("%s -> ", tmp->name_room);
+** 			tmp = tmp->next;
+** 		}
+** 		printf("\n");
+** 		printf("\n");
+** 	}
+** }
+*/

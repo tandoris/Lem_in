@@ -22,14 +22,9 @@ int		main(void)
 
 	display_map = NULL;
 	new_graph = get_infos(&display_map);
-	// printf("Algo begins\n");
-	// print_graph(new_graph);
-	// opti_rooms(&new_graph);
-	// printf("OPTI begins\n");
 	if (!(paths = find_all_paths(&new_graph)))
 		ft_free_and_exit(&new_graph, &display_map);
 	flow = spread_ants(&paths, new_graph->ants);
-	// print_flow(paths, flow);
 
 	print_map(&display_map);
 	free_t_map_list(&display_map);
@@ -37,19 +32,17 @@ int		main(void)
 	i = 0;
 	if (paths->paths[0]->status == END_ROOM)
 	{
-		ft_putchar('\n');
-		// printf("\n");
+		print_buffer("\n", 1);
 		while (i < new_graph->ants)
 		{
 			print_one_move(i, paths->paths[0]->name_room);
 			i++;
 		}
-		ft_putchar('\n');
-		// printf("\n");
+		print_buffer("\n", 1);
 	}
 	else
 		print_lem_in(paths, flow, new_graph->ants);
-	// print_graph(new_graph);
+	print_buffer(NULL, 0);
 	free_graph(&new_graph);
 	free_paths(&paths);
 	free(flow);

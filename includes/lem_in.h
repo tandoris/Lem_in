@@ -17,7 +17,7 @@
 # include <stdlib.h>
 # include "libft.h"
 # include <limits.h>
-// # define INT_MAX 2147483647
+# define BUFFER_SIZE 100000
 
 /*
 **	structure enum état de la salle. NORMAL = 0, START_ROOM = 1, END_ROOM = 2
@@ -164,5 +164,8 @@ int					print_one_move(size_t ant_name, char *room);
 
 void				print_graph(t_graph *graph);
 void				print_flow(t_paths *roads, long int *flow);
+
+void				print_buffer(char *str, size_t len);
+
 
 #endif

@@ -12,6 +12,34 @@
 
 #include "lem_in.h"
 
+void	print_buffer(char *str, size_t len)
+{
+	static char buf[BUFFER_SIZE];
+	static int	index = 0;
+	size_t	i;
+
+	if (!str)
+	{
+		write(1, buf, index);
+		ft_bzero(buf, BUFFER_SIZE);
+		index = 0;
+		return ;
+	}
+	i = 0;
+	while (i < len)
+	{
+		buf[index] = str[i];
+		index++;
+		if (index == BUFFER_SIZE)
+		{
+			write(1, buf, index);
+			ft_bzero(buf, BUFFER_SIZE);
+			index = 0;
+		}
+		i++;
+	}
+}
+
 static size_t	count_actual_paths(size_t nb_paths, long int *flow)
 {
 	size_t		i;
@@ -75,14 +103,13 @@ void	print_lem_in(t_paths *roads, long int *flow, int nb_ants)
 
 	i = 0;
 	flow_max = flow_cpy(flow);
-	ft_putchar('\n');		
+	print_buffer("\n", 1);		
 	// printf("\n");
 	arrived_ants = 0;
 	tour = 0;
 	roads->nb_paths = count_actual_paths(roads->nb_paths, flow);
 	// printf("nb_paths : %d\n", roads->nb_paths);
 	stationary = nb_ants - put_pioneers(roads, flow_max, nb_ants);
-
 	while (nb_ants > arrived_ants)
 	{
 		i = 0;
@@ -94,8 +121,8 @@ void	print_lem_in(t_paths *roads, long int *flow, int nb_ants)
 			i++;
 		}
 		stationary -= put_pioneers(roads, flow_max, stationary);
-		ft_putchar('\n');		
-		// printf("\n");
+		// write(1, "\n", 1);		
+		print_buffer("\n", 1);
 		tour++;
 	}
 	free(flow_max); // faire fonction free int * ?
@@ -140,13 +167,16 @@ int		print_one_trip(t_node **path, int duration, int nb_ants, long int flow)
 	return (arrived_ants);
 }
 
+
 int	print_one_move(size_t ant_name, char *room)
 {
-	ft_putchar('L');
-	ft_putnbr((int)ant_name + 1);
-	ft_putchar('-');
-	ft_putstr(room);
-	ft_putchar(' ');
-//	printf("L%zu-%s ", ant_name + 1, room);
+	char *nbr;
+
+	nbr = ft_itoa((int)ant_name + 1);
+	print_buffer("L", 1);
+	print_buffer(nbr, ft_strlen(nbr));
+	print_buffer("-", 1);
+	print_buffer(room, ft_strlen(room));
+	print_buffer(" ", 1);
 	return (1);
 }

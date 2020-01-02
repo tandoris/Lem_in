@@ -6,7 +6,7 @@
 #    By: lboukrou <lboukrou@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/12/16 19:56:30 by lboukrou          #+#    #+#              #
-#    Updated: 2019/12/29 22:24:02 by lboukrou         ###   ########.fr        #
+#    Updated: 2020/01/02 21:21:39 by lboukrou         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -38,7 +38,8 @@ SRC_NAME	=   error.c \
 				paths.c \
 				opti_rooms.c \
 				manage_flow.c \
-				print_lem_in.c
+				print_lem_in.c \
+				print_one_move.c
 
 INC_NAME	=	lem_in.h
 OBJ_NAME	=	$(SRC_NAME:.c=.o)

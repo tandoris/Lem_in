@@ -6,7 +6,7 @@
 /*   By: lboukrou <lboukrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/26 22:07:06 by lboukrou          #+#    #+#             */
-/*   Updated: 2020/01/02 20:37:27 by lboukrou         ###   ########.fr       */
+/*   Updated: 2020/01/02 21:11:16 by lboukrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ static int		who_is_smallest(int a, int b, int c)
 }
 
 /*
-**	Returns max numm of paths
+**	Returns max num of paths
 */
 
 int				count_max_paths(t_graph *graph)
@@ -74,46 +74,6 @@ t_node			*get_shortest_path(t_graph **graph)
 	return (path);
 }
 
-/*
-**	Returns adjencency room that is closest to end, if it's unoccupied
-*/
-
-t_node			*search_closest_room(t_graph *graph, t_node **room)
-{
-	t_node		*closest;
-	t_node		*tmp;
-
-	tmp = *room;
-	closest = tmp;
-	tmp = tmp->next;
-	while (tmp)
-	{
-		if (!(is_room_occupied(graph, tmp)))
-			closest = comp_distance(graph, closest->room_index,
-						tmp->room_index);
-		tmp = tmp->next;
-	}
-	if (closest->room_index == (*room)->room_index)
-		return (NULL);
-	return (closest);
-}
-
-/*
-**	Returns 1 if room occupied, 0 if room is free
-*/
-
-int				is_room_occupied(t_graph *graph, t_node *room)
-{
-	t_node	*tmp;
-
-	tmp = *search_by_index(graph, room->room_index);
-	return (tmp->occupied);
-}
-
-/*
-**	Returns a structure with all possible paths from shortest to longest
-*/
-
 static t_paths	*last_verif(t_paths *p)
 {
 	if (p->nb_paths <= 0)
@@ -123,6 +83,10 @@ static t_paths	*last_verif(t_paths *p)
 	}
 	return (p);
 }
+
+/*
+**	Returns a structure with all possible paths from shortest to longest
+*/
 
 t_paths			*find_all_paths(t_graph **graph)
 {

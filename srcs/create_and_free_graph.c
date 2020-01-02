@@ -6,7 +6,7 @@
 /*   By: lboukrou <lboukrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/23 19:31:00 by lboukrou          #+#    #+#             */
-/*   Updated: 2019/12/30 14:11:39 by lboukrou         ###   ########.fr       */
+/*   Updated: 2020/01/02 21:26:39 by lboukrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,4 +56,30 @@ void	free_graph(t_graph **graph)
 	}
 	free((*graph)->adj_list);
 	free(*graph);
+}
+
+/*
+**	s
+*/
+
+void	free_paths(t_paths **paths_to_free)
+{
+	int		i;
+	t_node	*tmp;
+
+	i = 0;
+	tmp = NULL;
+	if (!(*paths_to_free) || !paths_to_free)
+		return ;
+	if ((*paths_to_free)->paths)
+	{
+		while ((*paths_to_free)->paths[i])
+		{
+			tmp = (*paths_to_free)->paths[i];
+			free_node_list(&tmp);
+			i++;
+		}
+		free((*paths_to_free)->paths);
+	}
+	free(*paths_to_free);
 }

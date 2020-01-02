@@ -6,7 +6,7 @@
 /*   By: lboukrou <lboukrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/28 18:18:00 by lboukrou          #+#    #+#             */
-/*   Updated: 2020/01/02 20:39:09 by lboukrou         ###   ########.fr       */
+/*   Updated: 2020/01/02 21:21:21 by lboukrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,24 @@ static size_t	count_actual_paths(size_t nb_paths, long int *flow)
 	return (count);
 }
 
+static int		put_pioneers(t_paths *roads, long int *flow_max, int stationary)
+{
+	int	road_index;
+
+	road_index = 0;
+	while (road_index < roads->nb_paths && stationary > 0)
+	{
+		roads->paths[road_index]->ant = stationary;
+		roads->paths[road_index]->prev_ant = 1;
+		stationary--;
+		if (roads->paths[road_index]->visitors >= flow_max[road_index])
+			break ;
+		road_index++;
+	}
+	print_buffer("\n", 1);
+	return (road_index);
+}
+
 static long int	*flow_cpy(long int *src)
 {
 	long int		*dst;
@@ -74,24 +92,6 @@ static long int	*flow_cpy(long int *src)
 		j++;
 	}
 	return (dst);
-}
-
-static int		put_pioneers(t_paths *roads, long int *flow_max, int stationary)
-{
-	int	road_index;
-
-	road_index = 0;
-	while (road_index < roads->nb_paths && stationary > 0)
-	{
-		roads->paths[road_index]->ant = stationary;
-		roads->paths[road_index]->prev_ant = 1;
-		stationary--;
-		if (roads->paths[road_index]->visitors >= flow_max[road_index])
-			break ;
-		road_index++;
-	}
-	print_buffer("\n", 1);
-	return (road_index);
 }
 
 void			print_lem_in(t_paths *roads, long int *flow, int nb_ants)
@@ -121,63 +121,4 @@ void			print_lem_in(t_paths *roads, long int *flow, int nb_ants)
 		tour++;
 	}
 	free(flow_max);
-}
-
-void			make_next_move(t_node **path)
-{
-	t_node		*tmp;
-
-	tmp = *path;
-	while (tmp)
-	{
-		if (tmp->next)
-		{
-			tmp->next->prev_ant = tmp->ant;
-		}
-		tmp->ant = tmp->prev_ant;
-		tmp = tmp->next;
-	}
-}
-
-int				print_one_trip(t_node **path, int duration, int nb_ants,
-								long int flow)
-{
-	t_node		*tmp;
-	int			i;
-	int			arrived_ants;
-	int			len;
-
-	i = 0;
-	tmp = *path;
-	len = tmp->distance;
-	arrived_ants = 0;
-	i = 0;
-	while (tmp && i <= duration)
-	{
-		if (tmp->visitors < flow)
-		{
-			if (tmp->status == END_ROOM)
-				arrived_ants++;
-			print_one_move(nb_ants - tmp->ant, tmp->name_room);
-			tmp->visitors++;
-		}
-		tmp = tmp->next;
-		i++;
-	}
-	make_next_move(path);
-	return (arrived_ants);
-}
-
-int				print_one_move(size_t ant_name, char *room)
-{
-	char *nbr;
-
-	nbr = ft_itoa((int)ant_name + 1);
-	print_buffer("L", 1);
-	print_buffer(nbr, ft_strlen(nbr));
-	print_buffer("-", 1);
-	print_buffer(room, ft_strlen(room));
-	print_buffer(" ", 1);
-	free(nbr);
-	return (1);
 }

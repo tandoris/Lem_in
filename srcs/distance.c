@@ -6,7 +6,7 @@
 /*   By: lboukrou <lboukrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/26 21:28:46 by lboukrou          #+#    #+#             */
-/*   Updated: 2020/01/02 14:53:19 by lboukrou         ###   ########.fr       */
+/*   Updated: 2020/01/02 21:11:49 by lboukrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,4 +65,28 @@ void		reset_distance(t_graph **graph)
 		(*graph)->adj_list[i]->distance = -1;
 		i++;
 	}
+}
+
+/*
+**	Returns adjencency room that is closest to end, if it's unoccupied
+*/
+
+t_node		*search_closest_room(t_graph *graph, t_node **room)
+{
+	t_node		*closest;
+	t_node		*tmp;
+
+	tmp = *room;
+	closest = tmp;
+	tmp = tmp->next;
+	while (tmp)
+	{
+		if (!(is_room_occupied(graph, tmp)))
+			closest = comp_distance(graph, closest->room_index,
+						tmp->room_index);
+		tmp = tmp->next;
+	}
+	if (closest->room_index == (*room)->room_index)
+		return (NULL);
+	return (closest);
 }

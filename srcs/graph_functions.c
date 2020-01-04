@@ -6,7 +6,7 @@
 /*   By: lboukrou <lboukrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/03 18:01:59 by lboukrou          #+#    #+#             */
-/*   Updated: 2020/01/02 15:56:08 by lboukrou         ###   ########.fr       */
+/*   Updated: 2020/01/02 22:39:37 by lboukrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,32 +119,3 @@ t_node	*duplicate_room(t_node *room_src)
 	}
 	return (room_dest);
 }
-
-/*
-**	Prints a graph (to be deleted)
-*/
-
-/*
-** void	print_graph(t_graph *graph)
-** {
-** 	t_node		*tmp;
-**
-** 	if (!graph)
-** 		return ;
-** 	for (size_t i = 0; i < graph->nb_vertices; i++)
-** 	{
-** 		if (graph->adj_list[i]->occupied)
-** 			continue ;
-** 		tmp = graph->adj_list[i];
-** 		printf("\n Adjacency list of index %zu and distance : %d\n ",
-**				i, tmp->distance);
-** 		while (tmp)
-** 		{
-** 			printf("%s -> ", tmp->name_room);
-** 			tmp = tmp->next;
-** 		}
-** 		printf("\n");
-** 		printf("\n");
-** 	}
-** }
-*/

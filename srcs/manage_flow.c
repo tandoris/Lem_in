@@ -6,7 +6,7 @@
 /*   By: lboukrou <lboukrou@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/12/28 15:00:10 by lboukrou          #+#    #+#             */
-/*   Updated: 2019/12/31 21:30:25 by lboukrou         ###   ########.fr       */
+/*   Updated: 2020/01/02 22:39:21 by lboukrou         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,24 +66,4 @@ long int	*spread_ants(t_paths **roads, int nb_ants)
 		i = (i == (*roads)->nb_paths) ? 0 : i;
 	}
 	return (flow);
-}
-
-void		print_flow(t_paths *roads, long int *flow)
-{
-	int		i;
-	t_node	*tmp;
-
-	i = 0;
-	while (i < roads->nb_paths)
-	{
-		printf("nb fourmis %ld pour path n`%d -> ", flow[i], i);
-		tmp = roads->paths[i];
-		while (tmp)
-		{
-			printf("%s - ", tmp->name_room);
-			tmp = tmp->next;
-		}
-		i++;
-		printf("\n");
-	}
 }
